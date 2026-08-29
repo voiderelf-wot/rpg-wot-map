@@ -49,6 +49,12 @@ function visEditorHTML(cardId, vis){
   return `<button type="button" class="vis-btn" data-card-id="${cardId}" data-vis="${vis.join(',')}" title="Editar visibilidade">👁 ${visLabel(vis)}</button>`;
 }
 
+function itemsTableHTML(items){
+  if(!items || !items.length) return '';
+  const rows = items.map(it => `<tr><td>${it.name}</td><td class="item-price">${it.price}</td></tr>`).join('');
+  return `<table class="items-table"><tbody>${rows}</tbody></table>`;
+}
+
 
 const mapScroll = document.getElementById('mapScroll');
 const mapContent = document.getElementById('mapContent');
@@ -220,7 +226,7 @@ function selectLocation(id){
           ${visEditorHTML(npc.id, vis)}
           <span class="npc-chevron">▸</span>
         </div>
-        <div class="npc-desc"><div class="npc-desc-inner">${npc.desc}</div></div>
+        <div class="npc-desc"><div class="npc-desc-inner">${npc.desc}${itemsTableHTML(npc.items)}</div></div>
       `;
       row.querySelector('.npc-row-head').addEventListener('click', (e) => {
         if(e.target.closest('.vis-btn')) return;
@@ -827,17 +833,31 @@ function renderShopCatalog(){
     return;
   }
 
-  wrap.innerHTML = `<div class="shop-catalog-grid">${shops.map(s => `
-    <button type="button" class="shop-card" data-loc-id="${s.locId}">
-      <div class="shop-card-name">${s.name}</div>
-      <div class="shop-card-role">${s.role}</div>
+  wrap.innerHTML = `<div class="shop-catalog-grid">${shops.map((s, i) => `
+    <div class="shop-card" data-idx="${i}">
+      <div class="shop-card-head">
+        <div>
+          <div class="shop-card-name">${s.name}</div>
+          <div class="shop-card-role">${s.role}</div>
+        </div>
+        <span class="shop-card-chevron">▸</span>
+      </div>
       <div class="shop-card-desc">${s.desc}</div>
-      <div class="shop-card-loc">📍 ${s.locName}</div>
-    </button>`).join('')}</div>`;
+      <div class="shop-card-body">
+        ${itemsTableHTML(s.items) || `<p class="shop-catalog-empty" style="padding:8px 0 0;">Sem itens cadastrados ainda.</p>`}
+        <button type="button" class="shop-card-goto" data-loc-id="${s.locId}">📍 Ver ${s.locName} no mapa</button>
+      </div>
+    </div>`).join('')}</div>`;
 
-  wrap.querySelectorAll('.shop-card').forEach(card => {
-    card.addEventListener('click', () => {
-      selectLocation(card.dataset.locId);
+  wrap.querySelectorAll('.shop-card-head').forEach(head => {
+    head.addEventListener('click', () => {
+      head.closest('.shop-card').classList.toggle('open');
+    });
+  });
+  wrap.querySelectorAll('.shop-card-goto').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      selectLocation(btn.dataset.locId);
       document.querySelector('.map-frame').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
