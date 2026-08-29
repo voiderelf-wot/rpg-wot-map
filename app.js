@@ -678,6 +678,8 @@ function applyAccessToUI(){
   sessionBadge.style.display = 'flex';
   sessionWho.textContent = currentUser.char;
   document.getElementById('globalSearchWrap').style.display = 'block';
+  document.getElementById('shopCatalogWrap').style.display = 'block';
+  renderShopCatalog();
 
   const filterBar = document.getElementById('charFilters');
   if(isGM){
@@ -801,6 +803,51 @@ buildLockGrid();
   }
 })();
 // ------------------------------------------------------------
+// CATÁLOGO DE LOJAS — varre todos os locais atrás de NPCs do
+// tipo "shop" e monta uma vitrine única, clicável, respeitando
+// a visibilidade (Mestre vê tudo; jogador só o que pode ver).
+// ------------------------------------------------------------
+function renderShopCatalog(){
+  const wrap = document.getElementById('shopCatalog');
+  if(!wrap || !currentUser) return;
+  const mestre = currentUser.char === 'Mestre';
+  const shops = [];
+
+  LOCATIONS.forEach(loc => {
+    (loc.npcs || []).forEach(n => {
+      if(n.type !== 'shop') return;
+      const vis = getVisibility(n.id, n.visibleTo);
+      if(!mestre && !(vis.includes('all') || vis.includes(currentUser.char))) return;
+      shops.push({ ...n, locId: loc.id, locName: loc.name });
+    });
+  });
+
+  if(shops.length === 0){
+    wrap.innerHTML = `<p class="shop-catalog-empty">Nenhuma loja cadastrada ainda.</p>`;
+    return;
+  }
+
+  wrap.innerHTML = `<div class="shop-catalog-grid">${shops.map(s => `
+    <button type="button" class="shop-card" data-loc-id="${s.locId}">
+      <div class="shop-card-name">${s.name}</div>
+      <div class="shop-card-role">${s.role}</div>
+      <div class="shop-card-desc">${s.desc}</div>
+      <div class="shop-card-loc">📍 ${s.locName}</div>
+    </button>`).join('')}</div>`;
+
+  wrap.querySelectorAll('.shop-card').forEach(card => {
+    card.addEventListener('click', () => {
+      selectLocation(card.dataset.locId);
+      document.querySelector('.map-frame').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+document.getElementById('shopCatalogToggle').addEventListener('click', () => {
+  document.getElementById('shopCatalogWrap').classList.toggle('open');
+});
+
+// ------------------------------------------------------------
 // FIREBASE — listeners ao vivo. Mantêm os caches locais
 // (visOverridesCache, locationNotesCache) sincronizados com o
 // banco em tempo real, pra qualquer jogador com a página aberta
@@ -810,6 +857,7 @@ function attachFirebaseListeners(){
   db.ref('visibilityOverrides').on('value', snap => {
     visOverridesCache = snap.val() || {};
     if(panelMode === 'location' && currentLocationId) selectLocation(currentLocationId);
+    if(currentUser) renderShopCatalog();
   });
 
   db.ref('locationNotes').on('value', snap => {

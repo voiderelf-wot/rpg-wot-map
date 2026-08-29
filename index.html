@@ -92,12 +92,13 @@
 
   <div id="visPopoverFloating"></div>
 
-  <footer class="note">
-    ACESSO: os PINs de cada personagem ficam em <code>data.js</code>, na constante <code>ACCESS_PINS</code>. Troque os números e combine cada um com o jogador correspondente. O mesmo link serve pra todo mundo — cada jogador só entra com o próprio PIN, e o navegador dele lembra o login depois (pode trocar clicando em "Trocar" no canto superior). Isso não é criptografia — alguém que abrir o código-fonte da página consegue ver tudo — mas evita cliques acidentais e cola casual durante o jogo.<br><br>
-    NOTAS: cada personagem tem seu bloco pessoal ("Minhas Notas"), privado, sincronizado via Firebase entre dispositivos. Cada local também tem um mural de "Notas da Party" — qualquer um pode escrever, todo mundo vê ao vivo, e apagar as próprias (o Mestre pode apagar qualquer uma).<br><br>
-    VISIBILIDADE (só Mestre): o ícone 👁 em cada card de background/NPC controla quem pode ver aquilo — sincroniza via Firebase pra todo mundo na hora.<br><br>
-    MODO EDIÇÃO (só Mestre): clique no mapa para ler a posição em % (top/left). Copie os valores e ajuste o array <code>LOCATIONS</code> em <code>data.js</code> para posicionar a área clicável sobre o ícone certo do mapa.
-  </footer>
+  <div class="shop-catalog-wrap" id="shopCatalogWrap" style="display:none;">
+    <button type="button" class="shop-catalog-toggle" id="shopCatalogToggle">
+      <span>🛒 Catálogo de Lojas</span>
+      <span class="shop-catalog-chevron">▸</span>
+    </button>
+    <div class="shop-catalog" id="shopCatalog"></div>
+  </div>
 </div>
 
 
