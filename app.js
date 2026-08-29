@@ -46,18 +46,7 @@ function canCurrentUserSee(vis){
 }
 function visEditorHTML(cardId, vis){
   if(!currentUser || currentUser.char !== 'Mestre') return '';
-  const boxes = PLAYER_CHARS.map(name =>
-    `<label><input type="checkbox" value="${name}" ${vis.includes(name) ? 'checked' : ''}> ${name}</label>`
-  ).join('');
-  return `
-    <span class="vis-editor" data-card-id="${cardId}">
-      <button type="button" class="vis-btn" title="Editar visibilidade">👁 ${visLabel(vis)}</button>
-      <div class="vis-popover">
-        <label><input type="checkbox" value="all" ${vis.includes('all') ? 'checked' : ''}> Todos (grupo)</label>
-        <div class="vis-divider"></div>
-        ${boxes}
-      </div>
-    </span>`;
+  return `<button type="button" class="vis-btn" data-card-id="${cardId}" data-vis="${vis.join(',')}" title="Editar visibilidade">👁 ${visLabel(vis)}</button>`;
 }
 
 
@@ -234,7 +223,7 @@ function selectLocation(id){
         <div class="npc-desc"><div class="npc-desc-inner">${npc.desc}</div></div>
       `;
       row.querySelector('.npc-row-head').addEventListener('click', (e) => {
-        if(e.target.closest('.vis-editor')) return;
+        if(e.target.closest('.vis-btn')) return;
         row.classList.toggle('open');
       });
       npcSection.appendChild(row);
@@ -269,14 +258,21 @@ function renderPartyNotesSection(locId){
   const el = document.getElementById('partyNotesSection');
   if(!el) return; // painel pode ter mudado de aba enquanto isso chegava
   const notesObj = locationNotesCache[locId] || {};
-  const notes = Object.values(notesObj).sort((a, b) => a.createdAt - b.createdAt);
+  const notes = Object.entries(notesObj).sort((a, b) => a[1].createdAt - b[1].createdAt);
 
   const notesHTML = notes.length
-    ? notes.map(n => `
+    ? notes.map(([pushId, n]) => {
+        const canDelete = currentUser && (currentUser.char === 'Mestre' || currentUser.char === n.author);
+        const delBtn = canDelete ? `<button type="button" class="party-note-del" data-loc-id="${locId}" data-push-id="${pushId}" title="Apagar nota">🗑</button>` : '';
+        return `
         <div class="party-note">
-          <div class="party-note-head"><b>${n.author}</b><span>${new Date(n.createdAt).toLocaleString('pt-BR', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span></div>
+          <div class="party-note-head">
+            <div class="pn-left"><b>${n.author}</b><span>${new Date(n.createdAt).toLocaleString('pt-BR', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span></div>
+            ${delBtn}
+          </div>
           <p>${n.text}</p>
-        </div>`).join('')
+        </div>`;
+      }).join('')
     : `<p class="party-notes-empty">Nenhuma nota da party ainda sobre este local.</p>`;
 
   el.innerHTML = `
@@ -297,6 +293,12 @@ function renderPartyNotesSection(locId){
       createdAt: Date.now()
     });
     input.value = '';
+  });
+  el.querySelectorAll('.party-note-del').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if(!confirm('Apagar essa nota?')) return;
+      db.ref('locationNotes/' + btn.dataset.locId + '/' + btn.dataset.pushId).remove();
+    });
   });
 }
 
@@ -492,27 +494,66 @@ function applyFilter(){
   });
 }
 
-// Editor de visibilidade (só existe na tela quando logado como Mestre)
+// ------------------------------------------------------------
+// Editor de visibilidade (só existe na tela quando logado como
+// Mestre). O popover é um único elemento flutuante (position:fixed),
+// reposicionado via JS a cada clique, pra nunca ficar cortado pelo
+// scroll interno do painel — antes ele vivia dentro do card e o
+// navegador cortava a lista quando não cabia.
+// ------------------------------------------------------------
+const visPopoverEl = document.getElementById('visPopoverFloating');
+
+function closeVisPopover(){
+  visPopoverEl.classList.remove('open');
+  visPopoverEl.dataset.cardId = '';
+}
+
+function openVisPopover(btn){
+  const cardId = btn.dataset.cardId;
+  const vis = (btn.dataset.vis || 'all').split(',');
+  const boxes = PLAYER_CHARS.map(name =>
+    `<label><input type="checkbox" value="${name}" ${vis.includes(name) ? 'checked' : ''}> ${name}</label>`
+  ).join('');
+  visPopoverEl.innerHTML = `
+    <label><input type="checkbox" value="all" ${vis.includes('all') ? 'checked' : ''}> Todos (grupo)</label>
+    <div class="vis-divider"></div>
+    ${boxes}
+  `;
+  visPopoverEl.dataset.cardId = cardId;
+  visPopoverEl.classList.add('open');
+
+  // posiciona logo abaixo do botão, sem estourar a borda direita/inferior da tela
+  const r = btn.getBoundingClientRect();
+  const popW = 170, popH = visPopoverEl.offsetHeight || 160;
+  let left = r.left;
+  let top = r.bottom + 4;
+  if(left + popW > window.innerWidth - 8) left = window.innerWidth - popW - 8;
+  if(top + popH > window.innerHeight - 8) top = r.top - popH - 4;
+  visPopoverEl.style.left = Math.max(8, left) + 'px';
+  visPopoverEl.style.top = Math.max(8, top) + 'px';
+}
+
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.vis-btn');
   if(btn){
-    const editor = btn.closest('.vis-editor');
-    const wasOpen = editor.classList.contains('open');
-    document.querySelectorAll('.vis-editor.open').forEach(el => el.classList.remove('open'));
-    if(!wasOpen) editor.classList.add('open');
+    const wasOpenForThis = visPopoverEl.classList.contains('open') && visPopoverEl.dataset.cardId === btn.dataset.cardId;
+    closeVisPopover();
+    if(!wasOpenForThis) openVisPopover(btn);
     return;
   }
-  if(!e.target.closest('.vis-popover')){
-    document.querySelectorAll('.vis-editor.open').forEach(el => el.classList.remove('open'));
+  if(!e.target.closest('#visPopoverFloating')){
+    closeVisPopover();
   }
 });
+window.addEventListener('scroll', closeVisPopover, true);
+
 document.addEventListener('change', (e) => {
-  const cb = e.target.closest('.vis-popover input[type="checkbox"]');
+  const cb = e.target.closest('#visPopoverFloating input[type="checkbox"]');
   if(!cb) return;
-  const editor = cb.closest('.vis-editor');
-  const cardId = editor.dataset.cardId;
-  const boxes = Array.from(editor.querySelectorAll('input[type="checkbox"]'));
-  const allBox = editor.querySelector('input[value="all"]');
+  const cardId = visPopoverEl.dataset.cardId;
+  if(!cardId) return;
+  const boxes = Array.from(visPopoverEl.querySelectorAll('input[type="checkbox"]'));
+  const allBox = visPopoverEl.querySelector('input[value="all"]');
   let vis;
   if(cb.value === 'all' && cb.checked){
     boxes.forEach(b => { if(b.value !== 'all') b.checked = false; });
@@ -523,7 +564,11 @@ document.addEventListener('change', (e) => {
     if(vis.length === 0){ allBox.checked = true; vis = ['all']; }
   }
   saveVisOverride(cardId, vis);
-  editor.querySelector('.vis-btn').textContent = '👁 ' + visLabel(vis);
+  const targetBtn = document.querySelector(`.vis-btn[data-card-id="${cardId}"]`);
+  if(targetBtn){
+    targetBtn.textContent = '👁 ' + visLabel(vis);
+    targetBtn.dataset.vis = vis.join(',');
+  }
   const targetEl = document.querySelector(`[data-card-id="${cardId}"].know-card, [data-card-id="${cardId}"].npc-row`);
   if(targetEl) targetEl.dataset.vis = vis.join(',');
   applyFilter();

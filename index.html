@@ -174,25 +174,26 @@
   .know-card.hidden-by-filter{display:none;}
 
   /* ---------------- VISIBILITY EDITOR (Mestre only) ---------------- */
-  .vis-editor{position:relative;display:inline-block;margin-left:6px;}
   .vis-btn{
     font-family:var(--font-mono);font-size:9.5px;letter-spacing:.02em;
     background:var(--panel-2);border:1px solid var(--line);border-radius:3px;
-    padding:2px 7px;color:var(--ink-dim);cursor:pointer;
+    padding:2px 7px;color:var(--ink-dim);cursor:pointer;margin-left:6px;
   }
   .vis-btn:hover{border-color:var(--gold);color:var(--gold);}
-  .vis-popover{
-    display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:30;
+  /* Popover flutuante único, fora do fluxo do painel (position:fixed),
+     pra nunca ser cortado pelo scroll interno do painel lateral. */
+  #visPopoverFloating{
+    display:none;position:fixed;z-index:200;
     background:var(--panel);border:1px solid var(--gold);border-radius:4px;
-    padding:8px 10px;box-shadow:0 8px 20px rgba(0,0,0,.25);min-width:150px;
+    padding:8px 10px;box-shadow:0 12px 30px rgba(0,0,0,.35);min-width:160px;
   }
-  .vis-editor.open .vis-popover{display:block;}
-  .vis-popover label{
+  #visPopoverFloating.open{display:block;}
+  #visPopoverFloating label{
     display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink);
     padding:3px 0;cursor:pointer;white-space:nowrap;font-family:var(--font-body);
   }
-  .vis-popover input{accent-color:var(--gold);cursor:pointer;}
-  .vis-popover .vis-divider{border-top:1px solid var(--line);margin:4px 0;}
+  #visPopoverFloating input{accent-color:var(--gold);cursor:pointer;}
+  #visPopoverFloating .vis-divider{border-top:1px solid var(--line);margin:4px 0;}
 
   /* ---------------- FLASH highlight from search jump ---------------- */
   @keyframes visFlash{
@@ -406,9 +407,16 @@
   }
   .party-note-head{
     display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;
+    gap:8px;
   }
+  .party-note-head .pn-left{display:flex;gap:8px;align-items:baseline;}
   .party-note-head b{font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.03em;}
   .party-note-head span{font-family:var(--font-mono);font-size:9.5px;color:var(--ink-dim);}
+  .party-note-del{
+    background:none;border:none;color:var(--ink-dim);cursor:pointer;font-size:13px;
+    padding:0 2px;line-height:1;flex-shrink:0;
+  }
+  .party-note-del:hover{color:var(--accent);}
   .party-note p{margin:0;font-size:13px;line-height:1.55;color:var(--ink);}
   .party-notes-empty{color:var(--ink-dim);font-size:12.5px;font-style:italic;margin-bottom:12px;}
   .party-note-form textarea{
@@ -509,9 +517,11 @@
     </div>
   </div>
 
+  <div id="visPopoverFloating"></div>
+
   <footer class="note">
     ACESSO: os PINs de cada personagem ficam em <code>data.js</code>, na constante <code>ACCESS_PINS</code>. Troque os números e combine cada um com o jogador correspondente. O mesmo link serve pra todo mundo — cada jogador só entra com o próprio PIN, e o navegador dele lembra o login depois (pode trocar clicando em "Trocar" no canto superior). Isso não é criptografia — alguém que abrir o código-fonte da página consegue ver tudo — mas evita cliques acidentais e cola casual durante o jogo.<br><br>
-    NOTAS: cada personagem tem seu bloco pessoal ("Minhas Notas"), privado, sincronizado via Firebase entre dispositivos. Cada local também tem um mural de "Notas da Party" — qualquer um pode escrever, todo mundo vê ao vivo.<br><br>
+    NOTAS: cada personagem tem seu bloco pessoal ("Minhas Notas"), privado, sincronizado via Firebase entre dispositivos. Cada local também tem um mural de "Notas da Party" — qualquer um pode escrever, todo mundo vê ao vivo, e apagar as próprias (o Mestre pode apagar qualquer uma).<br><br>
     VISIBILIDADE (só Mestre): o ícone 👁 em cada card de background/NPC controla quem pode ver aquilo — sincroniza via Firebase pra todo mundo na hora.<br><br>
     MODO EDIÇÃO (só Mestre): clique no mapa para ler a posição em % (top/left). Copie os valores e ajuste o array <code>LOCATIONS</code> em <code>data.js</code> para posicionar a área clicável sobre o ícone certo do mapa.
   </footer>
