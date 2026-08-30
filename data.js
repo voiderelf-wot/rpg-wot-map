@@ -132,12 +132,12 @@ const LOCATIONS = [
     top: 43.3, left: 76.1,
     desc: "Small village in Cairhien, north of the capital — Dongo's home town.",
     knowledge: [
-      { who: "Dongo", tag: "personal background", pc: true, text: "Born in Tremosien. Raised by 'The Bear,' a trafficker who trained orphaned children as spies and assassins — no one was allowed to show their face." },
-      { who: "Dongo", tag: "personal background", pc: true, text: "Fled after Pardal, another child in the group, was executed, and was discarded by the Bear as 'damaged goods.'" },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Born in Tremosien. Grew up within an organization where no one was ever allowed to show their face — his tutor and master was known only as 'Bear,' who trained orphaned children as spies and assassins." },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Fled after Pardal, another child in the group, was executed, and was discarded by Bear as 'damaged goods.'" },
     ],
     npcs: [
-      { name: "The Bear", role: "Mentor / trafficker", type: "npc", desc: "Raised orphaned children and trained them as spies and assassins to sell — no one was allowed to show their face. Executed Pardal as punishment and discarded Dongo once he judged him emotionally 'broken.'" },
-      { name: "Pardal", role: "Fellow trainee (deceased)", type: "npc", desc: "Another child trained alongside Dongo. Landed a blow that nearly tore off his mask — the Bear executed her as an example." },
+      { name: "Bear", role: "Mentor / trafficker", type: "npc", desc: "Raised orphaned children and trained them as spies and assassins to sell — no one was allowed to show their face. Executed Pardal as punishment and discarded Dongo once he judged him emotionally 'broken.'" },
+      { name: "Pardal", role: "Fellow trainee (deceased)", type: "npc", desc: "Another child trained alongside Dongo. Landed a blow that nearly tore off his mask — Bear executed her as an example." },
     ]
   },
   {
