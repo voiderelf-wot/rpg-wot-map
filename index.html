@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roda do Tempo — Mapa de Conhecimento</title>
+<title>Wheel of Time — Interactive Map</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,20 +11,20 @@
 <div id="lockScreen">
   <div class="lock-card">
     <div id="pinStepPick">
-      <p class="eyebrow">Roda do Tempo</p>
-      <h2>Quem está acessando?</h2>
-      <p class="hint">Escolha seu personagem e digite o PIN que o mestre te passou.</p>
+      <p class="eyebrow">Wheel of Time</p>
+      <h2>Who's logging in?</h2>
+      <p class="hint">Choose your character and enter the PIN the GM gave you.</p>
       <div class="lock-grid" id="lockGrid"></div>
-      <button class="lock-gm" id="lockGmBtn">Sou o mestre</button>
+      <button class="lock-gm" id="lockGmBtn">I'm the GM</button>
     </div>
     <div id="pinStepEnter" class="pin-step">
-      <p class="eyebrow">PIN de acesso</p>
+      <p class="eyebrow">Access PIN</p>
       <p class="pin-name" id="pinName">—</p>
       <input type="password" inputmode="numeric" maxlength="6" id="pinInput" placeholder="••••">
       <p class="pin-error" id="pinError">&nbsp;</p>
       <div class="pin-actions">
-        <button id="pinBack">Voltar</button>
-        <button class="primary" id="pinSubmit">Entrar</button>
+        <button id="pinBack">Back</button>
+        <button class="primary" id="pinSubmit">Enter</button>
       </div>
     </div>
   </div>
@@ -35,41 +35,41 @@
   <header class="top">
     <div>
       <p class="eyebrow">RPG Wheel of Time – Ocelots · The Westlands, Third Age</p>
-      <h1>Mapa Interativo</h1>
+      <h1>Interactive Map</h1>
       <p class="sub sub-quote">"There are no beginnings or endings to the turning of the Wheel of Time."</p>
     </div>
     <div class="controls" id="charFilters">
-      <span class="chip active" data-char="all">Todos</span>
+      <span class="chip active" data-char="all">All</span>
       <span class="chip" data-char="Maeri">Maeri</span>
       <span class="chip" data-char="Uthar">Uthar</span>
       <span class="chip" data-char="Dongo">Dongo</span>
       <span class="chip" data-char="Aynara">Aynara</span>
-      <span class="chip edit-toggle" id="editToggle">✎ Modo Edição</span>
+      <span class="chip edit-toggle" id="editToggle">✎ Edit Mode</span>
     </div>
     <div class="session-badge" id="sessionBadge" style="display:none;">
-      Acesso: <b id="sessionWho">—</b>
-      <button id="logoutBtn">Trocar</button>
+      Logged in as: <b id="sessionWho">—</b>
+      <button id="logoutBtn">Switch</button>
     </div>
   </header>
 
   <div class="global-search" id="globalSearchWrap" style="display:none;">
-    <input type="text" id="globalSearch" placeholder="Buscar locais, NPCs, conhecimento..." autocomplete="off">
+    <input type="text" id="globalSearch" placeholder="Search locations, NPCs, lore..." autocomplete="off">
     <div class="search-results" id="searchResults"></div>
   </div>
 
   <div class="layout">
     <div class="map-frame">
       <div class="zoom-controls">
-        <button id="zoomInBtn" title="Aumentar zoom">+</button>
+        <button id="zoomInBtn" title="Zoom in">+</button>
         <div class="divider"></div>
-        <button id="zoomOutBtn" title="Diminuir zoom">−</button>
+        <button id="zoomOutBtn" title="Zoom out">−</button>
         <div class="divider"></div>
-        <button id="zoomResetBtn" title="Restaurar zoom" style="font-size:12px;">⤾</button>
+        <button id="zoomResetBtn" title="Reset zoom" style="font-size:12px;">⤾</button>
         <div class="zoom-level" id="zoomLevel">100%</div>
       </div>
       <div class="map-scroll" id="mapScroll">
         <div class="map-content" id="mapContent">
-          <img id="mapImg" src="map.jpg" alt="Mapa das Westlands" draggable="false">
+          <img id="mapImg" src="map.jpg" alt="Map of the Westlands" draggable="false">
         </div>
       </div>
       <div class="coord-readout" id="coordReadout"></div>
@@ -77,14 +77,14 @@
 
     <div class="panel" id="panel">
       <div class="panel-tabs">
-        <button class="panel-tab active" id="tabLocation">Local</button>
-        <button class="panel-tab" id="tabDistances">🧭 Distâncias</button>
-        <button class="panel-tab" id="tabNotes">📝 Minhas Notas</button>
+        <button class="panel-tab active" id="tabLocation">Location</button>
+        <button class="panel-tab" id="tabDistances">🧭 Distances</button>
+        <button class="panel-tab" id="tabNotes">📝 My Notes</button>
       </div>
       <div class="panel-body" id="panelBody">
         <div class="empty-state">
           <div class="glyph">◈</div>
-          <p>Selecione um ponto no mapa para revelar o que os personagens sabem sobre aquele lugar.</p>
+          <p>Select a point on the map to reveal what the characters know about that place.</p>
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@
 
   <div class="shop-catalog-wrap" id="shopCatalogWrap" style="display:none;">
     <button type="button" class="shop-catalog-toggle" id="shopCatalogToggle">
-      <span id="shopCatalogTitle">🛒 Lojas</span>
+      <span id="shopCatalogTitle">🛒 Shops</span>
       <span class="shop-catalog-chevron">▸</span>
     </button>
     <div class="shop-catalog" id="shopCatalog"></div>
@@ -107,10 +107,10 @@
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
 <script src="firebase-config.js"></script>
 
-<!-- Dados da campanha (editar aqui pra atualizar conteúdo) -->
+<!-- Campaign data (edit here to update content) -->
 <script src="data.js"></script>
 
-<!-- Lógica da ferramenta -->
+<!-- Tool logic -->
 <script src="app.js"></script>
 </body>
 </html>

@@ -1,29 +1,29 @@
 // ============================================================
-// DADOS DA CAMPANHA — locais, personagens, distâncias canônicas.
-// Editar este arquivo é a forma normal de atualizar o conteúdo
-// entre sessões (locais novos, NPCs, backgrounds, etc.).
+// CAMPAIGN DATA — locations, characters, canonical distances.
+// Editing this file is the normal way to update content
+// between sessions (new locations, NPCs, backgrounds, etc.).
 // ============================================================
 
 // ============================================================
-// ACESSO — defina os PINs de cada personagem aqui.
-// Combine esses números com cada jogador em particular
-// (por WhatsApp, no papel, etc.) — não são visíveis na tela.
+// ACCESS — set each character's PIN here.
+// Share these numbers with each player individually
+// (WhatsApp, on paper, etc.) — not visible on screen.
 // ============================================================
 const ACCESS_PINS = {
   "Maeri": "1111",
   "Uthar": "2222",
   "Dongo": "3333",
   "Aynara": "4444",
-  "Mestre": "0000"
+  "GM": "0000"
 };
 const STORAGE_KEY = "wot_map_session_v1";
-const PLAYER_CHARS = Object.keys(ACCESS_PINS).filter(c => c !== "Mestre");
+const PLAYER_CHARS = Object.keys(ACCESS_PINS).filter(c => c !== "GM");
 
 // ============================================================
-// DISTÂNCIAS CANÔNICAS — fonte: wot.fandom.com/wiki/Distances_in_the_Westlands
-// "Em linha reta" (as the crow flies), entre as 28 capitais/locais
-// principais do continente. DIST_MATRIX[i][j] = distância entre
-// DIST_CITIES[i] e DIST_CITIES[j].
+// CANONICAL DISTANCES — source: wot.fandom.com/wiki/Distances_in_the_Westlands
+// "As the crow flies", between the 28 main capitals/locations
+// of the continent. DIST_MATRIX[i][j] = distance between
+// DIST_CITIES[i] and DIST_CITIES[j].
 // ============================================================
 const DIST_CITIES = ["Amador", "Aringill", "Baerlon", "Bandar Eban", "Caemlyn", "Cairhien", "Chachin", "Ebou Dar", "Emond's Field", "Fal Dara", "Fal Moran", "Falme", "Far Madding", "Godan", "Illian", "Jangai Pass", "Jehanna", "Katar", "Lugard", "Maradon", "Mayene", "Salidar", "Shol Arbela", "Tanchico", "Tar Valon", "Tear", "Tremalking", "Whitebridge"];
 const DIST_MATRIX = [
@@ -59,22 +59,22 @@ const DIST_MATRIX = [
 
 
 // ============================================================
-// PERSONAGENS — perfil + local de origem (homeLocationId aponta
-// para um id do array LOCATIONS). Quando esse personagem abre
-// o local correspondente, um banner "terra natal" aparece
-// automaticamente no topo do painel, mesmo sem escrever um
-// card de conhecimento manual pra isso.
+// CHARACTERS — profile + home location (homeLocationId points
+// to an id in the LOCATIONS array). When that character opens
+// the matching location, a "home turf" banner appears
+// automatically at the top of the panel, even without writing
+// a manual background card for it.
 // ============================================================
 const CHARACTERS = {
-  "Maeri": { classe: "Cleric",  origemLabel: "Criada por A Família (The Kin) em Abou Dar, Altara", homeLocationId: "altara" },
-  "Uthar": { classe: "Fighter", origemLabel: "Plains of Maredo, na fronteira entre Altara e Amadicia", homeLocationId: "altara" },
+  "Maeri": { classe: "Cleric",  origemLabel: "Raised by The Kin in Abou Dar, Altara", homeLocationId: "altara" },
+  "Uthar": { classe: "Fighter", origemLabel: "Plains of Maredo, on the Altara/Amadicia border", homeLocationId: "altara" },
   "Dongo": { classe: "Rogue",   origemLabel: "Tremosien, Cairhien", homeLocationId: "tremosien" },
-  "Aynara": { classe: "Ranger",  origemLabel: "Origem ainda não revelada em jogo", homeLocationId: null }
+  "Aynara": { classe: "Ranger",  origemLabel: "Origin not yet revealed in-game", homeLocationId: null }
 };
 
 // ============================================================
-// DADOS — edite aqui. `top` e `left` são porcentagens (0-100)
-// relativas ao tamanho total da imagem do mapa.
+// DATA — edit here. `top` and `left` are percentages (0-100)
+// relative to the total size of the map image.
 // ============================================================
 const LOCATIONS = [
   {
@@ -82,14 +82,14 @@ const LOCATIONS = [
     distCity: "Tar Valon",
     name: "Tar Valon",
     top: 35.5, left: 70.5,
-    desc: "Cidade insular no rio Erinin, à vista do Farol dos Arautos. Sede das Aes Sedai e da Amyrlin Seat, é a segunda cidade mais populosa das Westlands e permanece independente desde sua fundação — elo vital de comércio entre as Nações de Fronteira e os reinos do sul.",
+    desc: "Island city on the River Erinin, within sight of the Herald's Lighthouse. Seat of the Aes Sedai and the Amyrlin Seat, it's the second most populous city in the Westlands and has remained independent since its founding — a vital trade link between the Borderlands and the southern realms.",
     knowledge: [],
     npcs: [
-      { name: "Serenya Taravin", role: "Aes Sedai · Ajah Azul", type: "npc", desc: "Pragmática, alta, cabelo preto com grisalhos preso em coque, olhos escuros. Coordena uma rede de informantes e contratou o grupo por fora da estrutura formal da Torre." },
-      { name: "Jarem al'Caar", role: "Warder de Serenya", type: "npc", desc: "Discreto e atento, cabelos castanhos escuros. Natural de Arafel." },
-      { name: "Tomas \"Tom\" Veldan", role: "Taverneiro · Blue Cat", type: "npc", desc: "Homem robusto e simpático, dono da Taverna Blue Cat — vista para o rio Erinin, decoração multicultural." },
-      { name: "Capitão Elias Dorin", role: "Capitão da Guarda", type: "npc", desc: "Capitão dos guardas da cidade, interrogado pelo grupo durante a investigação sobre as Novices desaparecidas." },
-      { name: "Callan Forjaforte", role: "Ferreiro · loja de armas", type: "shop", desc: "Homem musculoso de barba negra cheia, natural de Illian. Vendeu armas básicas ao grupo com a carta de crédito de Serenya.",
+      { name: "Serenya Taravin", role: "Aes Sedai · Blue Ajah", type: "npc", desc: "Pragmatic, tall, black hair streaked with grey pinned in a bun, dark eyes. Runs a network of informants and hired the party outside the Tower's official structure." },
+      { name: "Jarem al'Caar", role: "Serenya's Warder", type: "npc", desc: "Quiet and watchful, dark brown hair. A native of Arafel." },
+      { name: "Tomas \"Tom\" Veldan", role: "Innkeeper · Blue Cat", type: "npc", desc: "Burly, friendly man, owner of the Blue Cat Inn — overlooking the River Erinin, multicultural décor." },
+      { name: "Captain Elias Dorin", role: "Captain of the Guard", type: "npc", desc: "Captain of the city guard, questioned by the party during the investigation into the missing Novices." },
+      { name: "Callan Forjaforte", role: "Blacksmith · weapon shop", type: "shop", desc: "Muscular man with a full black beard, a native of Illian. Sold basic weapons to the party using Serenya's letter of credit.",
         items: [
           { name: "Dagger", price: "2 GP" },
           { name: "Shortsword", price: "10 GP" },
@@ -101,14 +101,14 @@ const LOCATIONS = [
           { name: "Chain mail", price: "75 GP" },
           { name: "Shield", price: "10 GP" }
         ] },
-      { name: "Mara al'Dene", role: "Herbalista · poções de cura", type: "shop", desc: "Baixa, gentil, cheirando a ervas frescas, natural de Tear. Vendeu poções de cura ao grupo.",
+      { name: "Mara al'Dene", role: "Herbalist · healing potions", type: "shop", desc: "Short, kind, smelling of fresh herbs, a native of Tear. Sold healing potions to the party.",
         items: [
           { name: "Healing potion", price: "50 GP" },
           { name: "Antitoxin", price: "50 GP" },
           { name: "Healer's kit (10 uses)", price: "5 GP" },
           { name: "Rations (1 day)", price: "5 SP" }
         ] },
-      { name: "Vandor Merrilin", role: "Comerciante · equipamento geral", type: "shop", desc: "Elegante e astuto, natural de Caemlyn. Vendeu equipamento geral ao grupo.",
+      { name: "Vandor Merrilin", role: "Merchant · general supplies", type: "shop", desc: "Elegant and shrewd, a native of Caemlyn. Sold general equipment to the party.",
         items: [
           { name: "Backpack", price: "2 GP" },
           { name: "Rope, hempen (50 ft)", price: "1 GP" },
@@ -119,25 +119,25 @@ const LOCATIONS = [
           { name: "Parchment and ink", price: "1 GP" },
           { name: "Common saddle", price: "10 GP" }
         ] },
-      { name: "Perrin Rattler", role: "Mercador de ratos", type: "npc", desc: "Peculiar comerciante natural de Murandy, encontrado em South Harbor sendo acusado pelos Whitecloaks." },
-      { name: "Gared Thane", role: "Guarda", type: "npc", desc: "Guarda natural de Andor, apaixonado por Elara Bryne — fugiram juntos de Tar Valon." },
-      { name: "Elara Bryne", role: "Novice (fugiu)", type: "npc", desc: "Novice natural de Andor que fugiu voluntariamente com Gared Thane — não foi sequestro." },
-      { name: "Kaela Miren", role: "Novice (resgatada)", type: "npc", desc: "Novice natural de Cairhien, capturada por mercenários pagos pelos Seanchan e resgatada pelo grupo no armazém." },
-      { name: "Lirene Valda", role: "Novice (resgatada)", type: "npc", desc: "Novice natural de Tarabon, capturada por mercenários pagos pelos Seanchan e resgatada pelo grupo no armazém." },
+      { name: "Perrin Rattler", role: "Rat merchant", type: "npc", desc: "Peculiar merchant, a native of Murandy, found at South Harbor being accused by the Whitecloaks." },
+      { name: "Gared Thane", role: "Guard", type: "npc", desc: "Guard, a native of Andor, in love with Elara Bryne — they fled Tar Valon together." },
+      { name: "Elara Bryne", role: "Novice (fled)", type: "npc", desc: "Novice, a native of Andor, who fled voluntarily with Gared Thane — it wasn't a kidnapping." },
+      { name: "Kaela Miren", role: "Novice (rescued)", type: "npc", desc: "Novice, a native of Cairhien, captured by mercenaries paid by the Seanchan and rescued by the party at the warehouse." },
+      { name: "Lirene Valda", role: "Novice (rescued)", type: "npc", desc: "Novice, a native of Tarabon, captured by mercenaries paid by the Seanchan and rescued by the party at the warehouse." },
     ]
   },
   {
     id: "tremosien",
     name: "Tremosien",
     top: 43.3, left: 76.1,
-    desc: "Pequeno vilarejo em Cairhien, ao norte da capital — terra natal de Dongo.",
+    desc: "Small village in Cairhien, north of the capital — Dongo's home town.",
     knowledge: [
-      { who: "Dongo", tag: "origem pessoal", pc: true, text: "Nasceu em Tremosien. Foi criado por 'O Urso', um traficante que treinava crianças órfãs como espiãs e assassinas — ninguém podia mostrar o rosto." },
-      { who: "Dongo", tag: "origem pessoal", pc: true, text: "Fugiu após a execução de Pardal, outra criança do grupo, e foi descartado pelo Urso como 'mercadoria danificada'." },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Born in Tremosien. Raised by 'The Bear,' a trafficker who trained orphaned children as spies and assassins — no one was allowed to show their face." },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Fled after Pardal, another child in the group, was executed, and was discarded by the Bear as 'damaged goods.'" },
     ],
     npcs: [
-      { name: "O Urso", role: "Mentor / traficante", type: "npc", desc: "Criava crianças órfãs e as treinava como espiãs e assassinas para vender — ninguém podia mostrar o rosto. Executou Pardal como punição e descartou Dongo quando o julgou 'quebrado' emocionalmente." },
-      { name: "Pardal", role: "Criança de treinamento (falecida)", type: "npc", desc: "Outra criança treinada junto com Dongo. Acertou um golpe que quase arrancou a máscara dele — o Urso a executou como exemplo." },
+      { name: "The Bear", role: "Mentor / trafficker", type: "npc", desc: "Raised orphaned children and trained them as spies and assassins to sell — no one was allowed to show their face. Executed Pardal as punishment and discarded Dongo once he judged him emotionally 'broken.'" },
+      { name: "Pardal", role: "Fellow trainee (deceased)", type: "npc", desc: "Another child trained alongside Dongo. Landed a blow that nearly tore off his mask — the Bear executed her as an example." },
     ]
   },
   {
@@ -145,7 +145,7 @@ const LOCATIONS = [
     distCity: "Cairhien",
     name: "Cairhien",
     top: 45.7, left: 74.6,
-    desc: "Cidade murada em formato quadrado às margens do rio Alguenya, reconstruída após ser incendiada na Guerra Aiel. Famosa pelas Torres Sem Topo e por ser o epicentro de Daes Dae'mar, o Jogo das Casas — a intrincada disputa política entre as nobres Casas cairhienin.",
+    desc: "A square-walled city on the banks of the River Alguenya, rebuilt after being burned during the Aiel War. Famous for its Topless Towers and as the epicenter of Daes Dae'mar, the Game of Houses — the intricate political struggle among Cairhien's noble Houses.",
     knowledge: [],
   },
   {
@@ -153,14 +153,14 @@ const LOCATIONS = [
     distCity: "Ebou Dar",
     name: "Altara (Ebou Dar)",
     top: 81.8, left: 44.6,
-    desc: "Capital portuária de Altara, erguida sobre as ruínas da antiga Barashta. Dividida pelo rio Eldar entre o lado próspero da nobreza e o Rahad, bairro pobre e perigoso — conhecida pela moda extravagante e pela vida vibrante ao redor do Palácio Tarasin.",
+    desc: "Altara's port capital, built over the ruins of ancient Barashta. Split by the River Eldar between the wealthy noble quarter and the Rahad, a poor and dangerous district — known for its extravagant fashion and the vibrant life around the Tarasin Palace.",
     knowledge: [
-      { who: "Uthar", tag: "origem pessoal", pc: true, text: "Nasceu em uma família nobre perto das Plains of Maredo, região disputada entre Altara e Amadicia. Seu pai, Lorde Dainar, foi morto quando os Whitecloaks invadiram com a ajuda de um tio traidor." },
-      { who: "Maeri", tag: "origem pessoal", pc: true, text: "Foi resgatada nas ruas de Rahad por Vernam, uma Sábia (Wise Woman) d'A Família, e cresceu entre as Kinswomen em Abou Dar, aprendendo cura e ervas." },
-      { who: "Maeri", tag: "origem pessoal", pc: true, text: "Escondeu de todas, exceto Vernam, sua habilidade de canalizar — recusou-se a ir para a Torre Branca por anos." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "Born into a noble family near the Plains of Maredo, a region disputed between Altara and Amadicia. His father, Lord Dainar, was killed when the Whitecloaks invaded with the help of a traitorous uncle." },
+      { who: "Maeri", tag: "personal background", pc: true, text: "Rescued from the streets of Rahad by Vernam, a Wise Woman of The Kin, and grew up among the Kinswomen in Abou Dar, learning healing and herbcraft." },
+      { who: "Maeri", tag: "personal background", pc: true, text: "Hid her ability to channel from everyone except Vernam — refused to go to the White Tower for years." },
     ],
     npcs: [
-      { name: "Vernam", role: "Anciã (Elder) · A Família", type: "npc", desc: "Uma das Anciãs d'A Família (The Kin), parte da Tricotagem (Knitting Circle). Talento particular para cura, com o Poder e com ervas. Resgatou Maeri das ruas de Rahad e se tornou sua guardiã oficial." },
+      { name: "Vernam", role: "Elder · The Kin", type: "npc", desc: "One of the Elders of The Kin, part of the Knitting Circle. Particular talent for healing, both with the Power and with herbs. Rescued Maeri from the streets of Rahad and became her official guardian." },
     ]
   },
   {
@@ -168,11 +168,11 @@ const LOCATIONS = [
     distCity: "Amador",
     name: "Amadicia",
     top: 69.9, left: 38.9,
-    desc: "Capital de Amadicia e sede da Fortaleza da Luz, quartel-general dos Filhos da Luz. Amadicia tem um rei, mas são os Whitecloaks que de fato governam — canalização é proibida por lei em todo o território.",
+    desc: "Capital of Amadicia and home to the Fortress of the Light, headquarters of the Children of the Light. Amadicia has a king, but it's the Whitecloaks who really rule — channeling is outlawed throughout the territory.",
     knowledge: [
-      { who: "Uthar", tag: "origem pessoal", pc: true, text: "Foi capturado pelos Whitecloaks ainda criança e criado sob a guarda de uma família nobre secretamente contrária ao fanatismo dos Filhos da Luz." },
-      { who: "Uthar", tag: "origem pessoal", pc: true, text: "Aprendeu esgrima, disciplina e estratégia como um dos Whitecloaks, mesmo odiando o que representavam." },
-      { who: "Uthar", tag: "origem pessoal", pc: true, text: "Sua família adotiva foi executada como Darkfriends quando os Whitecloaks descobriram sua atividade rebelde — o que selou seu rompimento definitivo com Amadicia." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "Was captured by the Whitecloaks as a child and raised under the guardianship of a noble family secretly opposed to the Children's fanaticism." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "Learned swordsmanship, discipline, and strategy as one of the Whitecloaks, even while hating what they stood for." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "His adoptive family was executed as Darkfriends when the Whitecloaks discovered their rebellious activity — sealing his final break with Amadicia." },
     ],
   },
   {
@@ -180,7 +180,7 @@ const LOCATIONS = [
     distCity: "Maradon",
     name: "Saldaea (Maradon)",
     top: 20.3, left: 51.3,
-    desc: "Capital de Saldaea, a maior das Nações de Fronteira, erguida às margens do rio Arinelle bem próximo ao Blight. Sede do Palácio Cordamora e de uma corte movimentada, apesar da ameaça constante das Terras Sombrias logo ao norte.",
+    desc: "Capital of Saldaea, the largest of the Borderlands, built on the banks of the River Arinelle right by the Blight. Home to the Cordamora Palace and a lively court, despite the constant threat of the Blight just to the north.",
     knowledge: [],
   },
   {
@@ -188,7 +188,7 @@ const LOCATIONS = [
     distCity: "Caemlyn",
     name: "Andor (Caemlyn)",
     top: 56.5, left: 64.7,
-    desc: "Capital de Andor, considerada a segunda cidade mais bela das Westlands, atrás só de Tar Valon. Dividida entre a Cidade Interior, erguida pelos Ogier, e a Nova Cidade construída por humanos — sede do Palácio Real e do Trono do Leão.",
+    desc: "Capital of Andor, considered the second most beautiful city in the Westlands, after only Tar Valon. Split between the Inner City, built by the Ogier, and the New City built by humans — home to the Royal Palace and the Lion Throne.",
     knowledge: [],
   },
   {
@@ -196,9 +196,9 @@ const LOCATIONS = [
     distCity: "Far Madding",
     name: "Far Madding",
     top: 67.5, left: 66.4,
-    desc: "Cidade-estado independente numa ilha, ligada ao continente por três pontes. Abriga o Guardian, um ter'angreal antigo que bloqueia o acesso ao Poder Único dentro e ao redor da cidade — o único lugar conhecido onde ninguém consegue canalizar.",
+    desc: "Independent city-state on an island, linked to the mainland by three bridges. Home to the Guardian, an ancient ter'angreal that blocks access to the One Power in and around the city — the only known place where no one can channel.",
     knowledge: [
-      { who: "Mestre", tag: "worldbuilding", pc: false, text: "Área reservada para expansão futura — vilarejos ao redor, cultura e conflitos locais ainda em desenvolvimento. O grupo ainda não esteve aqui.", visibleTo: [] },
+      { who: "GM", tag: "worldbuilding", pc: false, text: "Reserved for future expansion — surrounding villages, local culture and conflicts still in development. The party hasn't been here yet.", visibleTo: [] },
     ],
   },
   {
@@ -206,7 +206,7 @@ const LOCATIONS = [
     distCity: "Illian",
     name: "Illian",
     top: 85.3, left: 59.3,
-    desc: "Uma das maiores cidades das Westlands, cortada por diversos canais e governada em conjunto pelo Rei, o Conselho dos Nove e a Assembleia. Famosa por sediar a Grande Caçada do Corno, tradição em que caçadores juram encontrar o Corno de Valere.",
+    desc: "One of the largest cities in the Westlands, cut through by many canals and jointly ruled by the King, the Council of Nine, and the Assemblage. Famous for hosting the Great Hunt of the Horn, in which Hunters swear to find the Horn of Valere.",
     knowledge: [],
   },
   {
@@ -214,7 +214,7 @@ const LOCATIONS = [
     distCity: "Tear",
     name: "Tear",
     top: 77.6, left: 71.4,
-    desc: "Grande porto no Mar das Tempestades, dominado pela Pedra de Tear — fortaleza colossal erguida pouco após a Quebra do Mundo, que nunca caiu até a chegada do Dragão Reencarnado. Governada por Altos Lordes profundamente avessos a tudo ligado ao Poder Único.",
+    desc: "Great port on the Sea of Storms, dominated by the Stone of Tear — a massive fortress raised shortly after the Breaking of the World, never taken until the coming of the Dragon Reborn. Ruled by High Lords deeply averse to anything tied to the One Power.",
     knowledge: [],
   },
   {
@@ -222,7 +222,7 @@ const LOCATIONS = [
     distCity: "Lugard",
     name: "Murandy (Lugard)",
     top: 65, left: 56.9,
-    desc: "Capital de Murandy, cidade movimentada pelo comércio mas conhecida pela desordem e pela fraca autoridade do rei fora das próprias muralhas. Cruzamento de rotas comerciais entre Andor, Illian, Altara e Ghealdan.",
+    desc: "Capital of Murandy, a city kept alive by trade but known for its disorder and for how little authority the king holds beyond his own walls. A crossroads of trade routes between Andor, Illian, Altara, and Ghealdan.",
     knowledge: [],
   },
   {
@@ -230,7 +230,7 @@ const LOCATIONS = [
     distCity: "Tanchico",
     name: "Tarabon (Tanchico)",
     top: 62.5, left: 25.9,
-    desc: "Antiga capital de Tarabon, erguida sobre três penínsulas na Baía de Tanchico. Sede do Palácio do Panarca — parcialmente datado da própria Era das Lendas — hoje enfraquecida pela guerra civil e pela presença Seanchan.",
+    desc: "Former capital of Tarabon, built across three peninsulas on Tanchico Bay. Home to the Panarch's Palace — parts of which date back to the Age of Legends itself — now weakened by civil war and the growing Seanchan presence.",
     knowledge: [],
   },
   {
@@ -238,7 +238,7 @@ const LOCATIONS = [
     distCity: "Shol Arbela",
     name: "Arafel (Shol Arbela)",
     top: 21, left: 71.6,
-    desc: "Capital de Arafel, conhecida como a Cidade dos Dez Mil Sinos, pelo costume local de trançar sininhos nos cabelos. Uma das poucas grandes cidades das Westlands não erguida pelos Ogier.",
+    desc: "Capital of Arafel, known as the City of Ten Thousand Bells for the local custom of braiding bells into one's hair. One of the few great Westlands cities not built by the Ogier.",
     knowledge: [],
   },
 ];

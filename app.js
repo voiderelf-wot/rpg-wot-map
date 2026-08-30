@@ -1,15 +1,15 @@
 // ============================================================
-// LÓGICA DA FERRAMENTA — não deveria precisar editar isso pra
-// atualizar conteúdo de campanha (isso é no data.js). Mexa
-// aqui só se for mudar comportamento/funcionalidade.
+// TOOL LOGIC — you shouldn't need to edit this to update
+// campaign content (that's in data.js). Only touch this
+// to change behavior/functionality.
 // ============================================================
 
-// VISIBILIDADE — cada card de conhecimento e cada NPC recebe um
-// id estável e uma visibilidade padrão (derivada de who/pc, ou
-// "all" = grupo todo). O Mestre pode sobrescrever isso na hora,
-// pela própria ferramenta (ícone 👁 em cada card) — sincroniza
-// via Firebase em tempo real pra todo mundo que estiver com a
-// página aberta, e persiste entre sessões/dispositivos.
+// VISIBILITY — each knowledge card and each NPC gets
+// a stable id and a default visibility (derived from who/pc, or
+// "all" = whole party). The GM can override this on the fly,
+// right from the tool itself (👁 icon on each card) — syncs via
+// Firebase in real time for everyone with the page open, and
+// persists across sessions/devices.
 // ============================================================
 LOCATIONS.forEach(loc => {
   (loc.knowledge || []).forEach((k, i) => {
@@ -24,29 +24,29 @@ LOCATIONS.forEach(loc => {
   });
 });
 
-// Cache em memória, mantido sincronizado por um listener do Firebase
-// (attachFirebaseListeners, no fim do arquivo). Leitura fica síncrona
-// (bom pra renderização), escrita vai direto pro Firebase.
+// In-memory cache, kept in sync by a Firebase listener
+// (attachFirebaseListeners, at the end of the file). Reads stay
+// synchronous (good for rendering), writes go straight to Firebase.
 let visOverridesCache = {};
 
 function saveVisOverride(cardId, vis){
-  visOverridesCache[cardId] = vis; // atualização otimista, local
+  visOverridesCache[cardId] = vis; // optimistic local update
   db.ref('visibilityOverrides/' + cardId).set(vis);
 }
 function getVisibility(cardId, defaultVis){
   return visOverridesCache[cardId] || defaultVis;
 }
 function visLabel(vis){
-  return vis.includes('all') ? 'Todos' : vis.join(', ');
+  return vis.includes('all') ? 'All' : vis.join(', ');
 }
 function canCurrentUserSee(vis){
   if(!currentUser) return false;
-  if(currentUser.char === 'Mestre') return true;
+  if(currentUser.char === 'GM') return true;
   return vis.includes('all') || vis.includes(currentUser.char);
 }
 function visEditorHTML(cardId, vis){
-  if(!currentUser || currentUser.char !== 'Mestre') return '';
-  return `<button type="button" class="vis-btn" data-card-id="${cardId}" data-vis="${vis.join(',')}" title="Editar visibilidade">👁 ${visLabel(vis)}</button>`;
+  if(!currentUser || currentUser.char !== 'GM') return '';
+  return `<button type="button" class="vis-btn" data-card-id="${cardId}" data-vis="${vis.join(',')}" title="Edit visibility">👁 ${visLabel(vis)}</button>`;
 }
 
 function itemsTableHTML(items){
@@ -189,7 +189,7 @@ function selectLocation(id){
   const loc = LOCATIONS.find(l => l.id === id);
   if(!loc) return;
   panelBody.innerHTML = `
-    <p class="loc-eyebrow">Local</p>
+    <p class="loc-eyebrow">Location</p>
     <h2>${loc.name}</h2>
     <p class="loc-desc">${loc.desc}</p>
     <div id="homeBanners"></div>
@@ -202,15 +202,15 @@ function selectLocation(id){
     if(info.homeLocationId === loc.id){
       const b = document.createElement('div');
       b.className = 'home-banner';
-      b.innerHTML = `<span class="home-icon">🏠</span><div><b>${name} é daqui</b><span>${info.origemLabel}</span></div>`;
+      b.innerHTML = `<span class="home-icon">🏠</span><div><b>${name} is from here</b><span>${info.origemLabel}</span></div>`;
       homeBannersEl.appendChild(b);
     }
   });
 
-  // NPCs & Lojas
+  // NPCs & Shops
   if(loc.npcs && loc.npcs.length){
     const npcSection = document.getElementById('npcSection');
-    npcSection.innerHTML = `<p class="npc-section-title">NPCs &amp; Lojas</p>`;
+    npcSection.innerHTML = `<p class="npc-section-title">NPCs &amp; Shops</p>`;
     loc.npcs.forEach((npc) => {
       const vis = getVisibility(npc.id, npc.visibleTo);
       const row = document.createElement('div');
@@ -238,7 +238,7 @@ function selectLocation(id){
 
   const cardsEl = document.getElementById('cards');
   if(loc.knowledge.length){
-    cardsEl.innerHTML = `<p class="npc-section-title">📖 Background pessoal</p>`;
+    cardsEl.innerHTML = `<p class="npc-section-title">📖 Personal Background</p>`;
   }
   loc.knowledge.forEach(k => {
     const vis = getVisibility(k.id, k.visibleTo);
@@ -255,39 +255,39 @@ function selectLocation(id){
 }
 
 // ------------------------------------------------------------
-// NOTAS DA PARTY — quadro por local. Qualquer personagem logado
-// pode adicionar uma nota (assinada com o nome dele), e todo
-// mundo vê, ao vivo, via Firebase Realtime Database.
+// PARTY NOTES — a board per location. Any logged-in character
+// can add a note (signed with their name), and everyone sees it
+// live, via Firebase Realtime Database.
 // ------------------------------------------------------------
 let locationNotesCache = {}; // { [locationId]: { [pushId]: {author, text, createdAt} } }
 
 function renderPartyNotesSection(locId){
   const el = document.getElementById('partyNotesSection');
-  if(!el) return; // painel pode ter mudado de aba enquanto isso chegava
+  if(!el) return; // panel may have switched tabs before this arrived
   const notesObj = locationNotesCache[locId] || {};
   const notes = Object.entries(notesObj).sort((a, b) => a[1].createdAt - b[1].createdAt);
 
   const notesHTML = notes.length
     ? notes.map(([pushId, n]) => {
-        const canDelete = currentUser && (currentUser.char === 'Mestre' || currentUser.char === n.author);
-        const delBtn = canDelete ? `<button type="button" class="party-note-del" data-loc-id="${locId}" data-push-id="${pushId}" title="Apagar nota">🗑</button>` : '';
+        const canDelete = currentUser && (currentUser.char === 'GM' || currentUser.char === n.author);
+        const delBtn = canDelete ? `<button type="button" class="party-note-del" data-loc-id="${locId}" data-push-id="${pushId}" title="Delete note">🗑</button>` : '';
         return `
         <div class="party-note">
           <div class="party-note-head">
-            <div class="pn-left"><b>${n.author}</b><span>${new Date(n.createdAt).toLocaleString('pt-BR', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span></div>
+            <div class="pn-left"><b>${n.author}</b><span>${new Date(n.createdAt).toLocaleString('en-US', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span></div>
             ${delBtn}
           </div>
           <p>${n.text}</p>
         </div>`;
       }).join('')
-    : `<p class="party-notes-empty">Nenhuma nota da party ainda sobre este local.</p>`;
+    : `<p class="party-notes-empty">No party notes for this location yet.</p>`;
 
   el.innerHTML = `
-    <p class="npc-section-title">📝 Notas da Party</p>
+    <p class="npc-section-title">📝 Party Notes</p>
     <div class="party-notes-list">${notesHTML}</div>
     <div class="party-note-form">
-      <textarea id="partyNoteInput" placeholder="Adicionar uma nota sobre ${LOCATIONS.find(l=>l.id===locId).name}..."></textarea>
-      <button type="button" id="partyNoteSubmit">Adicionar nota</button>
+      <textarea id="partyNoteInput" placeholder="Add a note about ${LOCATIONS.find(l=>l.id===locId).name}..."></textarea>
+      <button type="button" id="partyNoteSubmit">Add note</button>
     </div>
   `;
   document.getElementById('partyNoteSubmit').addEventListener('click', () => {
@@ -303,16 +303,16 @@ function renderPartyNotesSection(locId){
   });
   el.querySelectorAll('.party-note-del').forEach(btn => {
     btn.addEventListener('click', () => {
-      if(!confirm('Apagar essa nota?')) return;
+      if(!confirm('Delete this note?')) return;
       db.ref('locationNotes/' + btn.dataset.locId + '/' + btn.dataset.pushId).remove();
     });
   });
 }
 
 // ------------------------------------------------------------
-// NOTES TAB — bloco pessoal e privado por personagem. Salvo no
-// Firebase (personalNotes/{personagem}), então sincroniza entre
-// dispositivos diferentes logados com o mesmo personagem.
+// NOTES TAB — a private personal notebook per character. Saved
+// to Firebase (personalNotes/{character}), so it syncs across
+// different devices logged in as the same character.
 // ------------------------------------------------------------
 let notesSaveTimeout = null;
 
@@ -323,17 +323,17 @@ function renderNotesTab(){
   document.getElementById('tabDistances').classList.remove('active');
 
   if(!currentUser){
-    panelBody.innerHTML = `<div class="notes-locked"><div class="glyph" style="font-size:26px;opacity:.5;">🔒</div><p>Faça login pra usar suas notas.</p></div>`;
+    panelBody.innerHTML = `<div class="notes-locked"><div class="glyph" style="font-size:26px;opacity:.5;">🔒</div><p>Log in to use your notes.</p></div>`;
     return;
   }
   const who = currentUser.char;
 
   panelBody.innerHTML = `
-    <p class="loc-eyebrow">Bloco pessoal</p>
-    <h2>Notas de ${who}</h2>
+    <p class="loc-eyebrow">Personal notebook</p>
+    <h2>${who}'s Notes</h2>
     <div class="notes-wrap">
-      <textarea id="notesArea" placeholder="Escreva aqui suas anotações, teorias, pistas, o que quiser lembrar depois..." disabled></textarea>
-      <div class="notes-status"><span id="notesStatus">carregando…</span><span>${who === 'Mestre' ? 'visível só pro mestre' : 'privado — só ' + who + ' vê, sincroniza entre dispositivos'}</span></div>
+      <textarea id="notesArea" placeholder="Write your notes, theories, clues, anything you want to remember later..." disabled></textarea>
+      <div class="notes-status"><span id="notesStatus">loading…</span><span>${who === 'GM' ? 'visible only to the GM' : 'private — only ' + who + ' sees this, syncs across devices'}</span></div>
     </div>
   `;
   const area = document.getElementById('notesArea');
@@ -342,16 +342,16 @@ function renderNotesTab(){
   db.ref('personalNotes/' + who).once('value').then(snap => {
     area.value = (snap.val() && snap.val().text) || '';
     area.disabled = false;
-    status.textContent = 'salvo';
+    status.textContent = 'saved';
   });
 
   area.addEventListener('input', () => {
-    status.textContent = 'salvando…';
+    status.textContent = 'saving…';
     clearTimeout(notesSaveTimeout);
     notesSaveTimeout = setTimeout(() => {
       db.ref('personalNotes/' + who).set({ text: area.value, updatedAt: Date.now() })
-        .then(() => { status.textContent = 'salvo'; })
-        .catch(() => { status.textContent = 'erro ao salvar'; });
+        .then(() => { status.textContent = 'saved'; })
+        .catch(() => { status.textContent = 'error saving'; });
     }, 400);
   });
 }
@@ -363,7 +363,7 @@ document.getElementById('tabLocation').addEventListener('click', () => {
     document.getElementById('tabLocation').classList.add('active');
     document.getElementById('tabDistances').classList.remove('active');
     document.getElementById('tabNotes').classList.remove('active');
-    panelBody.innerHTML = `<div class="empty-state"><div class="glyph">◈</div><p>Selecione um ponto no mapa para revelar o que os personagens sabem sobre aquele lugar.</p></div>`;
+    panelBody.innerHTML = `<div class="empty-state"><div class="glyph">◈</div><p>Select a point on the map to reveal what the characters know about that place.</p></div>`;
   }
 });
 document.getElementById('tabNotes').addEventListener('click', renderNotesTab);
@@ -373,17 +373,17 @@ document.getElementById('tabNotes').addEventListener('click', renderNotesTab);
 // + D&D 5e travel pace conversion.
 // ------------------------------------------------------------
 const PACES_BASE = [
-  { key: "fast",   label: "Rápido", milesPerDay: 30, note: "-5 Percepção passiva" },
+  { key: "fast",   label: "Fast", milesPerDay: 30, note: "-5 passive Perception" },
   { key: "normal", label: "Normal", milesPerDay: 24, note: "—" },
-  { key: "slow",   label: "Lento",  milesPerDay: 18, note: "permite furtividade" }
+  { key: "slow",   label: "Slow",  milesPerDay: 18, note: "allows stealth" }
 ];
-// Velocidades oficiais do D&D 5e (PHB, tabela de Montarias e Veículos).
-// A tabela de ritmo padrão assume velocidade 30 pés; escalamos
-// proporcionalmente para os outros modos de viagem.
+// Official D&D 5e speeds (PHB, Mounts and Vehicles table).
+// The standard pace table assumes 30ft speed; we scale
+// proportionally for the other travel modes.
 const TRAVEL_MODES = {
-  "a-pe":    { label: "A pé",     speedFt: 30, hint: "Velocidade humana padrão" },
-  "cavalo":  { label: "A cavalo", speedFt: 60, hint: "Cavalo de montaria (Riding Horse), 60 pés" },
-  "carroca": { label: "De carroça", speedFt: 40, hint: "Puxada por cavalo de tiro (Draft Horse), 40 pés" }
+  "a-pe":    { label: "On foot",     speedFt: 30, hint: "Standard human speed" },
+  "cavalo":  { label: "On horseback", speedFt: 60, hint: "Riding Horse, 60 ft" },
+  "carroca": { label: "By wagon", speedFt: 40, hint: "Pulled by a Draft Horse, 40 ft" }
 };
 
 function cityHasPin(cityName){
@@ -409,25 +409,25 @@ function renderDistancesTab(){
   const modeOptions = Object.entries(TRAVEL_MODES).map(([key, m]) => `<option value="${key}">${m.label}</option>`).join('');
 
   panelBody.innerHTML = `
-    <p class="loc-eyebrow">Calculadora</p>
-    <h2>Distâncias</h2>
-    <p class="loc-desc">Distâncias canônicas em linha reta (wot.fandom.com). ★ = local já marcado no mapa.</p>
+    <p class="loc-eyebrow">Calculator</p>
+    <h2>Distances</h2>
+    <p class="loc-desc">Canonical straight-line distances (wot.fandom.com). ★ = location already pinned on the map.</p>
     <div class="dist-selects">
       <div>
-        <label>De</label>
+        <label>From</label>
         <select id="distFrom">${options}</select>
       </div>
-      <button class="dist-swap" id="distSwap" title="Inverter">⇅</button>
+      <button class="dist-swap" id="distSwap" title="Swap">⇅</button>
       <div>
-        <label>Até</label>
+        <label>To</label>
         <select id="distTo">${options}</select>
       </div>
       <div>
-        <label>Modo de viagem</label>
+        <label>Travel mode</label>
         <select id="distMode">${modeOptions}</select>
       </div>
       <label class="dist-terrain-toggle">
-        <input type="checkbox" id="distTerrain"> Terreno difícil (dobra o tempo)
+        <input type="checkbox" id="distTerrain"> Difficult terrain (doubles travel time)
       </label>
     </div>
     <div id="distResult"></div>
@@ -442,12 +442,12 @@ function renderDistancesTab(){
     const a = fromSel.value, b = toSel.value;
     const resultEl = document.getElementById('distResult');
     if(a === b){
-      resultEl.innerHTML = `<div class="dist-none">Escolha dois locais diferentes.</div>`;
+      resultEl.innerHTML = `<div class="dist-none">Choose two different locations.</div>`;
       return;
     }
     const miles = distanceBetween(a, b);
     if(miles == null){
-      resultEl.innerHTML = `<div class="dist-none">Sem dado canônico entre esses dois locais.</div>`;
+      resultEl.innerHTML = `<div class="dist-none">No canonical data between these two locations.</div>`;
       return;
     }
     const mode = TRAVEL_MODES[modeSel.value];
@@ -457,19 +457,19 @@ function renderDistancesTab(){
     const rows = PACES_BASE.map(p => {
       const effectiveMilesPerDay = p.milesPerDay * speedMultiplier * terrainMultiplier;
       const days = miles / effectiveMilesPerDay;
-      const daysLabel = days < 1 ? `${Math.ceil(days*24)}h` : `${days.toFixed(1)} dias`;
-      return `<tr><td>${p.label} (${effectiveMilesPerDay.toFixed(1)} mi/dia)</td><td class="days">${daysLabel}</td><td style="color:var(--ink-dim);font-size:11px;">${p.note}</td></tr>`;
+      const daysLabel = days < 1 ? `${Math.ceil(days*24)}h` : `${days.toFixed(1)} days`;
+      return `<tr><td>${p.label} (${effectiveMilesPerDay.toFixed(1)} mi/day)</td><td class="days">${daysLabel}</td><td style="color:var(--ink-dim);font-size:11px;">${p.note}</td></tr>`;
     }).join('');
     resultEl.innerHTML = `
       <div class="dist-result">
-        <div class="dist-miles">${miles.toLocaleString('pt-BR')}</div>
-        <div class="dist-miles-label">MILHAS · EM LINHA RETA</div>
+        <div class="dist-miles">${miles.toLocaleString('en-US')}</div>
+        <div class="dist-miles-label">MILES · AS THE CROW FLIES</div>
         <table class="dist-pace-table">
-          <tr><th>Ritmo</th><th>Tempo</th><th></th></tr>
+          <tr><th>Pace</th><th>Time</th><th></th></tr>
           ${rows}
         </table>
       </div>
-      <p class="dist-note">${mode.hint}${terrainCk.checked ? ' · terreno difícil ativo (metade da distância diária, regra padrão do D&D 5e)' : ''}. Tempo estimado viajando em linha reta, sem paradas — estrada real costuma ser mais longa; ajuste como mestre achar melhor.</p>
+      <p class="dist-note">${mode.hint}${terrainCk.checked ? ' · difficult terrain active (half the daily distance, standard D&D 5e rule)' : ''}. Estimated time traveling in a straight line, without stops — actual roads tend to be longer; adjust as the GM sees fit.</p>
     `;
   }
   fromSel.addEventListener('change', update);
@@ -487,26 +487,26 @@ function renderDistancesTab(){
 document.getElementById('tabDistances').addEventListener('click', renderDistancesTab);
 
 function applyFilter(){
-  // Mestre logado com "Todos" ativo vê tudo, sem restrição.
-  // Nos demais casos (jogador, ou Mestre simulando um personagem
-  // pelos chips), um card só aparece se sua visibilidade inclui
-  // "all" ou o personagem em questão.
-  const isMestreFull = currentUser && currentUser.char === 'Mestre' && activeChar === 'all';
-  const simChar = currentUser ? (currentUser.char === 'Mestre' ? activeChar : currentUser.char) : null;
+  // GM logged in with "All" active sees everything, no restriction.
+  // In other cases (player, or GM simulating a character via the
+  // chips), a card only shows if its visibility includes
+  // "all" or the character in question.
+  const isGMFull = currentUser && currentUser.char === 'GM' && activeChar === 'all';
+  const simChar = currentUser ? (currentUser.char === 'GM' ? activeChar : currentUser.char) : null;
 
   document.querySelectorAll('.know-card, .npc-row').forEach(el => {
     const vis = (el.dataset.vis || 'all').split(',');
-    const show = isMestreFull || (simChar && (vis.includes('all') || vis.includes(simChar)));
+    const show = isGMFull || (simChar && (vis.includes('all') || vis.includes(simChar)));
     el.classList.toggle('hidden-by-filter', !show);
   });
 }
 
 // ------------------------------------------------------------
-// Editor de visibilidade (só existe na tela quando logado como
-// Mestre). O popover é um único elemento flutuante (position:fixed),
-// reposicionado via JS a cada clique, pra nunca ficar cortado pelo
-// scroll interno do painel — antes ele vivia dentro do card e o
-// navegador cortava a lista quando não cabia.
+// Visibility editor (only exists on screen when logged in as
+// GM). The popover is a single floating element (position:fixed),
+// repositioned via JS on each click, so it never gets clipped by
+// the panel's internal scroll — it used to live inside the card
+// and the browser would cut off the list when it didn't fit.
 // ------------------------------------------------------------
 const visPopoverEl = document.getElementById('visPopoverFloating');
 
@@ -522,14 +522,14 @@ function openVisPopover(btn){
     `<label><input type="checkbox" value="${name}" ${vis.includes(name) ? 'checked' : ''}> ${name}</label>`
   ).join('');
   visPopoverEl.innerHTML = `
-    <label><input type="checkbox" value="all" ${vis.includes('all') ? 'checked' : ''}> Todos (grupo)</label>
+    <label><input type="checkbox" value="all" ${vis.includes('all') ? 'checked' : ''}> All (party)</label>
     <div class="vis-divider"></div>
     ${boxes}
   `;
   visPopoverEl.dataset.cardId = cardId;
   visPopoverEl.classList.add('open');
 
-  // posiciona logo abaixo do botão, sem estourar a borda direita/inferior da tela
+  // position right below the button, without overflowing the screen's right/bottom edge
   const r = btn.getBoundingClientRect();
   const popW = 170, popH = visPopoverEl.offsetHeight || 160;
   let left = r.left;
@@ -595,7 +595,7 @@ document.getElementById('editToggle').addEventListener('click', function(){
   this.classList.toggle('active', editMode);
   coordReadout.classList.toggle('show', editMode);
   coordReadout.innerHTML = editMode
-    ? 'Modo edição ativo.<br>Clique no mapa para capturar a posição.'
+    ? 'Edit mode active.<br>Click the map to capture the position.'
     : '';
 });
 
@@ -605,7 +605,7 @@ mapScroll.addEventListener('click', (e) => {
   const rect = img.getBoundingClientRect();
   const left = ((e.clientX - rect.left) / rect.width * 100).toFixed(2);
   const top = ((e.clientY - rect.top) / rect.height * 100).toFixed(2);
-  coordReadout.innerHTML = `top: <b>${top}%</b>, left: <b>${left}%</b><br><span style="opacity:.7">clique novamente para atualizar</span>`;
+  coordReadout.innerHTML = `top: <b>${top}%</b>, left: <b>${left}%</b><br><span style="opacity:.7">click again to update</span>`;
 });
 
 renderPins();
@@ -630,11 +630,11 @@ const pinError = document.getElementById('pinError');
 const sessionBadge = document.getElementById('sessionBadge');
 const sessionWho = document.getElementById('sessionWho');
 let pendingChar = null;
-let currentUser = null; // { char: 'Maeri' | ... | 'Mestre' }
+let currentUser = null; // { char: 'Maeri' | ... | 'GM' }
 
 function buildLockGrid(){
   lockGrid.innerHTML = '';
-  Object.keys(ACCESS_PINS).filter(c => c !== 'Mestre').forEach(name => {
+  Object.keys(ACCESS_PINS).filter(c => c !== 'GM').forEach(name => {
     const btn = document.createElement('button');
     btn.textContent = name;
     btn.addEventListener('click', () => openPinStep(name));
@@ -644,7 +644,7 @@ function buildLockGrid(){
 
 function openPinStep(name){
   pendingChar = name;
-  pinName.textContent = name === 'Mestre' ? 'Mestre' : name;
+  pinName.textContent = name === 'GM' ? 'GM' : name;
   pinInput.value = '';
   pinError.innerHTML = '&nbsp;';
   pinStepPick.style.display = 'none';
@@ -652,7 +652,7 @@ function openPinStep(name){
   setTimeout(() => pinInput.focus(), 50);
 }
 
-document.getElementById('lockGmBtn').addEventListener('click', () => openPinStep('Mestre'));
+document.getElementById('lockGmBtn').addEventListener('click', () => openPinStep('GM'));
 document.getElementById('pinBack').addEventListener('click', () => {
   pinStepEnter.classList.remove('active');
   pinStepPick.style.display = 'block';
@@ -663,7 +663,7 @@ function attemptLogin(){
   if(val === ACCESS_PINS[pendingChar]){
     grantAccess(pendingChar, true);
   } else {
-    pinError.textContent = 'PIN incorreto. Tente de novo.';
+    pinError.textContent = 'Wrong PIN. Try again.';
     pinInput.classList.remove('shake'); void pinInput.offsetWidth; pinInput.classList.add('shake');
     pinInput.value = '';
   }
@@ -681,7 +681,7 @@ function grantAccess(name, persist){
 }
 
 function applyAccessToUI(){
-  const isGM = currentUser.char === 'Mestre';
+  const isGM = currentUser.char === 'GM';
   sessionBadge.style.display = 'flex';
   sessionWho.textContent = currentUser.char;
   document.getElementById('globalSearchWrap').style.display = 'block';
@@ -711,31 +711,31 @@ function applyAccessToUI(){
 }
 
 // ------------------------------------------------------------
-// GLOBAL SEARCH — busca por locais, NPCs/lojas e conhecimento,
-// respeitando a visibilidade de quem está logado.
+// GLOBAL SEARCH — searches locations, NPCs/shops and lore,
+// respecting the visibility of whoever is logged in.
 // ------------------------------------------------------------
 function performSearch(query){
   const q = query.trim().toLowerCase();
   if(!q || !currentUser) return [];
   const results = [];
-  const mestre = currentUser.char === 'Mestre';
+  const isGM = currentUser.char === 'GM';
 
   LOCATIONS.forEach(loc => {
     if((loc.name + ' ' + loc.desc).toLowerCase().includes(q)){
-      results.push({ type: 'Local', locId: loc.id, label: loc.name, snippet: loc.desc });
+      results.push({ type: 'Location', locId: loc.id, label: loc.name, snippet: loc.desc });
     }
     (loc.knowledge || []).forEach(k => {
       const vis = getVisibility(k.id, k.visibleTo);
-      if(!mestre && !(vis.includes('all') || vis.includes(currentUser.char))) return;
+      if(!isGM && !(vis.includes('all') || vis.includes(currentUser.char))) return;
       if((k.text + ' ' + k.tag + ' ' + k.who).toLowerCase().includes(q)){
-        results.push({ type: 'Conhecimento', locId: loc.id, cardId: k.id, label: loc.name + ' — ' + k.tag, snippet: k.text });
+        results.push({ type: 'Lore', locId: loc.id, cardId: k.id, label: loc.name + ' — ' + k.tag, snippet: k.text });
       }
     });
     (loc.npcs || []).forEach(n => {
       const vis = getVisibility(n.id, n.visibleTo);
-      if(!mestre && !(vis.includes('all') || vis.includes(currentUser.char))) return;
+      if(!isGM && !(vis.includes('all') || vis.includes(currentUser.char))) return;
       if((n.name + ' ' + n.role + ' ' + n.desc).toLowerCase().includes(q)){
-        results.push({ type: 'NPC & Loja', locId: loc.id, cardId: n.id, label: n.name + ' · ' + loc.name, snippet: n.role });
+        results.push({ type: 'NPC & Shop', locId: loc.id, cardId: n.id, label: n.name + ' · ' + loc.name, snippet: n.role });
       }
     });
   });
@@ -750,7 +750,7 @@ function renderSearchResults(results, query){
     return;
   }
   if(results.length === 0){
-    box.innerHTML = `<div class="search-empty">Nada encontrado para "${query}".</div>`;
+    box.innerHTML = `<div class="search-empty">Nothing found for "${query}".</div>`;
     box.classList.add('show');
     return;
   }
@@ -810,20 +810,20 @@ buildLockGrid();
   }
 })();
 // ------------------------------------------------------------
-// CATÁLOGO DE LOJAS — mostra as lojas do local selecionado no
-// mapa (currentLocationId). Muda sempre que o jogador clica em
-// outro ponto, respeitando a visibilidade (Mestre vê tudo;
-// jogador só o que pode ver).
+// SHOP CATALOG — shows the shops for the currently selected
+// location (currentLocationId). Updates whenever the player
+// clicks another point, respecting visibility (GM sees
+// everything; players only see what they're allowed to).
 // ------------------------------------------------------------
 function renderShopCatalog(){
   const wrap = document.getElementById('shopCatalog');
   const titleEl = document.getElementById('shopCatalogTitle');
   if(!wrap || !currentUser) return;
-  const mestre = currentUser.char === 'Mestre';
+  const isGM = currentUser.char === 'GM';
 
   if(!currentLocationId){
-    titleEl.textContent = '🛒 Lojas';
-    wrap.innerHTML = `<p class="shop-catalog-empty">Selecione um local no mapa pra ver as lojas de lá.</p>`;
+    titleEl.textContent = '🛒 Shops';
+    wrap.innerHTML = `<p class="shop-catalog-empty">Select a location on the map to see its shops.</p>`;
     return;
   }
 
@@ -831,13 +831,13 @@ function renderShopCatalog(){
   const shops = (loc.npcs || []).filter(n => {
     if(n.type !== 'shop') return false;
     const vis = getVisibility(n.id, n.visibleTo);
-    return mestre || vis.includes('all') || vis.includes(currentUser.char);
+    return isGM || vis.includes('all') || vis.includes(currentUser.char);
   });
 
-  titleEl.textContent = `🛒 Lojas em ${loc.name}`;
+  titleEl.textContent = `🛒 Shops in ${loc.name}`;
 
   if(shops.length === 0){
-    wrap.innerHTML = `<p class="shop-catalog-empty">Nenhuma loja em ${loc.name}.</p>`;
+    wrap.innerHTML = `<p class="shop-catalog-empty">No shops in ${loc.name}.</p>`;
     return;
   }
 
@@ -852,7 +852,7 @@ function renderShopCatalog(){
       </div>
       <div class="shop-card-desc">${s.desc}</div>
       <div class="shop-card-body">
-        ${itemsTableHTML(s.items) || `<p class="shop-catalog-empty" style="padding:8px 0 0;">Sem itens cadastrados ainda.</p>`}
+        ${itemsTableHTML(s.items) || `<p class="shop-catalog-empty" style="padding:8px 0 0;">No items listed yet.</p>`}
       </div>
     </div>`).join('')}</div>`;
 
@@ -868,10 +868,10 @@ document.getElementById('shopCatalogToggle').addEventListener('click', () => {
 });
 
 // ------------------------------------------------------------
-// FIREBASE — listeners ao vivo. Mantêm os caches locais
-// (visOverridesCache, locationNotesCache) sincronizados com o
-// banco em tempo real, pra qualquer jogador com a página aberta
-// ver as mudanças de outros sem precisar recarregar.
+// FIREBASE — live listeners. Keep the local caches
+// (visOverridesCache, locationNotesCache) synced with the
+// database in real time, so any player with the page open
+// sees others' changes without needing to reload.
 // ------------------------------------------------------------
 function attachFirebaseListeners(){
   db.ref('visibilityOverrides').on('value', snap => {
