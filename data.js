@@ -57,6 +57,44 @@ const DIST_MATRIX = [
   [1005,1132,668,1728,775,1477,1634,1200,654,2412,2321,1768,989,2214,1366,2114,578,985,469,1546,2430,889,1931,1645,1417,1488,2411,null]
 ];
 
+// ============================================================
+// WATER ROUTES — river/sea connections between cities that show
+// up as an extra "by boat" option in the Distances calculator
+// when both cities in a navigable pair are selected.
+// Sources (WoT wiki + Wheel of Time Atlas):
+//  - River Erinin: Tar Valon <-> Aringill (Andor's main port) <-> Tear
+//  - River Manetherendrelle ("White River"): rises in Andor,
+//    passes Whitebridge, runs through Altara, borders Murandy,
+//    reaches the Sea of Storms at Illian
+//  - Sea Folk ships connect coastal port cities on the Sea of Storms
+// ============================================================
+const WATER_MODES = {
+  "rio": {
+    label: "River boat",
+    milesPerDay: 107,
+    hint: "Canonical: in The Dragon Reborn, Egwene's group travels ~1,600 miles down the River Erinin from Tar Valon to Tear in about 15 days aboard a boat described as slow — roughly 107 miles/day."
+  },
+  "mar": {
+    label: "Sea ship (Sea Folk)",
+    milesPerDay: 170,
+    hint: "Estimated: Sea Folk ships (Atha'an Miere) are described in canon as the fastest known vessels in the world, aided by Windfinders — but no exact speed is ever given in the books, so this number is a reasonable estimate, not a canonical figure."
+  }
+};
+const WATER_ROUTES = [
+  { a: "Tar Valon", b: "Caemlyn", mode: "rio", note: "via the River Erinin, through Aringill" },
+  { a: "Tar Valon", b: "Tear", mode: "rio", note: "via the River Erinin" },
+  { a: "Caemlyn", b: "Illian", mode: "rio", note: "via the River Manetherendrelle" },
+  { a: "Caemlyn", b: "Ebou Dar", mode: "rio", note: "via the River Manetherendrelle" },
+  { a: "Caemlyn", b: "Lugard", mode: "rio", note: "via the River Manetherendrelle" },
+  { a: "Lugard", b: "Illian", mode: "rio", note: "via the River Manetherendrelle" },
+  { a: "Ebou Dar", b: "Illian", mode: "rio", note: "via the River Manetherendrelle" },
+  { a: "Tear", b: "Illian", mode: "mar", note: "coastal route, Sea of Storms" },
+  { a: "Tear", b: "Ebou Dar", mode: "mar", note: "coastal route, Sea of Storms" },
+  { a: "Illian", b: "Ebou Dar", mode: "mar", note: "coastal route, Sea of Storms" }
+];
+function findWaterRoute(cityA, cityB){
+  return WATER_ROUTES.find(r => (r.a === cityA && r.b === cityB) || (r.a === cityB && r.b === cityA)) || null;
+}
 
 // ============================================================
 // CHARACTERS — profile + home location (homeLocationId points

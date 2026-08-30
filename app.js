@@ -406,7 +406,6 @@ function renderDistancesTab(){
   document.getElementById('tabNotes').classList.remove('active');
 
   const options = DIST_CITIES.map(c => `<option value="${c}">${cityHasPin(c) ? '★ ' : ''}${c}</option>`).join('');
-  const modeOptions = Object.entries(TRAVEL_MODES).map(([key, m]) => `<option value="${key}">${m.label}</option>`).join('');
 
   panelBody.innerHTML = `
     <p class="loc-eyebrow">Calculator</p>
@@ -424,9 +423,9 @@ function renderDistancesTab(){
       </div>
       <div>
         <label>Travel mode</label>
-        <select id="distMode">${modeOptions}</select>
+        <select id="distMode"></select>
       </div>
-      <label class="dist-terrain-toggle">
+      <label class="dist-terrain-toggle" id="distTerrainWrap">
         <input type="checkbox" id="distTerrain"> Difficult terrain (doubles travel time)
       </label>
     </div>
@@ -436,7 +435,18 @@ function renderDistancesTab(){
   const toSel = document.getElementById('distTo');
   const modeSel = document.getElementById('distMode');
   const terrainCk = document.getElementById('distTerrain');
+  const terrainWrap = document.getElementById('distTerrainWrap');
   toSel.selectedIndex = 1;
+
+  function rebuildModeOptions(){
+    const prevValue = modeSel.value;
+    const groundOptions = Object.entries(TRAVEL_MODES).map(([key, m]) => `<option value="${key}">${m.label}</option>`).join('');
+    const route = findWaterRoute(fromSel.value, toSel.value);
+    const waterOption = route ? `<option value="water:${route.mode}">🚤 ${WATER_MODES[route.mode].label} (${route.note})</option>` : '';
+    modeSel.innerHTML = groundOptions + waterOption;
+    // keep the previous selection if it's still available (e.g. still a valid water route)
+    if([...modeSel.options].some(o => o.value === prevValue)) modeSel.value = prevValue;
+  }
 
   function update(){
     const a = fromSel.value, b = toSel.value;
@@ -450,6 +460,31 @@ function renderDistancesTab(){
       resultEl.innerHTML = `<div class="dist-none">No canonical data between these two locations.</div>`;
       return;
     }
+
+    const isWater = modeSel.value.startsWith('water:');
+
+    if(isWater){
+      terrainWrap.style.display = 'none';
+      const waterKey = modeSel.value.split(':')[1];
+      const wMode = WATER_MODES[waterKey];
+      const route = findWaterRoute(a, b);
+      const days = miles / wMode.milesPerDay;
+      const daysLabel = days < 1 ? `${Math.ceil(days*24)}h` : `${days.toFixed(1)} days`;
+      resultEl.innerHTML = `
+        <div class="dist-result">
+          <div class="dist-miles">${miles.toLocaleString('en-US')}</div>
+          <div class="dist-miles-label">MILES · AS THE CROW FLIES</div>
+          <table class="dist-pace-table">
+            <tr><th>Route</th><th>Time</th><th></th></tr>
+            <tr><td>${wMode.label} (${wMode.milesPerDay} mi/day)</td><td class="days">${daysLabel}</td><td style="color:var(--ink-dim);font-size:11px;">${route ? route.note : ''}</td></tr>
+          </table>
+        </div>
+        <p class="dist-note">${wMode.hint}</p>
+      `;
+      return;
+    }
+
+    terrainWrap.style.display = 'flex';
     const mode = TRAVEL_MODES[modeSel.value];
     const speedMultiplier = mode.speedFt / 30;
     const terrainMultiplier = terrainCk.checked ? 0.5 : 1;
@@ -472,16 +507,19 @@ function renderDistancesTab(){
       <p class="dist-note">${mode.hint}${terrainCk.checked ? ' · difficult terrain active (half the daily distance, standard D&D 5e rule)' : ''}. Estimated time traveling in a straight line, without stops — actual roads tend to be longer; adjust as the GM sees fit.</p>
     `;
   }
-  fromSel.addEventListener('change', update);
-  toSel.addEventListener('change', update);
+
+  fromSel.addEventListener('change', () => { rebuildModeOptions(); update(); });
+  toSel.addEventListener('change', () => { rebuildModeOptions(); update(); });
   modeSel.addEventListener('change', update);
   terrainCk.addEventListener('change', update);
   document.getElementById('distSwap').addEventListener('click', () => {
     const tmp = fromSel.value;
     fromSel.value = toSel.value;
     toSel.value = tmp;
+    rebuildModeOptions();
     update();
   });
+  rebuildModeOptions();
   update();
 }
 document.getElementById('tabDistances').addEventListener('click', renderDistancesTab);
