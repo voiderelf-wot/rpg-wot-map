@@ -251,6 +251,7 @@ function selectLocation(id){
   });
   applyFilter();
   renderPartyNotesSection(loc.id);
+  renderShopCatalog();
 }
 
 // ------------------------------------------------------------
@@ -809,27 +810,34 @@ buildLockGrid();
   }
 })();
 // ------------------------------------------------------------
-// CATÁLOGO DE LOJAS — varre todos os locais atrás de NPCs do
-// tipo "shop" e monta uma vitrine única, clicável, respeitando
-// a visibilidade (Mestre vê tudo; jogador só o que pode ver).
+// CATÁLOGO DE LOJAS — mostra as lojas do local selecionado no
+// mapa (currentLocationId). Muda sempre que o jogador clica em
+// outro ponto, respeitando a visibilidade (Mestre vê tudo;
+// jogador só o que pode ver).
 // ------------------------------------------------------------
 function renderShopCatalog(){
   const wrap = document.getElementById('shopCatalog');
+  const titleEl = document.getElementById('shopCatalogTitle');
   if(!wrap || !currentUser) return;
   const mestre = currentUser.char === 'Mestre';
-  const shops = [];
 
-  LOCATIONS.forEach(loc => {
-    (loc.npcs || []).forEach(n => {
-      if(n.type !== 'shop') return;
-      const vis = getVisibility(n.id, n.visibleTo);
-      if(!mestre && !(vis.includes('all') || vis.includes(currentUser.char))) return;
-      shops.push({ ...n, locId: loc.id, locName: loc.name });
-    });
+  if(!currentLocationId){
+    titleEl.textContent = '🛒 Lojas';
+    wrap.innerHTML = `<p class="shop-catalog-empty">Selecione um local no mapa pra ver as lojas de lá.</p>`;
+    return;
+  }
+
+  const loc = LOCATIONS.find(l => l.id === currentLocationId);
+  const shops = (loc.npcs || []).filter(n => {
+    if(n.type !== 'shop') return false;
+    const vis = getVisibility(n.id, n.visibleTo);
+    return mestre || vis.includes('all') || vis.includes(currentUser.char);
   });
 
+  titleEl.textContent = `🛒 Lojas em ${loc.name}`;
+
   if(shops.length === 0){
-    wrap.innerHTML = `<p class="shop-catalog-empty">Nenhuma loja cadastrada ainda.</p>`;
+    wrap.innerHTML = `<p class="shop-catalog-empty">Nenhuma loja em ${loc.name}.</p>`;
     return;
   }
 
@@ -845,20 +853,12 @@ function renderShopCatalog(){
       <div class="shop-card-desc">${s.desc}</div>
       <div class="shop-card-body">
         ${itemsTableHTML(s.items) || `<p class="shop-catalog-empty" style="padding:8px 0 0;">Sem itens cadastrados ainda.</p>`}
-        <button type="button" class="shop-card-goto" data-loc-id="${s.locId}">📍 Ver ${s.locName} no mapa</button>
       </div>
     </div>`).join('')}</div>`;
 
   wrap.querySelectorAll('.shop-card-head').forEach(head => {
     head.addEventListener('click', () => {
       head.closest('.shop-card').classList.toggle('open');
-    });
-  });
-  wrap.querySelectorAll('.shop-card-goto').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      selectLocation(btn.dataset.locId);
-      document.querySelector('.map-frame').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 }
