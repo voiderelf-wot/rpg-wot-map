@@ -58,15 +58,25 @@ const DIST_MATRIX = [
 ];
 
 // ============================================================
-// WATER ROUTES — river/sea connections between cities that show
-// up as an extra "by boat" option in the Distances calculator
-// when both cities in a navigable pair are selected.
+// WATER ROUTES — river/sea systems. Any two cities that share a
+// system get an extra "by boat" option in the Distances
+// calculator. Grouped by waterway instead of listing every pair
+// by hand, so adding a city to a river is a one-line change.
 // Sources (WoT wiki + Wheel of Time Atlas):
-//  - River Erinin: Tar Valon <-> Aringill (Andor's main port) <-> Tear
+//  - River Erinin: rises in the Spine of the World, forms the
+//    southern border of Shienar and Arafel, flows through Tar
+//    Valon, forms the Cairhien/Andor border (Aringill <-> Maerone
+//    port crossing), and reaches the Sea of Storms at Tear.
+//    Confirmed in-book trips: Aringill<->Tar Valon<->Tear (TDR),
+//    Maerone->Tear (LoC).
 //  - River Manetherendrelle ("White River"): rises in Andor,
 //    passes Whitebridge, runs through Altara, borders Murandy,
-//    reaches the Sea of Storms at Illian
-//  - Sea Folk ships connect coastal port cities on the Sea of Storms
+//    reaches the Sea of Storms at Illian (river trip Remen->Illian
+//    is mentioned in-book).
+//  - Sea Folk ships connect coastal port cities on the Sea of Storms.
+// Simplification: Andor is represented by Caemlyn (its capital) even
+// though its actual river ports are Aringill (Erinin) and Whitebridge
+// (Manetherendrelle) — good enough for travel-time purposes.
 // ============================================================
 const WATER_MODES = {
   "rio": {
@@ -80,23 +90,18 @@ const WATER_MODES = {
     hint: "Sea Folk ships (Atha'an Miere) are described in canon as the fastest known vessels in the world, aided by Windfinders — but no exact speed is ever given in the books, so this number is a reasonable estimate, not a canonical figure."
   }
 };
-const WATER_ROUTES = [
-  { a: "Tar Valon", b: "Caemlyn", mode: "rio", note: "via the River Erinin, through Aringill" },
-  { a: "Tar Valon", b: "Tear", mode: "rio", note: "via the River Erinin" },
-  { a: "Caemlyn", b: "Illian", mode: "rio", note: "via the River Manetherendrelle" },
-  { a: "Caemlyn", b: "Ebou Dar", mode: "rio", note: "via the River Manetherendrelle" },
-  { a: "Caemlyn", b: "Lugard", mode: "rio", note: "via the River Manetherendrelle" },
-  { a: "Lugard", b: "Illian", mode: "rio", note: "via the River Manetherendrelle" },
-  { a: "Ebou Dar", b: "Illian", mode: "rio", note: "via the River Manetherendrelle" },
-  { a: "Tear", b: "Illian", mode: "mar", note: "coastal route, Sea of Storms" },
-  { a: "Tear", b: "Ebou Dar", mode: "mar", note: "coastal route, Sea of Storms" },
-  { a: "Illian", b: "Ebou Dar", mode: "mar", note: "coastal route, Sea of Storms" }
+const RIVER_SYSTEMS = [
+  { river: "River Erinin", mode: "rio", cities: ["Shol Arbela", "Tar Valon", "Cairhien", "Caemlyn", "Tear"] },
+  { river: "River Manetherendrelle", mode: "rio", cities: ["Caemlyn", "Ebou Dar", "Lugard", "Illian"] },
+  { river: "Sea of Storms coast (Sea Folk)", mode: "mar", cities: ["Tear", "Illian", "Ebou Dar"] }
 ];
 function findWaterRoute(cityA, cityB){
-  return WATER_ROUTES.find(r => (r.a === cityA && r.b === cityB) || (r.a === cityB && r.b === cityA)) || null;
+  const system = RIVER_SYSTEMS.find(s => s.cities.includes(cityA) && s.cities.includes(cityB));
+  if(!system) return null;
+  return { mode: system.mode, note: `via the ${system.river}` };
 }
 function cityHasWaterRoute(city){
-  return WATER_ROUTES.some(r => r.a === city || r.b === city);
+  return RIVER_SYSTEMS.some(s => s.cities.includes(city));
 }
 
 // ============================================================
