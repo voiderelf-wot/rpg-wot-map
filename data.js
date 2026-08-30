@@ -72,12 +72,12 @@ const WATER_MODES = {
   "rio": {
     label: "River boat",
     milesPerDay: 107,
-    hint: "Canonical: in The Dragon Reborn, Egwene's group travels ~1,600 miles down the River Erinin from Tar Valon to Tear in about 15 days aboard a boat described as slow — roughly 107 miles/day."
+    hint: "In The Dragon Reborn, Egwene's group travels ~1,600 miles down the River Erinin from Tar Valon to Tear in about 15 days aboard a boat described as slow — roughly 107 miles/day."
   },
   "mar": {
     label: "Sea ship (Sea Folk)",
     milesPerDay: 170,
-    hint: "Estimated: Sea Folk ships (Atha'an Miere) are described in canon as the fastest known vessels in the world, aided by Windfinders — but no exact speed is ever given in the books, so this number is a reasonable estimate, not a canonical figure."
+    hint: "Sea Folk ships (Atha'an Miere) are described in canon as the fastest known vessels in the world, aided by Windfinders — but no exact speed is ever given in the books, so this number is a reasonable estimate, not a canonical figure."
   }
 };
 const WATER_ROUTES = [
@@ -94,6 +94,9 @@ const WATER_ROUTES = [
 ];
 function findWaterRoute(cityA, cityB){
   return WATER_ROUTES.find(r => (r.a === cityA && r.b === cityB) || (r.a === cityB && r.b === cityA)) || null;
+}
+function cityHasWaterRoute(city){
+  return WATER_ROUTES.some(r => r.a === city || r.b === city);
 }
 
 // ============================================================

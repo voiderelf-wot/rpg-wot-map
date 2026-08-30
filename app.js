@@ -405,12 +405,12 @@ function renderDistancesTab(){
   document.getElementById('tabLocation').classList.remove('active');
   document.getElementById('tabNotes').classList.remove('active');
 
-  const options = DIST_CITIES.map(c => `<option value="${c}">${cityHasPin(c) ? '★ ' : ''}${c}</option>`).join('');
+  const options = DIST_CITIES.map(c => `<option value="${c}">${cityHasPin(c) ? '★ ' : ''}${cityHasWaterRoute(c) ? '⛵ ' : ''}${c}</option>`).join('');
 
   panelBody.innerHTML = `
     <p class="loc-eyebrow">Calculator</p>
     <h2>Distances</h2>
-    <p class="loc-desc">Canonical straight-line distances (wot.fandom.com). ★ = location already pinned on the map.</p>
+    <p class="loc-desc">Canonical straight-line distances (wot.fandom.com). ★ = location already pinned on the map. ⛵ = river or sea travel available.</p>
     <div class="dist-selects">
       <div>
         <label>From</label>
