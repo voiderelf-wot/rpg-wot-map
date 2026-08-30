@@ -82,7 +82,7 @@ const LOCATIONS = [
     distCity: "Tar Valon",
     name: "Tar Valon",
     top: 35.5, left: 70.5,
-    desc: "Cidade insular na Torre Branca, ponto de partida da campanha.",
+    desc: "Cidade insular no rio Erinin, à vista do Farol dos Arautos. Sede das Aes Sedai e da Amyrlin Seat, é a segunda cidade mais populosa das Westlands e permanece independente desde sua fundação — elo vital de comércio entre as Nações de Fronteira e os reinos do sul.",
     knowledge: [],
     npcs: [
       { name: "Serenya Taravin", role: "Aes Sedai · Ajah Azul", type: "npc", desc: "Pragmática, alta, cabelo preto com grisalhos preso em coque, olhos escuros. Coordena uma rede de informantes e contratou o grupo por fora da estrutura formal da Torre." },
@@ -145,7 +145,7 @@ const LOCATIONS = [
     distCity: "Cairhien",
     name: "Cairhien",
     top: 45.7, left: 74.6,
-    desc: "Capital da nação de Cairhien. Origem de Kaela Miren, uma das Novices desaparecidas.",
+    desc: "Cidade murada em formato quadrado às margens do rio Alguenya, reconstruída após ser incendiada na Guerra Aiel. Famosa pelas Torres Sem Topo e por ser o epicentro de Daes Dae'mar, o Jogo das Casas — a intrincada disputa política entre as nobres Casas cairhienin.",
     knowledge: [],
   },
   {
@@ -153,7 +153,7 @@ const LOCATIONS = [
     distCity: "Ebou Dar",
     name: "Altara (Ebou Dar)",
     top: 81.8, left: 44.6,
-    desc: "Onde Maeri foi criada por A Família (The Kin). As Plains of Maredo, terra natal de Uthar, ficam na fronteira norte de Altara com Amadicia.",
+    desc: "Capital portuária de Altara, erguida sobre as ruínas da antiga Barashta. Dividida pelo rio Eldar entre o lado próspero da nobreza e o Rahad, bairro pobre e perigoso — conhecida pela moda extravagante e pela vida vibrante ao redor do Palácio Tarasin.",
     knowledge: [
       { who: "Uthar", tag: "origem pessoal", pc: true, text: "Nasceu em uma família nobre perto das Plains of Maredo, região disputada entre Altara e Amadicia. Seu pai, Lorde Dainar, foi morto quando os Whitecloaks invadiram com a ajuda de um tio traidor." },
       { who: "Maeri", tag: "origem pessoal", pc: true, text: "Foi resgatada nas ruas de Rahad por Vernam, uma Sábia (Wise Woman) d'A Família, e cresceu entre as Kinswomen em Abou Dar, aprendendo cura e ervas." },
@@ -168,7 +168,7 @@ const LOCATIONS = [
     distCity: "Amador",
     name: "Amadicia",
     top: 69.9, left: 38.9,
-    desc: "Terra dos Filhos da Luz (Whitecloaks). Onde Uthar foi criado após a queda de sua família.",
+    desc: "Capital de Amadicia e sede da Fortaleza da Luz, quartel-general dos Filhos da Luz. Amadicia tem um rei, mas são os Whitecloaks que de fato governam — canalização é proibida por lei em todo o território.",
     knowledge: [
       { who: "Uthar", tag: "origem pessoal", pc: true, text: "Foi capturado pelos Whitecloaks ainda criança e criado sob a guarda de uma família nobre secretamente contrária ao fanatismo dos Filhos da Luz." },
       { who: "Uthar", tag: "origem pessoal", pc: true, text: "Aprendeu esgrima, disciplina e estratégia como um dos Whitecloaks, mesmo odiando o que representavam." },
@@ -180,7 +180,7 @@ const LOCATIONS = [
     distCity: "Maradon",
     name: "Saldaea (Maradon)",
     top: 20.3, left: 51.3,
-    desc: "Terra natal de Serenya Taravin, a Aes Sedai que contratou o grupo. Maradon é a capital.",
+    desc: "Capital de Saldaea, a maior das Nações de Fronteira, erguida às margens do rio Arinelle bem próximo ao Blight. Sede do Palácio Cordamora e de uma corte movimentada, apesar da ameaça constante das Terras Sombrias logo ao norte.",
     knowledge: [],
   },
   {
@@ -188,7 +188,7 @@ const LOCATIONS = [
     distCity: "Caemlyn",
     name: "Andor (Caemlyn)",
     top: 56.5, left: 64.7,
-    desc: "Reino natal de Elara Bryne, do guarda Gared Thane, e do comerciante Vandor Merrilin — que forneceu equipamento geral ao grupo em Tar Valon.",
+    desc: "Capital de Andor, considerada a segunda cidade mais bela das Westlands, atrás só de Tar Valon. Dividida entre a Cidade Interior, erguida pelos Ogier, e a Nova Cidade construída por humanos — sede do Palácio Real e do Trono do Leão.",
     knowledge: [],
   },
   {
@@ -196,7 +196,7 @@ const LOCATIONS = [
     distCity: "Far Madding",
     name: "Far Madding",
     top: 67.5, left: 66.4,
-    desc: "Cidade ao sul, ainda não visitada pelo grupo. Reservada para expansão futura da campanha.",
+    desc: "Cidade-estado independente numa ilha, ligada ao continente por três pontes. Abriga o Guardian, um ter'angreal antigo que bloqueia o acesso ao Poder Único dentro e ao redor da cidade — o único lugar conhecido onde ninguém consegue canalizar.",
     knowledge: [
       { who: "Mestre", tag: "worldbuilding", pc: false, text: "Área reservada para expansão futura — vilarejos ao redor, cultura e conflitos locais ainda em desenvolvimento. O grupo ainda não esteve aqui.", visibleTo: [] },
     ],
@@ -206,7 +206,7 @@ const LOCATIONS = [
     distCity: "Illian",
     name: "Illian",
     top: 85.3, left: 59.3,
-    desc: "Rival comercial histórica de Tear na disputa por azeitonas. Terra natal de Callan Forjaforte, o ferreiro que armou o grupo.",
+    desc: "Uma das maiores cidades das Westlands, cortada por diversos canais e governada em conjunto pelo Rei, o Conselho dos Nove e a Assembleia. Famosa por sediar a Grande Caçada do Corno, tradição em que caçadores juram encontrar o Corno de Valere.",
     knowledge: [],
   },
   {
@@ -214,7 +214,7 @@ const LOCATIONS = [
     distCity: "Tear",
     name: "Tear",
     top: 77.6, left: 71.4,
-    desc: "Rival comercial histórica de Illian na disputa por azeitonas. Terra natal de Mara al'Dene, a herbalista que forneceu poções ao grupo.",
+    desc: "Grande porto no Mar das Tempestades, dominado pela Pedra de Tear — fortaleza colossal erguida pouco após a Quebra do Mundo, que nunca caiu até a chegada do Dragão Reencarnado. Governada por Altos Lordes profundamente avessos a tudo ligado ao Poder Único.",
     knowledge: [],
   },
   {
@@ -222,7 +222,7 @@ const LOCATIONS = [
     distCity: "Lugard",
     name: "Murandy (Lugard)",
     top: 65, left: 56.9,
-    desc: "Terra natal de Perrin Rattler, o peculiar mercador de ratos encontrado em South Harbor.",
+    desc: "Capital de Murandy, cidade movimentada pelo comércio mas conhecida pela desordem e pela fraca autoridade do rei fora das próprias muralhas. Cruzamento de rotas comerciais entre Andor, Illian, Altara e Ghealdan.",
     knowledge: [],
   },
   {
@@ -230,7 +230,7 @@ const LOCATIONS = [
     distCity: "Tanchico",
     name: "Tarabon (Tanchico)",
     top: 62.5, left: 25.9,
-    desc: "Terra natal de Lirene Valda, uma das Novices sequestradas pelos Seanchan.",
+    desc: "Antiga capital de Tarabon, erguida sobre três penínsulas na Baía de Tanchico. Sede do Palácio do Panarca — parcialmente datado da própria Era das Lendas — hoje enfraquecida pela guerra civil e pela presença Seanchan.",
     knowledge: [],
   },
   {
@@ -238,7 +238,7 @@ const LOCATIONS = [
     distCity: "Shol Arbela",
     name: "Arafel (Shol Arbela)",
     top: 21, left: 71.6,
-    desc: "Terra natal de Jarem al'Caar, o Warder de Serenya Taravin.",
+    desc: "Capital de Arafel, conhecida como a Cidade dos Dez Mil Sinos, pelo costume local de trançar sininhos nos cabelos. Uma das poucas grandes cidades das Westlands não erguida pelos Ogier.",
     knowledge: [],
   },
 ];
