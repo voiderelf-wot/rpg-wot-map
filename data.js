@@ -112,10 +112,10 @@ function cityHasWaterRoute(city){
 // a manual background card for it.
 // ============================================================
 const CHARACTERS = {
-  "Maeri": { classe: "Cleric",  origemLabel: "Raised by The Kin in Abou Dar, Altara", homeLocationId: "altara" },
+  "Maeri": { classe: "Cleric",  origemLabel: "Born in a village in Altara; raised by The Kin in Ebou Dar; grew up in So Eban", homeLocationId: "altara" },
   "Uthar": { classe: "Fighter", origemLabel: "Plains of Maredo, on the Altara/Amadicia border", homeLocationId: "altara" },
   "Dongo": { classe: "Rogue",   origemLabel: "Tremosien, Cairhien", homeLocationId: "tremosien" },
-  "Aynara": { classe: "Ranger",  origemLabel: "Origin not yet revealed in-game", homeLocationId: null }
+  "Aynara": { classe: "Paladin", origemLabel: "Origin not yet revealed in-game", homeLocationId: null }
 };
 
 // ============================================================
@@ -200,7 +200,12 @@ const LOCATIONS = [
       "One night the sky above Darein glowed orange to the north.",
       "If you don't want to be seen leaving Tar Valon, go by way of Lugagde."
     ],
-    knowledge: [],
+    knowledge: [
+      { who: "Dongo", tag: "personal background", pc: true, text: "Reached Tar Valon by boat, arriving at South Harbor — surviving the voyage by stealing olives on board." },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Carries a mission from the Ghostbloods: eliminate a man in Tar Valon known as Marrik Callas. The Ghostbloods' knife he was given marks him as one of their agents." },
+      { who: "Aynara", tag: "personal background", pc: true, visibleTo: ["Aynara"], text: "Worked for High Inquisitor Dagobert Thane as a tracker and informant, finding and mapping Portal Stones with a portal-identifying device he gave her." },
+      { who: "Aynara", tag: "personal background", pc: true, visibleTo: ["Aynara"], text: "Was imprisoned in the Whitecloak camp after openly questioning the mission and disobeying a direct order — she had tried to walk away from it." },
+    ],
     npcs: [
       { name: "Serenya Taravin", role: "Aes Sedai · Blue Ajah · Sitter", type: "npc", desc: "Apparent age around 45, from Saldaea. Pragmatic and direct: tall, black hair streaked with grey pinned in a bun, dark eyes. A Sitter in the Hall of the Tower, she runs a network of informants outside the Tower's official channels and hired the party for tasks the Tower cannot take on openly." },
       { name: "Jarem al'Caar", role: "Serenya's Warder", type: "npc", desc: "Apparent age around 50, jovial and quick to read people. A former intelligence operative for a noble House of Arafel. Dark brown hair." },
@@ -363,8 +368,10 @@ const LOCATIONS = [
     top: 43.3, left: 76.1,
     desc: "Small village in Cairhien, north of the capital — Dongo's home town.",
     knowledge: [
-      { who: "Dongo", tag: "personal background", pc: true, text: "Born in Tremosien. Grew up within an organization where no one was ever allowed to show their face — his tutor and master was known only as 'Bear,' who trained orphaned children as spies and assassins." },
-      { who: "Dongo", tag: "personal background", pc: true, text: "Fled after Pardal, another child in the group, was executed, and was discarded by Bear as 'damaged goods.'" },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Raised and trained in Tremosien. Grew up within an organization where no one was ever allowed to show their face — his tutor and master was known only as 'Bear,' who trained orphaned children as spies and assassins." },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Trained in a courtyard paved with red sandstone, worn smooth and polished by years of use — a detail he still carries with him." },
+      { who: "Dongo", tag: "personal background", pc: true, text: "After Pardal, another child in the group, was executed, he tried to flee. He was caught, and Bear discarded him as 'damaged goods.'" },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Woke up alone on a quiet road in the rain and mud, holding a soaked letter: there was no place for him there, for whoever lets themselves be led by emotion is weak — he had honored his name all too well: 'Camundongo.'" },
     ],
     npcs: [
       { name: "Bear", role: "Mentor / trafficker", type: "npc", desc: "Raised orphaned children and trained them as spies and assassins to sell — no one was allowed to show their face. Executed Pardal as punishment and discarded Dongo once he judged him emotionally 'broken.'" },
@@ -387,8 +394,12 @@ const LOCATIONS = [
     desc: "Altara's port capital, built over the ruins of ancient Barashta. Split by the River Eldar between the wealthy noble quarter and the Rahad, a poor and dangerous district — known for its extravagant fashion and the vibrant life around the Tarasin Palace.",
     knowledge: [
       { who: "Uthar", tag: "personal background", pc: true, text: "Born into a noble family near the Plains of Maredo, a region disputed between Altara and Amadicia. His father, Lord Dainar, was killed when the Whitecloaks invaded with the help of a traitorous uncle." },
-      { who: "Maeri", tag: "personal background", pc: true, text: "Rescued from the streets of Rahad by Vernam, a Wise Woman of The Kin, and grew up among the Kinswomen in Abou Dar, learning healing and herbcraft." },
-      { who: "Maeri", tag: "personal background", pc: true, text: "Hid her ability to channel from everyone except Vernam — refused to go to the White Tower for years." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "Carries his father's sword: a heron-marked longsword that once belonged to Lord Dainar." },
+      { who: "Maeri", tag: "personal background", pc: true, text: "Born in a small village in Altara to parents whose house was always full of drying herbs and curing pelts. She barely remembers them — at some point she got lost and found herself alone on an unknown road." },
+      { who: "Maeri", tag: "personal background", pc: true, text: "Reached the Rahad around age 6 and survived its streets on luck and observation. For about six months a passing traveler taught her how to break free, where to strike, how to flee, and whom to trust — then left as suddenly as she came." },
+      { who: "Maeri", tag: "personal background", pc: true, text: "Around age 8, Vernam, a healer of The Kin, found her in a desperate state in the Rahad and healed her. Maeri followed her everywhere, worked the Farm and gathered herbs until Vernam became her official guardian, teaching her healing and herbcraft." },
+      { who: "Maeri", tag: "personal background", pc: true, text: "Began to show the Power at 11. Refused the White Tower, and Vernam kept her secret from the other Kinswomen — on the condition that she never channel in front of anyone. She was never entered in The Kin's records." },
+      { who: "Maeri", tag: "personal background", pc: true, text: "At 13 she moved with Vernam to the village of So Eban, where Vernam is the Wisdom. Grew up as a Wisdom in training — tending the sick, presiding over births and deaths, and practising the Power alone in secret." },
     ],
     npcs: [
       { name: "Vernam", role: "Elder · The Kin", type: "npc", desc: "One of the Elders of The Kin, part of the Knitting Circle. Particular talent for healing, both with the Power and with herbs. Rescued Maeri from the streets of Rahad and became her official guardian." },
@@ -401,9 +412,13 @@ const LOCATIONS = [
     top: 69.9, left: 38.9,
     desc: "Capital of Amadicia and home to the Fortress of the Light, headquarters of the Children of the Light. Amadicia has a king, but it's the Whitecloaks who really rule — channeling is outlawed throughout the territory.",
     knowledge: [
-      { who: "Uthar", tag: "personal background", pc: true, text: "Was captured by the Whitecloaks as a child and raised under the guardianship of a noble family secretly opposed to the Children's fanaticism." },
-      { who: "Uthar", tag: "personal background", pc: true, text: "Learned swordsmanship, discipline, and strategy as one of the Whitecloaks, even while hating what they stood for." },
-      { who: "Uthar", tag: "personal background", pc: true, text: "His adoptive family was executed as Darkfriends when the Whitecloaks discovered their rebellious activity — sealing his final break with Amadicia." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "Captured by the Whitecloaks at around 10 after the fall of his father's fortress, he was handed to the guardianship of House Macura — an Amadician noble house that publicly served the Light but secretly opposed the Children's fanaticism." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "House Macura's crest: a silver scale with open hands. Its motto: 'By the hand, not by the knee.' To outsiders, devotion to the Light; to those inside, 'we serve standing, not kneeling.'" },
+      { who: "Uthar", tag: "personal background", pc: true, text: "His adoptive family: Lord Eldric Macura, reserved and calculating; Lady Maren, who showed him genuine tenderness; Evon, his adoptive brother — rival and comrade; Theril, the tutor who trained him; and Sena, head of the servants, who always knew more than she let on." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "Learned swordsmanship, discipline and strategy inside the Children's world, even while hating what they stood for." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "The Crucible of the Light: when he was about 16, the Children branded House Macura as Darkfriends and destroyed it in a single night. Fire arrows set the banners ablaze, the manor burned, and Lord Eldric was executed in public — he died on his feet." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "The Crucible was commanded by an Inquisitor named Thane. Uthar saw him lick his dagger after killing a guard — a gesture that felt almost ritual, and that he has never understood." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "Escaped the massacre and fled east through Ghealdan, crossing into Andor. He does not know whether Maren, Evon, Theril or Sena survived." },
     ],
   },
   {
@@ -420,7 +435,9 @@ const LOCATIONS = [
     name: "Andor (Caemlyn)",
     top: 56.5, left: 64.7,
     desc: "Capital of Andor, considered the second most beautiful city in the Westlands, after only Tar Valon. Split between the Inner City, built by the Ogier, and the New City built by humans — home to the Royal Palace and the Lion Throne.",
-    knowledge: [],
+    knowledge: [
+      { who: "Uthar", tag: "personal background", pc: true, text: "Spent his years of exile in Andor as a mercenary, hiding his past and selling his sword to lords who saw him as little more than a useful blade. Came to Tar Valon by the Caemlyn road." },
+    ],
   },
   {
     id: "far-madding",

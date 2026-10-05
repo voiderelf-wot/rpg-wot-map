@@ -334,6 +334,8 @@ function selectLocation(id){
   const homeBannersEl = document.getElementById('homeBanners');
   Object.entries(CHARACTERS).forEach(([name, info]) => {
     if(info.homeLocationId === loc.id){
+      // Origin is personal background: only that character and the GM see it.
+      if(!canCurrentUserSee([name])) return;
       const b = document.createElement('div');
       b.className = 'home-banner';
       b.innerHTML = `<span class="home-icon">🏠</span><div><b>${name} is from here</b><span>${info.origemLabel}</span></div>`;
