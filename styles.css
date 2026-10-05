@@ -263,7 +263,7 @@
   .npc-desc{
     max-height:0;overflow:hidden;transition:max-height .2s ease;
   }
-  .npc-row.open .npc-desc{max-height:600px;}
+  .npc-row.open .npc-desc{max-height:1600px;}
   .npc-desc-inner{padding:2px 12px 12px;font-size:12.5px;line-height:1.6;color:var(--ink);border-top:1px solid var(--line);padding-top:9px;}
   .npc-desc-inner .items-table{margin-top:10px;}
 
@@ -371,7 +371,7 @@
   .shop-card-body{
     max-height:0;overflow:hidden;transition:max-height .2s ease;
   }
-  .shop-card.open .shop-card-body{max-height:600px;margin-top:10px;}
+  .shop-card.open .shop-card-body{max-height:1400px;margin-top:10px;}
   .items-table{width:100%;border-collapse:collapse;}
   .items-table td{
     font-size:12px;padding:5px 0;border-bottom:1px solid var(--line);color:var(--ink);
@@ -477,3 +477,52 @@
     font-family:var(--font-mono);font-size:11.5px;letter-spacing:.03em;cursor:pointer;font-weight:600;
   }
   .party-note-form button:hover{background:var(--gold-bright);}
+
+  /* ---------------- INFO BLOCKS (Geography, Politics, Culture, Places, Rumors) ---------------- */
+  .info-block{
+    border:1px solid var(--line);border-radius:4px;margin-bottom:6px;
+    background:var(--panel-2);overflow:hidden;
+  }
+  .info-block-head{
+    width:100%;display:flex;justify-content:space-between;align-items:center;
+    padding:9px 12px;background:none;border:none;cursor:pointer;
+    font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-dim);transition:background .12s ease;
+  }
+  .info-block-head:hover{background:#efe4c8;color:var(--ink);}
+  .info-chevron{font-size:11px;transition:transform .15s ease;}
+  .info-block.open .info-chevron{transform:rotate(90deg);}
+  .info-block-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .info-block.open .info-block-body{max-height:3000px;}
+  .info-block-inner{padding:10px 14px 10px;border-top:1px solid var(--line);}
+  .info-list{margin:0;padding-left:18px;font-size:12.5px;line-height:1.6;color:var(--ink);}
+  .info-list li{margin-bottom:6px;}
+  .info-group-title{
+    font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--gold);margin:8px 0 4px;
+  }
+  .rumor-list li{font-style:italic;}
+  .items-note{font-size:12px;color:var(--ink-dim);font-style:italic;margin:10px 0 0;line-height:1.5;}
+
+  /* ---------------- CITY MAP LAYER ---------------- */
+  .map-layer-bar{
+    position:absolute;top:10px;left:10px;z-index:20;
+    display:flex;align-items:center;gap:10px;
+    background:rgba(26,20,10,.92);border:1px solid var(--gold);border-radius:4px;padding:5px 10px 5px 5px;
+    color:#f2e9d4;font-family:var(--font-mono);font-size:11px;
+  }
+  .map-layer-bar button{
+    background:var(--gold);color:#faf6ea;border:none;border-radius:3px;padding:6px 10px;
+    font-family:var(--font-mono);font-size:11px;font-weight:600;cursor:pointer;
+  }
+  .map-layer-bar button:hover{background:var(--gold-bright);}
+  .map-layer-bar b{display:block;letter-spacing:.04em;}
+  .map-layer-bar small{display:block;font-size:9px;color:#c9b98a;}
+  .map-scroll.city{text-align:center;}
+  .city-pin::before{opacity:.55;}
+  .open-citymap{
+    width:100%;margin:-4px 0 14px;padding:10px;cursor:pointer;
+    background:var(--panel-2);border:1px solid var(--gold);border-radius:4px;
+    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;color:var(--gold);font-weight:600;
+  }
+  .open-citymap:hover{background:var(--gold);color:#faf6ea;}

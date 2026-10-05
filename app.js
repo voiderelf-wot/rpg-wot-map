@@ -11,15 +11,17 @@
 // Firebase in real time for everyone with the page open, and
 // persists across sessions/devices.
 // ============================================================
+const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+
 LOCATIONS.forEach(loc => {
   (loc.knowledge || []).forEach((k, i) => {
-    k.id = loc.id + '-k' + i;
+    k.id = loc.id + '-k-' + slug(k.who + ' ' + k.text);
     if(!k.visibleTo){
       k.visibleTo = (k.pc && PLAYER_CHARS.includes(k.who)) ? [k.who] : ['all'];
     }
   });
   (loc.npcs || []).forEach((n, i) => {
-    n.id = loc.id + '-n' + i;
+    n.id = loc.id + '-n-' + slug(n.name);
     if(!n.visibleTo) n.visibleTo = ['all'];
   });
 });
@@ -64,6 +66,8 @@ let activeChar = 'all';
 let editMode = false;
 let currentLocationId = null;
 let panelMode = 'location'; // 'location' | 'notes'
+let currentMap = 'world';   // 'world' or the id of a location whose city map is open
+let worldView = { zoom: 100, left: 0, top: 0 }; // world-map view, restored when leaving a city map
 
 function renderPins(){
   document.querySelectorAll('.hotspot').forEach(p => p.remove());
@@ -74,6 +78,7 @@ function renderPins(){
     hs.style.left = loc.left + '%';
     if(loc.size) hs.style.setProperty('--hs-size', loc.size + '%');
     hs.dataset.id = loc.id;
+    if(loc.id === currentLocationId) hs.classList.add('selected');
     hs.innerHTML = `<div class="hs-label">${loc.name}</div>`;
     hs.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -97,6 +102,11 @@ let baseWidthPx = 0; // width in px that corresponds to zoom = 100%
 function initZoomBase(){
   // "100%" = image fitted to the visible width of the frame, same as before zoom existed
   baseWidthPx = mapScroll.clientWidth;
+  if(currentMap !== 'world' && mapImg.naturalWidth){
+    // portrait city maps also have to fit the visible height
+    const maxH = window.innerHeight * 0.78;
+    baseWidthPx = Math.min(baseWidthPx, maxH * mapImg.naturalWidth / mapImg.naturalHeight);
+  }
   setZoomPx(baseWidthPx * (zoom / 100));
 }
 
@@ -179,7 +189,130 @@ window.addEventListener('mouseup', () => {
   setTimeout(() => { dragMoved = false; }, 0);
 });
 
+// ------------------------------------------------------------
+// Curated location content: the one-paragraph overview plus
+// collapsible blocks (Geography, Politics, Culture) and extras
+// (Places, Rumors). Locations not curated yet just show `desc`.
+// ------------------------------------------------------------
+function infoBlockHTML(title, bodyHTML){
+  return `<div class="info-block">
+    <button type="button" class="info-block-head"><span>${title}</span><span class="info-chevron">▸</span></button>
+    <div class="info-block-body"><div class="info-block-inner">${bodyHTML}</div></div>
+  </div>`;
+}
+function bulletsHTML(arr){
+  return `<ul class="info-list">${arr.map(t => `<li>${t}</li>`).join('')}</ul>`;
+}
+function locIntroHTML(loc){
+  let html = `<p class="loc-desc">${loc.desc}</p>`;
+  if(loc.subMap && currentMap !== loc.id) html += `<button type="button" class="open-citymap" data-loc-id="${loc.id}">🗺 Open city map</button>`;
+  if(loc.geography) html += infoBlockHTML('Geography', bulletsHTML(loc.geography));
+  if(loc.politics)  html += infoBlockHTML('Politics', bulletsHTML(loc.politics));
+  if(loc.culture)   html += infoBlockHTML('Culture', bulletsHTML(loc.culture));
+  return html;
+}
+function locExtrasHTML(loc){
+  let html = '';
+  if(loc.places && loc.places.length){
+    const groups = loc.places.map(g =>
+      `<p class="info-group-title">${g.group}</p><ul class="info-list place-list">${g.items.map(p => `<li data-place="${p.name}"><b>${p.name}</b> — ${p.desc}</li>`).join('')}</ul>`
+    ).join('');
+    html += infoBlockHTML('Places', groups);
+  }
+  if(loc.rumors && loc.rumors.length){
+    html += infoBlockHTML('Rumors', `<ul class="info-list rumor-list">${loc.rumors.map(r => `<li>“${r}”</li>`).join('')}</ul>`);
+  }
+  return html;
+}
+document.addEventListener('click', (e) => {
+  const head = e.target.closest('.info-block-head');
+  if(head) head.parentElement.classList.toggle('open');
+});
+
+// ------------------------------------------------------------
+// City maps: a location with `subMap` can swap the world map for
+// its own image, with clickable pins that open the matching entry
+// in the Places block. "World map" button brings the old view back.
+// ------------------------------------------------------------
+const WORLD_SRC = mapImg.getAttribute('src');
+
+function renderCityPins(sm){
+  document.querySelectorAll('.hotspot').forEach(p => p.remove());
+  sm.pins.forEach(pin => {
+    const hs = document.createElement('div');
+    hs.className = 'hotspot city-pin';
+    hs.style.top = pin.top + '%';
+    hs.style.left = pin.left + '%';
+    hs.style.setProperty('--hs-size', pin.size + '%');
+    hs.innerHTML = `<div class="hs-label">${pin.name}</div>`;
+    hs.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if(dragMoved) return;
+      openPlace(currentMap, pin.name);
+    });
+    mapContent.appendChild(hs);
+  });
+}
+
+function openCityMap(locId){
+  const loc = LOCATIONS.find(l => l.id === locId);
+  if(!loc || !loc.subMap) return;
+  if(currentMap === 'world') worldView = { zoom, left: mapScroll.scrollLeft, top: mapScroll.scrollTop };
+  currentMap = locId;
+  const sm = loc.subMap;
+  mapScroll.classList.add('city');
+  document.getElementById('mapLayerTitle').innerHTML = `<b>${sm.title}</b><small>${sm.credit}</small>`;
+  document.getElementById('mapLayerBar').style.display = 'flex';
+  mapImg.style.minWidth = '0';
+  zoom = 100;
+  zoomLevelEl.textContent = '100%';
+  const finish = () => { initZoomBase(); mapScroll.scrollTo(0, 0); renderCityPins(sm); };
+  mapImg.onload = finish;
+  mapImg.src = sm.image;
+  if(mapImg.complete && mapImg.naturalWidth) finish();
+}
+
+function closeCityMap(){
+  currentMap = 'world';
+  mapScroll.classList.remove('city');
+  document.getElementById('mapLayerBar').style.display = 'none';
+  mapImg.style.minWidth = '';
+  zoom = worldView.zoom;
+  zoomLevelEl.textContent = zoom + '%';
+  const finish = () => { initZoomBase(); mapScroll.scrollTo(worldView.left, worldView.top); renderPins(); };
+  mapImg.onload = finish;
+  mapImg.src = WORLD_SRC;
+  if(mapImg.complete && mapImg.naturalWidth) finish();
+}
+
+function highlightPlace(name){
+  const li = [...panelBody.querySelectorAll('.place-list li')].find(x => x.dataset.place === name);
+  if(!li) return;
+  li.closest('.info-block').classList.add('open');
+  li.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  li.classList.add('flash-highlight');
+  setTimeout(() => li.classList.remove('flash-highlight'), 1600);
+}
+function openPlace(locId, name){
+  selectLocation(locId);
+  setTimeout(() => highlightPlace(name), 50);
+}
+
+document.addEventListener('click', (e) => {
+  const open = e.target.closest('.open-citymap');
+  if(open){
+    openCityMap(open.dataset.locId);
+    selectLocation(open.dataset.locId); // refresh the panel (hides the button)
+    document.querySelector('.map-frame').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  if(e.target.closest('#backToWorld')){
+    closeCityMap();
+    if(panelMode === 'location' && currentLocationId) selectLocation(currentLocationId);
+  }
+});
+
 function selectLocation(id){
+  if(currentMap !== 'world' && id !== currentMap) closeCityMap();
   currentLocationId = id;
   panelMode = 'location';
   document.getElementById('tabLocation').classList.add('active');
@@ -191,9 +324,10 @@ function selectLocation(id){
   panelBody.innerHTML = `
     <p class="loc-eyebrow">Location</p>
     <h2>${loc.name}</h2>
-    <p class="loc-desc">${loc.desc}</p>
+    ${locIntroHTML(loc)}
     <div id="homeBanners"></div>
     <div id="npcSection"></div>
+    ${locExtrasHTML(loc)}
     <div id="cards"></div>
     <div id="partyNotesSection"></div>
   `;
@@ -226,7 +360,7 @@ function selectLocation(id){
           ${visEditorHTML(npc.id, vis)}
           <span class="npc-chevron">▸</span>
         </div>
-        <div class="npc-desc"><div class="npc-desc-inner">${npc.desc}${itemsTableHTML(npc.items)}</div></div>
+        <div class="npc-desc"><div class="npc-desc-inner">${npc.desc}${itemsTableHTML(npc.items)}${npc.itemsNote ? `<p class="items-note">${npc.itemsNote}</p>` : ''}</div></div>
       `;
       row.querySelector('.npc-row-head').addEventListener('click', (e) => {
         if(e.target.closest('.vis-btn')) return;
@@ -759,9 +893,20 @@ function performSearch(query){
   const isGM = currentUser.char === 'GM';
 
   LOCATIONS.forEach(loc => {
-    if((loc.name + ' ' + loc.desc).toLowerCase().includes(q)){
+    const locText = [loc.name, loc.desc, ...(loc.geography || []), ...(loc.politics || []), ...(loc.culture || [])].join(' ');
+    if(locText.toLowerCase().includes(q)){
       results.push({ type: 'Location', locId: loc.id, label: loc.name, snippet: loc.desc });
     }
+    (loc.places || []).forEach(g => g.items.forEach(p => {
+      if((p.name + ' ' + p.desc).toLowerCase().includes(q)){
+        results.push({ type: 'Place', locId: loc.id, placeName: p.name, label: p.name + ' · ' + loc.name, snippet: p.desc });
+      }
+    }));
+    (loc.rumors || []).forEach(r => {
+      if(r.toLowerCase().includes(q)){
+        results.push({ type: 'Rumor', locId: loc.id, label: 'Rumor · ' + loc.name, snippet: r });
+      }
+    });
     (loc.knowledge || []).forEach(k => {
       const vis = getVisibility(k.id, k.visibleTo);
       if(!isGM && !(vis.includes('all') || vis.includes(currentUser.char))) return;
@@ -809,6 +954,7 @@ function jumpToSearchResult(result){
   document.getElementById('searchResults').classList.remove('show');
   document.getElementById('globalSearch').value = '';
   selectLocation(result.locId);
+  if(result.placeName) setTimeout(() => highlightPlace(result.placeName), 50);
   if(result.cardId){
     setTimeout(() => {
       const el = document.querySelector(`[data-card-id="${CSS.escape(result.cardId)}"]`);
@@ -890,7 +1036,7 @@ function renderShopCatalog(){
       </div>
       <div class="shop-card-desc">${s.desc}</div>
       <div class="shop-card-body">
-        ${itemsTableHTML(s.items) || `<p class="shop-catalog-empty" style="padding:8px 0 0;">No items listed yet.</p>`}
+        ${itemsTableHTML(s.items) || (s.itemsNote ? `<p class="items-note">${s.itemsNote}</p>` : `<p class="shop-catalog-empty" style="padding:8px 0 0;">No items listed yet.</p>`)}
       </div>
     </div>`).join('')}</div>`;
 
