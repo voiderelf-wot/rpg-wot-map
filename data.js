@@ -113,7 +113,7 @@ function cityHasWaterRoute(city){
 // ============================================================
 const CHARACTERS = {
   "Maeri": { classe: "Cleric",  origemLabel: "Born in a village in Altara; raised by The Kin in Ebou Dar; grew up in So Eban", homeLocationId: "altara" },
-  "Uthar": { classe: "Fighter", origemLabel: "Plains of Maredo, on the Altara/Amadicia border", homeLocationId: "altara" },
+  "Uthar": { classe: "Fighter", origemLabel: "House Maredo — a border fortress near Alkindar, Altara", homeLocationId: "altara" },
   "Dongo": { classe: "Rogue",   origemLabel: "Tremosien, Cairhien", homeLocationId: "tremosien" },
   "Aynara": { classe: "Paladin", origemLabel: "Origin not yet revealed in-game", homeLocationId: null }
 };
@@ -393,7 +393,7 @@ const LOCATIONS = [
     top: 81.8, left: 44.6,
     desc: "Altara's port capital, built over the ruins of ancient Barashta. Split by the River Eldar between the wealthy noble quarter and the Rahad, a poor and dangerous district — known for its extravagant fashion and the vibrant life around the Tarasin Palace.",
     knowledge: [
-      { who: "Uthar", tag: "personal background", pc: true, text: "Born into a noble family near the Plains of Maredo, a region disputed between Altara and Amadicia. His father, Lord Dainar, was killed when the Whitecloaks invaded with the help of a traitorous uncle." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "Born into House Maredo, an Altaran noble family. His father, Lord Dainar, held a border fortress near Alkindar, on the River Eldar, guarding Altara against Amadician incursions — and was killed when the Whitecloaks invaded with the help of a traitorous uncle." },
       { who: "Uthar", tag: "personal background", pc: true, text: "Carries his father's sword: a heron-marked longsword that once belonged to Lord Dainar." },
       { who: "Maeri", tag: "personal background", pc: true, text: "Born in a small village in Altara to parents whose house was always full of drying herbs and curing pelts. She barely remembers them — at some point she got lost and found herself alone on an unknown road." },
       { who: "Maeri", tag: "personal background", pc: true, text: "Reached the Rahad around age 6 and survived its streets on luck and observation. For about six months a passing traveler taught her how to break free, where to strike, how to flee, and whom to trust — then left as suddenly as she came." },
