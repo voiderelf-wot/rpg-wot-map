@@ -77,9 +77,10 @@ const DIST_MATRIX = [
 //    reaches the Sea of Storms at Illian (river trip Remen->Illian
 //    is mentioned in-book).
 //  - Sea Folk ships connect coastal port cities on the Sea of Storms.
-// Simplification: Andor is represented by Caemlyn (its capital) even
-// though its actual river ports are Aringill (Erinin) and Whitebridge
-// (Manetherendrelle) — good enough for travel-time purposes.
+// Andor's river ports are Aringill (Erinin) and Whitebridge (Arinelle,
+// near where it meets the Manetherendrelle). Caemlyn stands on no great
+// river, so it has no boat option (R03, 06/10/2026).
+//  - River Arinelle: flows south from Saldaea past Maradon to Whitebridge.
 // ============================================================
 const WATER_MODES = {
   "rio": {
@@ -94,8 +95,9 @@ const WATER_MODES = {
   }
 };
 const RIVER_SYSTEMS = [
-  { river: "River Erinin", mode: "rio", cities: ["Shol Arbela", "Tar Valon", "Cairhien", "Caemlyn", "Tear"] },
-  { river: "River Manetherendrelle", mode: "rio", cities: ["Caemlyn", "Ebou Dar", "Lugard", "Illian"] },
+  { river: "River Erinin", mode: "rio", cities: ["Shol Arbela", "Tar Valon", "Cairhien", "Aringill", "Tear"] },
+  { river: "River Arinelle", mode: "rio", cities: ["Maradon", "Whitebridge"] },
+  { river: "River Manetherendrelle", mode: "rio", cities: ["Whitebridge", "Ebou Dar", "Lugard", "Illian"] },
   { river: "Sea of Storms coast (Sea Folk)", mode: "mar", cities: ["Tear", "Illian", "Ebou Dar"] }
 ];
 function findWaterRoute(cityA, cityB){
@@ -605,12 +607,164 @@ const LOCATIONS = [
   {
     id: "andor",
     distCity: "Caemlyn",
-    name: "Andor (Caemlyn)",
+    name: "Caemlyn (Andor)",
     top: 56.5, left: 64.7,
-    desc: "Capital of Andor, considered the second most beautiful city in the Westlands, after only Tar Valon. Split between the Inner City, built by the Ogier, and the New City built by humans — home to the Royal Palace and the Lion Throne.",
+    desc: "Capital of Andor, the largest nation in the Westlands, and seat of the Lion Throne. Counted the second most beautiful city after Tar Valon: an Ogier-built Inner City wrapped by a human New City, with Low Caemlyn spilling past the walls.",
+    geography: [
+      "Built on hills in the plain between Braem Wood and the Tunaighan Hills. It stands on no great river: the city lives on springs and cisterns, and on water carted in daily from the River Cary to the west and the Erinin to the east.",
+      "The Inner City was raised by the Ogier soon after the Shattering and has withstood sieges ever since. The New City grew around it, built by human hands, and was walled in turn.",
+      "Low Caemlyn spreads a mile or two beyond the outer wall, with farmers' markets at each of the main gates.",
+      "Around 300,000 people live here year-round, and many more come during the trading season.",
+      "South of the city lies the populous heart of the realm, with villages and lanes every few miles. North and northwest, toward the Caralain Grass, the land empties out."
+    ],
+    politics: [
+      "Only a queen may sit the Lion Throne and wear the Rose Crown. Her eldest daughter, the Daughter-Heir, is sent to study in the White Tower and receives the Tower's ring whether or not she can channel. Her eldest brother, the First Prince of the Sword, is sworn to protect her and trained to lead the queen's armies.",
+      "Andor has over four hundred noble Houses, but only nineteen Great Houses truly count. A claimant needs the support of ten High Seats to take the throne. Commoners are free: lesser Houses follow the great ones by alliance, not by oath of land.",
+      "The realm was founded during the War of the Hundred Years by Ishara, daughter of Artur Hawkwing's governor, and Souran Maravaile, Hawkwing's greatest general. Every queen since has claimed descent from Ishara.",
+      "Morgase Trakand has reigned since 976 NE. The Daughter-Heir Tigraine had vanished, and Morgase, only sixteen, won the Succession with the support of thirteen Houses.",
+      "Today a newcomer to court, Lord Gaebril, has the queen's ear. Old allies have been sent away or exiled, and the Captain-General Gareth Bryne no longer commands the Queen's Guard.",
+      "Morgase has signed an agreement with the Children of the Light, who now travel and preach freely in Andor. She dismissed her Aes Sedai advisor, breaking a tradition a thousand years old."
+    ],
+    culture: [
+      "Andor is the realm of the White Lion on a field of red; its national colors are red and white, and Andorans are fiercely proud of their queen.",
+      "For a thousand years Andor has been the White Tower's firmest ally. The pact with the Whitecloaks has shaken that bond, and the court has grown cold toward Tar Valon.",
+      "Tigraine's disappearance in 972 NE remains a public mystery, sung about in ballads across the realm."
+    ],
+    places: [
+      { group: "City", items: [
+        { name: "The Royal Palace", desc: "Seat of the Lion Throne, in the heart of the Inner City." },
+        { name: "The Inner City", desc: "The old city raised by the Ogier, on the highest hills." },
+        { name: "The New City", desc: "The human-built city around the Inner City, enclosed by the outer wall." },
+        { name: "Low Caemlyn", desc: "The sprawl outside the outer wall, with farmers' markets at each main gate." }
+      ] },
+      { group: "Inns", items: [
+        { name: "The Queen's Blessing", desc: "A well-kept inn run by Basel Gill, a stout and loyal subject of the queen." }
+      ] }
+    ],
+    rumors: [
+      "The queen listens to no one but Lord Gaebril now; those who disagree wake up exiled.",
+      "Whitecloaks have been 'visiting' villages south of Caemlyn, asking after women who heal.",
+      "For the first time in a thousand years, there is no Aes Sedai in the palace.",
+      "Travelers swear they have seen the Daughter-Heir Tigraine, older now, among pale-eyed foreigners."
+    ],
+    npcs: [
+      { name: "Morgase Trakand", role: "Queen of Andor", type: "npc", desc: "Has held the Lion Throne since 976 NE, when she won the Succession at sixteen. A beautiful woman of about forty-three with red-gold hair. Her House, Trakand, bears three golden keys." },
+      { name: "Lord Gaebril", role: "Favorite of the queen", type: "npc", desc: "A newcomer to court who quickly became the queen's closest counselor. No one seems quite sure where he came from." },
+      { name: "Gareth Bryne", role: "Former Captain-General of the Queen's Guard", type: "npc", desc: "One of the Great Captains, he served three queens. Removed from command under Lord Gaebril's influence." },
+      { name: "Dyelin Taravin", role: "High Seat of House Taravin", type: "npc", desc: "Proud and plainspoken, she became High Seat at fifteen and drove raiders from her lands. Her House, which bears an owl and oak, stands next in line for the throne." },
+      { name: "Basel Gill", role: "Innkeeper · The Queen's Blessing", type: "npc", desc: "Stout, good-natured and loyal to the queen, he runs one of the best inns in the New City." }
+    ],
     knowledge: [
       { who: "Uthar", tag: "personal background", pc: true, text: "Spent his years of exile in Andor as a mercenary, hiding his past and selling his sword to lords who saw him as little more than a useful blade. Came to Tar Valon by the Caemlyn road." },
     ],
+  },
+  {
+    id: "aringill",
+    distCity: "Aringill",
+    name: "Aringill",
+    top: 57.3, left: 70.8,
+    desc: "Andor's chief port on the River Erinin, facing the Cairhienin town of Maerone across the water. Most of the realm's river trade passes through its docks.",
+    geography: [
+      "A walled river town on the west bank of the Erinin, about 300 miles by road from Caemlyn.",
+      "Ferries cross to Maerone, on the Cairhienin shore."
+    ],
+    politics: [
+      "Ruled by a governor appointed by the Crown, not by any noble House."
+    ],
+    places: [
+      { group: "Town", items: [
+        { name: "The Docks of Aringill", desc: "The busiest river docks in Andor, where barges from Tar Valon, Cairhien and Tear unload." }
+      ] }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "whitebridge",
+    distCity: "Whitebridge",
+    name: "Whitebridge",
+    top: 55.9, left: 51.7,
+    desc: "A walled town on the River Arinelle, where the Caemlyn Road crosses the water on a bridge older than the Shattering. It divides Andor's thinly settled west from its crowded east.",
+    geography: [
+      "Stands on the east bank of the Arinelle. The White Bridge, made of something that looks like glass, runs nearly a mile and has not worn in thousands of years.",
+      "It is the last crossing of the Arinelle south of Maradon.",
+      "Trade is seasonal: in winter the mountain passes and the river to the north close.",
+      "About 730 miles west of Caemlyn along the Caemlyn Road."
+    ],
+    politics: [
+      "Ruled by a governor appointed by the Crown."
+    ],
+    culture: [
+      "A town of merchant houses, warehouses and fishermen. Andoran goods go north to Saldaea and south to Illian; furs and ice peppers come down from the north."
+    ],
+    places: [
+      { group: "Town", items: [
+        { name: "The White Bridge", desc: "A glass-like span from before the Shattering, nearly a mile long." },
+        { name: "The Wayfarer's Rest", desc: "An inn on the central square, run by Bartim." }
+      ] }
+    ],
+    rumors: [
+      "On nights of strong wind, the White Bridge sings."
+    ],
+    npcs: [
+      { name: "Bartim", role: "Innkeeper · The Wayfarer's Rest", type: "npc", desc: "Runs the inn on the central square and hears every piece of news that crosses the bridge." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "baerlon",
+    distCity: "Baerlon",
+    name: "Baerlon",
+    top: 49.1, left: 42.7,
+    desc: "A walled mining town in western Andor, gateway to the Two Rivers and the Mountains of Mist.",
+    geography: [
+      "Lies in the far west, near the foothills of the Mountains of Mist, where the roads from the mines meet the road to Whitebridge."
+    ],
+    politics: [
+      "Ruled by a governor appointed by the Crown."
+    ],
+    culture: [
+      "Miners from the mountains sell their ore here, and Two Rivers wool and tabac pass through on their way east."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "four-kings",
+    name: "Four Kings",
+    top: 57.2, left: 61.3,
+    desc: "A crossroads town on the Caemlyn Road, west of the capital, where goods change hands for Lugard and the south.",
+    geography: [
+      "Sits on the Caemlyn Road between Whitebridge and Caemlyn, where a road branches south toward Lugard."
+    ],
+    places: [
+      { group: "Road", items: [
+        { name: "Hawkwing's Statue", desc: "A great statue of Artur Hawkwing beside the Caemlyn Road, west of the town." }
+      ] }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "emonds-field",
+    distCity: "Emond's Field",
+    name: "Emond's Field (Two Rivers)",
+    top: 53.4, left: 40.9,
+    desc: "The largest of the four villages of the Two Rivers, a remote district in Andor's far southwest that belongs to the realm mostly on paper.",
+    geography: [
+      "The Two Rivers lies between the Taren and the White River, with the Forest of Shadows to the south and the Mountains of Mist to the west.",
+      "Its four villages are Emond's Field, Deven Ride, Taren Ferry and Watch Hill."
+    ],
+    politics: [
+      "There is no lord: each village is run by a Village Council and a Mayor, and the women's Circle led by the Wisdom.",
+      "No tax collector from Caemlyn has come in generations."
+    ],
+    culture: [
+      "Two Rivers folk are stubborn, independent and plainspoken. They sell wool and tabac to the merchants of Baerlon."
+    ],
+    places: [
+      { group: "Village", items: [
+        { name: "The Winespring Inn", desc: "The inn on the village green, beside the spring that gives it its name." }
+      ] }
+    ],
+    knowledge: [],
   },
   {
     id: "far-madding",
