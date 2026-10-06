@@ -633,14 +633,59 @@ const LOCATIONS = [
     places: [
       { group: "City", items: [
         { name: "The Royal Palace", desc: "Seat of the Lion Throne, in the heart of the Inner City." },
-        { name: "The Inner City", desc: "The old city raised by the Ogier, on the highest hills." },
+        { name: "Queen's Plaza", desc: "The great open square west of the Royal Palace." },
+        { name: "The Inner City", desc: "The old city raised by the Ogier, on the highest hills, ringed by its own wall." },
         { name: "The New City", desc: "The human-built city around the Inner City, enclosed by the outer wall." },
+        { name: "Full Moon Street", desc: "A long street curving along the outside of the Inner City wall." },
         { name: "Low Caemlyn", desc: "The sprawl outside the outer wall, with farmers' markets at each main gate." }
       ] },
+      { group: "Gates", items: [
+        { name: "Tar Valon Gate", desc: "The northern gate of the outer wall, where the road from Tar Valon comes in." },
+        { name: "Sunrise Gate", desc: "The eastern gate, on the road to Aringill and Cairhien." },
+        { name: "Far Madding Gate", desc: "The southern gate, on the road to Far Madding." },
+        { name: "Lugard Gate", desc: "The southwestern gate, on the road to Lugard." },
+        { name: "Whitebridge Gate", desc: "The western gate, on the Caemlyn Road to Four Kings and Whitebridge." },
+        { name: "Mondel Gate", desc: "A gate in the Inner City wall, on its northwest side." },
+        { name: "Origan Gate", desc: "A gate in the Inner City wall, on its south side." }
+      ] },
       { group: "Inns", items: [
-        { name: "The Queen's Blessing", desc: "A well-kept inn run by Basel Gill, a stout and loyal subject of the queen." }
+        { name: "The Queen's Blessing", desc: "A well-kept inn in the eastern New City, run by Basel Gill, a stout and loyal subject of the queen." },
+        { name: "The Crown & Lion", desc: "An inn in the southwestern New City." },
+        { name: "The Culain's Hound", desc: "An inn in the northern New City, off the road to the Tar Valon Gate." },
+        { name: "The Farrier's Green", desc: "An inn in the southeastern New City." },
+        { name: "The Happy Throng", desc: "An inn in the northeastern New City." },
+        { name: "The Hoop & Arrow", desc: "An inn near the Far Madding Gate." },
+        { name: "The Seven-Striped Lass", desc: "An inn in the far west of the New City, near the outer wall." },
+        { name: "The Silver Swan", desc: "An inn in the southeastern New City." },
+        { name: "The Two Apples", desc: "An inn in the southern New City, below the Inner City." }
       ] }
     ],
+    subMap: {
+      title: "Caemlyn",
+      image: "caemlyn-walls.png",
+      credit: "Map by Adam Whitehead, Atlas of Ice and Fire (2020)",
+      pins: [
+        { name: "The Royal Palace", top: 66.4, left: 42.6, size: 10 },
+        { name: "Queen's Plaza", top: 58.3, left: 37.5, size: 6 },
+        { name: "Full Moon Street", top: 41.6, left: 43.1, size: 4 },
+        { name: "Tar Valon Gate", top: 16.2, left: 45.8, size: 5 },
+        { name: "Sunrise Gate", top: 38.9, left: 84.6, size: 5 },
+        { name: "Far Madding Gate", top: 96.4, left: 43.1, size: 5 },
+        { name: "Lugard Gate", top: 70.3, left: 7.5, size: 5 },
+        { name: "Whitebridge Gate", top: 36.5, left: 15.1, size: 5 },
+        { name: "Mondel Gate", top: 44.8, left: 32.3, size: 5 },
+        { name: "Origan Gate", top: 79.3, left: 46.6, size: 5 },
+        { name: "The Queen's Blessing", top: 52.6, left: 81.0, size: 3.6 },
+        { name: "The Crown & Lion", top: 86.8, left: 27.2, size: 3.6 },
+        { name: "The Culain's Hound", top: 28.1, left: 47.4, size: 3.6 },
+        { name: "The Farrier's Green", top: 69.5, left: 66.8, size: 3.6 },
+        { name: "The Happy Throng", top: 31.1, left: 64.8, size: 3.6 },
+        { name: "The Hoop & Arrow", top: 93.6, left: 55.0, size: 3.6 },
+        { name: "The Seven-Striped Lass", top: 58.1, left: 8.4, size: 3.6 },
+        { name: "The Silver Swan", top: 87.8, left: 64.7, size: 3.6 },
+        { name: "The Two Apples", top: 86.4, left: 38.1, size: 3.6 }
+      ]
+    },
     rumors: [
       "The queen listens to no one but Lord Gaebril now; those who disagree wake up exiled.",
       "Whitecloaks have been 'visiting' villages south of Caemlyn, asking after women who heal.",
