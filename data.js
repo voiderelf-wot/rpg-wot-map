@@ -366,7 +366,7 @@ const LOCATIONS = [
     id: "tremosien",
     name: "Tremosien",
     top: 43.3, left: 76.1,
-    desc: "Small village in Cairhien, north of the capital — Dongo's home town.",
+    desc: "Small village in Cairhien, north of the capital.",
     knowledge: [
       { who: "Dongo", tag: "personal background", pc: true, text: "Raised and trained in Tremosien. Grew up within an organization where no one was ever allowed to show their face — his tutor and master was known only as 'Bear,' who trained orphaned children as spies and assassins." },
       { who: "Dongo", tag: "personal background", pc: true, text: "Trained in a courtyard paved with red sandstone, worn smooth and polished by years of use — a detail he still carries with him." },
@@ -374,8 +374,8 @@ const LOCATIONS = [
       { who: "Dongo", tag: "personal background", pc: true, text: "Woke up alone on a quiet road in the rain and mud, holding a soaked letter: there was no place for him there, for whoever lets themselves be led by emotion is weak — he had honored his name all too well: 'Camundongo.'" },
     ],
     npcs: [
-      { name: "Bear", role: "Mentor / trafficker", type: "npc", desc: "Raised orphaned children and trained them as spies and assassins to sell — no one was allowed to show their face. Executed Pardal as punishment and discarded Dongo once he judged him emotionally 'broken.'" },
-      { name: "Pardal", role: "Fellow trainee (deceased)", type: "npc", desc: "Another child trained alongside Dongo. Landed a blow that nearly tore off his mask — Bear executed her as an example." },
+      { name: "Bear", role: "Mentor / trafficker", type: "npc", visibleTo: ["Dongo"], desc: "Raised orphaned children and trained them as spies and assassins to sell — no one was allowed to show their face. Executed Pardal as punishment and discarded Dongo once he judged him emotionally 'broken.'" },
+      { name: "Pardal", role: "Fellow trainee (deceased)", type: "npc", visibleTo: ["Dongo"], desc: "Another child trained alongside Dongo. Landed a blow that nearly tore off his mask — Bear executed her as an example." },
     ]
   },
   {
