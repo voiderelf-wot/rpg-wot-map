@@ -69,6 +69,9 @@ const DIST_MATRIX = [
 //    port crossing), and reaches the Sea of Storms at Tear.
 //    Confirmed in-book trips: Aringill<->Tar Valon<->Tear (TDR),
 //    Maerone->Tear (LoC).
+//    Cairhien city actually sits on the River Alguenya, which
+//    joins the Erinin just south of it; it's listed on the Erinin
+//    system because boats reach it by way of the Alguenya.
 //  - River Manetherendrelle ("White River"): rises in Andor,
 //    passes Whitebridge, runs through Altara, borders Murandy,
 //    reaches the Sea of Storms at Illian (river trip Remen->Illian
@@ -114,7 +117,7 @@ function cityHasWaterRoute(city){
 const CHARACTERS = {
   "Maeri": { classe: "Cleric",  origemLabel: "Born in a village in Altara; raised by The Kin in Ebou Dar; grew up in So Eban", homeLocationId: "altara" },
   "Uthar": { classe: "Fighter", origemLabel: "House Maredo — a border fortress near Alkindar, Altara", homeLocationId: "altara" },
-  "Dongo": { classe: "Rogue",   origemLabel: "Tremosien, Cairhien", homeLocationId: "tremosien" },
+  "Dongo": { classe: "Rogue",   origemLabel: "Tremonsien, Cairhien", homeLocationId: "tremosien" },
   "Aynara": { classe: "Paladin", origemLabel: "Origin not yet revealed in-game", homeLocationId: null }
 };
 
@@ -202,7 +205,7 @@ const LOCATIONS = [
     ],
     knowledge: [
       { who: "Dongo", tag: "personal background", pc: true, text: "Reached Tar Valon by boat, arriving at South Harbor — surviving the voyage by stealing olives on board." },
-      { who: "Dongo", tag: "personal background", pc: true, text: "Carries a mission from the Ghostbloods: eliminate a man in Tar Valon known as Marrik Callas. The Ghostbloods' knife he was given marks him as one of their agents." },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Carries a mission from the Ghostbloods: eliminate 'the rat merchant' in Tar Valon. In return they promised him information about his own past. They warned him: 'he is not what he seems.' Refusing could mean being found by his old buyers." },
       { who: "Aynara", tag: "personal background", pc: true, visibleTo: ["Aynara"], text: "Worked for High Inquisitor Dagobert Thane as a tracker and informant, finding and mapping Portal Stones with a portal-identifying device he gave her." },
       { who: "Aynara", tag: "personal background", pc: true, visibleTo: ["Aynara"], text: "Was imprisoned in the Whitecloak camp after openly questioning the mission and disobeying a direct order — she had tried to walk away from it." },
     ],
@@ -364,11 +367,31 @@ const LOCATIONS = [
   },
   {
     id: "tremosien",
-    name: "Tremosien",
+    name: "Tremonsien",
     top: 43.3, left: 76.1,
-    desc: "Small village in Cairhien, north of the capital.",
+    desc: "Small village in Cairhien, north of the capital, on the road to Tar Valon.",
+    geography: [
+      "Sits atop a terraced hill in the foothills of Kinslayer's Dagger, with square stone houses on uniform lots and streets laid out in a neat grid."
+    ],
+    politics: [
+      "Governed locally, under the nobility of the region."
+    ],
+    culture: [
+      "Its people are short, pale and friendly.",
+      "A trading post for miners and for merchants braving the long road north to Shienar."
+    ],
+    places: [
+      { group: "Village", items: [
+        { name: "The Nine Rings", desc: "The village inn." },
+        { name: "The Excavation", desc: "Near the village, Cairhienin nobles are digging up a giant stone hand holding a crystal sphere. No one knows what it is; some travel a long way just to see it." }
+      ] }
+    ],
+    rumors: [
+      "The diggers found a chamber beneath the stone hand. The first crew that went down never came back, and the noble funding the dig is looking for discreet people — none of them Cairhienin.",
+      "Village children swear that on a moonless night the crystal sphere glowed for an instant. Ever since, the dogs howl toward the excavation."
+    ],
     knowledge: [
-      { who: "Dongo", tag: "personal background", pc: true, text: "Raised and trained in Tremosien. Grew up within an organization where no one was ever allowed to show their face — his tutor and master was known only as 'Bear,' who trained orphaned children as spies and assassins." },
+      { who: "Dongo", tag: "personal background", pc: true, text: "Raised and trained in Tremonsien. Grew up within an organization where no one was ever allowed to show their face — his tutor and master was known only as 'Bear,' who trained orphaned children as spies and assassins." },
       { who: "Dongo", tag: "personal background", pc: true, text: "Trained in a courtyard paved with red sandstone, worn smooth and polished by years of use — a detail he still carries with him." },
       { who: "Dongo", tag: "personal background", pc: true, text: "After Pardal, another child in the group, was executed, he tried to flee. He was caught, and Bear discarded him as 'damaged goods.'" },
       { who: "Dongo", tag: "personal background", pc: true, text: "Woke up alone on a quiet road in the rain and mud, holding a soaked letter: there was no place for him there, for whoever lets themselves be led by emotion is weak — he had honored his name all too well: 'Camundongo.'" },
@@ -383,8 +406,155 @@ const LOCATIONS = [
     distCity: "Cairhien",
     name: "Cairhien",
     top: 45.7, left: 74.6,
-    desc: "A square-walled city on the banks of the River Alguenya, rebuilt after being burned during the Aiel War. Famous for its Topless Towers and as the epicenter of Daes Dae'mar, the Game of Houses — the intricate political struggle among Cairhien's noble Houses.",
-    knowledge: [],
+    desc: "Capital of Cairhien: a square-walled city raised on terraced hills along the River Alguenya. Famous for its Topless Towers and as the epicenter of Daes Dae'mar, the Game of Houses. Since King Galldrian Riatin was assassinated, the Sun Throne has stood empty and the noble Houses are at civil war.",
+    geography: [
+      "The inner city lies within square walls, built on hills flattened into terraces, with streets laid out in a perfect grid.",
+      "Outside the walls sprawls the Foregate: a second city, unplanned, loud, colorful and chaotic — the opposite of the inner city.",
+      "The Topless Towers were burned by the Aiel in 976 NE. Ogier stonemasons have been rebuilding them, but the work goes slowly.",
+      "The city stands on the River Alguenya, just south of where the Gaelin flows into it; the Alguenya joins the Erinin further south.",
+      "Four gates pierce the walls: the Jangai Gate to the north, the Dragonwall Gate to the east, the Alguenya Gate to the west, by the river port, and the Erinin Gate to the south. The Foregate spreads outside the north and south walls.",
+      "The north road leads to Tar Valon by way of Tremonsien; the east road runs all the way to the Jangai Pass, with the town of Eianrod about halfway."
+    ],
+    politics: [
+      "Cairhien is a monarchy: its ruler sits the Sun Throne, and the nobility is split into Houses that vie for the crown.",
+      "King Galldrian Riatin was assassinated. Since then the Sun Throne has stood empty, and the Houses are at civil war over the succession — only the fifth in a thousand years, for Cairhienin consider open war a crude way to play.",
+      "Daes Dae'mar, the Game of Houses, is at its height: every word and gesture has a second meaning, and in Cairhien even commoners play. Forcing a rival to concede is admired more than killing him — though assassination is part of the Game too.",
+      "The country's symbol is the Rising Sun: a golden sun with wavy rays on a field of blue.",
+      "The Aiel War (976–978 NE): King Laman Damodred cut down Avendoraldera, a sapling of the Aiel's Tree of Life gifted to Cairhien, to make himself a throne. In answer, four Aiel clans crossed the Jangai Pass, burned half the city, and pursued the king to the Shining Walls of Tar Valon, where he was killed."
+    ],
+    culture: [
+      "Cairhienin are, as a rule, short and pale, wary, and fond of order. They tend to follow a conversation rather than lead it.",
+      "Nobles dress in dark, reserved clothing; colored stripes across the chest show a noble's House and rank — the more stripes, the higher the rank. Commoners favor brighter colors.",
+      "The inner city is rigid and reserved; the Foregate is festive and unruly, and the nobility despises it — though nobles sometimes join its revels, above all at the Feast of Lights.",
+      "Even twenty-five years later, resentment toward the Aiel runs deep.",
+      "With the civil war, the Foregate is crowded with people who fled the countryside.",
+      "For five centuries Cairhien grew rich on caravans crossing the Aiel Waste to Shara. The Aiel War closed that road, and the economy never recovered: despite vast farmland, the country depends on grain shipped up the Erinin from Tear. With the war, food, weapons and horses cost a quarter more than usual."
+    ],
+    places: [
+      { group: "City", items: [
+        { name: "The Sun Palace", desc: "Seat of the Sun Throne, now empty, at the heart of the city." },
+        { name: "The Royal Library", desc: "One of the greatest libraries in the world; the Aiel took care to protect it when they burned the city." },
+        { name: "House Damodred Palace", desc: "Palace of House Damodred, the House of the late King Laman." },
+        { name: "The Topless Towers", desc: "Burned in the Aiel War; Ogier stonemasons are slowly rebuilding them." },
+        { name: "Port of Cairhien", desc: "The river port on the Alguenya, outside the western wall." }
+      ] },
+      { group: "Gates", items: [
+        { name: "Jangai Gate", desc: "The northern gate, where the road from Tremonsien and Tar Valon enters the city." },
+        { name: "Dragonwall Gate", desc: "The eastern gate, facing the Spine of the World — the Dragonwall." },
+        { name: "Alguenya Gate", desc: "The western gate, opening onto the river port." },
+        { name: "Erinin Gate", desc: "The southern gate." }
+      ] },
+      { group: "Inns", items: [
+        { name: "The Defender of the Dragonwall", desc: "An inn in the inner city, near the Jangai Gate." },
+        { name: "The Great Tree", desc: "An inn in the inner city, east of the Sun Palace." },
+        { name: "The Bunch of Grapes", desc: "An inn in the northern Foregate, just outside the Jangai Gate." }
+      ] },
+      { group: "Foregate", items: [
+        { name: "The Foregate", desc: "The city outside the walls, sprawling north and south of them." },
+        { name: "Guild of Illuminators Chapter House", desc: "The walled chapter house of the Illuminators, the secretive guild that makes fireworks, in the northern Foregate." }
+      ] }
+    ],
+    subMap: {
+      title: "Cairhien",
+      image: "cairhien-city-final-2.png",
+      credit: "Map by Adam Whitehead, Atlas of Ice and Fire (2018)",
+      pins: [
+        { name: "The Sun Palace", top: 47.7, left: 61.0, size: 10 },
+        { name: "Jangai Gate", top: 16.3, left: 59.8, size: 5 },
+        { name: "Dragonwall Gate", top: 50.1, left: 95.6, size: 5 },
+        { name: "Alguenya Gate", top: 50.1, left: 36.5, size: 5 },
+        { name: "Erinin Gate", top: 79.8, left: 61.5, size: 5 },
+        { name: "The Bunch of Grapes", top: 13.8, left: 54.5, size: 3.6 },
+        { name: "The Great Tree", top: 54.2, left: 68.4, size: 3.6 },
+        { name: "The Defender of the Dragonwall", top: 28.3, left: 69.2, size: 3.6 },
+        { name: "Guild of Illuminators Chapter House", top: 1.2, left: 78.5, size: 4 },
+        { name: "The Royal Library", top: 31.2, left: 88.3, size: 6 },
+        { name: "House Damodred Palace", top: 57.6, left: 44.0, size: 3.6 },
+        { name: "The Foregate", top: 15.1, left: 69.8, size: 10 },
+        { name: "The Foregate", top: 83.5, left: 76.8, size: 10 },
+        { name: "Port of Cairhien", top: 38.8, left: 24.2, size: 10 }
+      ]
+    },
+    rumors: [
+      "Someone no one has ever seen is paying off the debts of minor Houses ruined by the war. The Houses accept — and afterward they all vote the same way.",
+      "Rival Houses are paying Foregate folk to swell their militias. Yesterday two gangs clashed on Tanners' Street, and no one knows who started it.",
+      "A foreign scholar paid dearly to read everything the Royal Library holds about the stone hand of Tremonsien. A week later, the librarian who helped him burned to death in his own room — and nothing else in the room caught fire.",
+      "Three heirs of different Houses died this season without a single wound, their faces frozen in fear. No one saw the killer come or go."
+    ],
+    knowledge: [
+      { who: "Party", tag: "session 1", pc: false, text: "Kaela Miren, one of the kidnapped novices, is from Cairhien." },
+    ],
+    npcs: [
+      { name: "The Seven Stripes", role: "Tailor", type: "shop", desc: "A narrow, tall shop in the inner city whose only window shows a black coat with seven colored stripes — the number only royalty wears. Owner Doren Halvane (Cairhien), small and quick-handed, has sewn noble stripes for thirty years; with Houses switching sides, he knows who changed allegiance before anyone else, and never says a word. His helper Iselle (Foregate) laughs loudly and has the best eye for color in the city.",
+        items: [
+          { name: "Common clothes", price: "5 SP" },
+          { name: "Traveler's clothes", price: "2 GP" },
+          { name: "Fine clothes (dark, Cairhienin cut)", price: "15 GP" },
+          { name: "Stripeless clothes (well cut, no House mark)", price: "8 GP" },
+          { name: "House stripe, sewn on (per stripe)", price: "1 GP" },
+          { name: "Hooded cloak", price: "2 GP" },
+          { name: "Fine leather gloves", price: "5 SP" },
+          { name: "Costume", price: "5 GP" },
+          { name: "Sewing kit", price: "5 SP" },
+          { name: "Disguise kit", price: "25 GP" }
+        ] },
+      { name: "The Wall Arsenal", role: "Weapons & armor", type: "shop", desc: "A stone warehouse built against the north wall by the Jangai Gate, marked only by a reinforced door and an Aiel spear hung upside down. Owner Barin Talmoor (Cairhien), an Aiel War veteran scarred from ear to chin, sells to the mercenaries the Houses hire and charges high without apology. He will not sell short spears, on principle. His helper Kesh (Murandy), a mercenary left without a House, talks too much about who is hiring and how much they pay.",
+        items: [
+          { name: "Dagger", price: "2 GP 5 SP" },
+          { name: "Handaxe", price: "6 GP" },
+          { name: "Mace", price: "6 GP" },
+          { name: "Spear (long)", price: "1 GP 3 SP" },
+          { name: "Quarterstaff", price: "3 SP" },
+          { name: "Shortsword", price: "13 GP" },
+          { name: "Longsword", price: "19 GP" },
+          { name: "Rapier", price: "31 GP" },
+          { name: "Battleaxe", price: "13 GP" },
+          { name: "Warhammer", price: "19 GP" },
+          { name: "Halberd", price: "25 GP" },
+          { name: "Shortbow", price: "31 GP" },
+          { name: "Arrows (20)", price: "1 GP 3 SP" },
+          { name: "Light crossbow", price: "31 GP" },
+          { name: "Crossbow bolts (20)", price: "1 GP 3 SP" },
+          { name: "Padded armor", price: "5 GP" },
+          { name: "Leather armor", price: "10 GP" },
+          { name: "Studded leather", price: "45 GP" },
+          { name: "Chain shirt", price: "50 GP" },
+          { name: "Scale mail", price: "50 GP" },
+          { name: "Chain mail", price: "75 GP" },
+          { name: "Shield", price: "10 GP" }
+        ] },
+      { name: "The Grain Barge", role: "Provisions", type: "shop", desc: "A long shed in the Foregate near the Alguenya docks, always crowded, with grain sacks stacked to the rafters and the smell of flour and river. Owner Harlan Vey (Andor), a stout red-haired merchant, buys the Tearen grain shipped up the Erinin and the Alguenya; in a time of scarcity his is the busiest shop in the city — and the one the Houses watch most closely. He swears he takes no side. No one believes him. His helper Pip (Foregate), a quick boy, delivers where no carter will go.",
+        items: [
+          { name: "Rations (1 day)", price: "6 SP" },
+          { name: "Rations (1 week, packed)", price: "3 GP 8 SP" },
+          { name: "Bread (loaf)", price: "3 CP" },
+          { name: "Cheese (hunk)", price: "1 SP 3 CP" },
+          { name: "Salted meat (chunk)", price: "4 SP" },
+          { name: "Salted fish (piece)", price: "3 SP" },
+          { name: "Flour (10 lb sack)", price: "1 SP 3 CP" },
+          { name: "Ale (mug)", price: "5 CP" },
+          { name: "Common wine (pitcher)", price: "3 SP" },
+          { name: "Horse feed (1 day)", price: "6 CP" },
+          { name: "Burlap sack", price: "1 CP" },
+          { name: "Barrel", price: "2 GP" },
+          { name: "Leather waterskin", price: "2 SP" }
+        ] },
+      { name: "The Sun Scribe", role: "Stationer, maps & copies", type: "shop", desc: "A quiet room a few steps from the Royal Library, smelling of ink and wax, with slanted copyist desks and maps hung on lines. A board on the wall lists the couriers leaving for Tar Valon, Caemlyn and Tear, and on which days. Owner Ellin Corvane (Cairhien), a tiny bespectacled copyist who remembers everything she has ever copied: the place to send a letter safely — or to learn who is writing to whom. Her helper Aldwin (Tar Valon) came to study at the Library and stayed.",
+        items: [
+          { name: "Paper (sheet)", price: "2 SP" },
+          { name: "Parchment (sheet)", price: "1 SP" },
+          { name: "Ink (bottle)", price: "10 GP" },
+          { name: "Quill", price: "2 CP" },
+          { name: "Sealing wax", price: "5 SP" },
+          { name: "Map or scroll case", price: "1 GP" },
+          { name: "Blank book", price: "25 GP" },
+          { name: "Map of Cairhien", price: "5 GP" },
+          { name: "Map of the lands between the Spine and Tar Valon", price: "15 GP" },
+          { name: "Copy of a text (per page)", price: "1 SP" },
+          { name: "Translation from the Old Tongue (per page)", price: "2 GP" },
+          { name: "Letter sent (Tar Valon, Caemlyn or Tear)", price: "2 SP" }
+        ] }
+    ]
   },
   {
     id: "altara",
