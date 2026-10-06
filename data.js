@@ -131,11 +131,12 @@ const LOCATIONS = [
     distCity: "Tar Valon",
     name: "Tar Valon",
     top: 35.5, left: 70.5,
-    desc: "Island city on the River Erinin, in sight of the Herald's Lighthouse. Seat of the Aes Sedai and the Amyrlin Seat, it is the second most populous city in the Westlands and a vital trade link between the Borderlands and the southern realms.",
+    desc: "Island city on the River Erinin, in sight of the Herald's Lighthouse. Seat of the Aes Sedai and the Amyrlin Seat, it is the most populous city in the Westlands, counting the bridge villages, and a vital trade link between the Borderlands and the southern realms.",
     geography: [
       "The island is about eight miles long and over two miles wide. The River Erinin splits around it: the Alindrelle Erinin to the west and the Osendrelle Erinin to the east.",
-      "The Shining Walls and the White Tower, the tallest structure in the known world, are visible for miles.",
-      "Six great bridges link the island to the mainland, each ending in a village: Jualde, Darein and Alindaer on the west bank; Lugagde, Daghain and Osenrein on the east.",
+      "The Shining Walls and the White Tower, at some 600 feet the tallest building on the continent, are visible for miles.",
+      "The Herald's Lighthouse rises about thirty miles to the southwest of the island.",
+      "Six great bridges link the island to the mainland, each ending in a village: Jualdhe, Darein and Alindaer on the west bank; Luagde, Daghain and Osenrein on the east.",
       "The Ogier Grove, two miles of oaks and Great Trees ringed by spiral stone arches, holds a Waygate that is fenced off and sealed to the public.",
       "Two harbors serve the city: Northharbour, built by the Ogier in white stone veined with silver and almost a mile wide, and Southharbour, at the island's southern tip."
     ],
@@ -151,18 +152,18 @@ const LOCATIONS = [
     ],
     culture: [
       "About 500,000 people live here, in a city built largely by Ogier stonemasons: even ordinary inns and shops look like works of art.",
-      "Raised soon after the Breaking of the World, with the Ogier contributing heavily. The name comes from the Old Tongue and means roughly \"Tower that Guards.\"",
+      "Raised soon after the Shattering, with the Ogier contributing heavily. The name comes from the Old Tongue and means roughly \"Tower that Guards.\"",
       "The city's symbol is the Flame of Tar Valon: a white flame, also drawn as a white teardrop with its point up.",
       "Every nation has a presence: embassies, merchants, and outsiders who never left.",
       "The Light is the common faith.",
       "Natives grow up treating Aes Sedai and Warders as everyday neighbors, though always with an undercurrent of reverence and respect.",
       "Merchants steer clear of any single Ajah's colors so as not to look affiliated.",
-      "Each bridge village has its own temper: Alindaer is an opportunistic crossroads playing the Great Game in miniature; Jualde is a place of passage where no one asks questions; Darein is stubbornly persistent; Lugagde is discreet; Daghain leans Cairhienin; Osenrein welcomes weary travelers and keeps the memory of its dead."
+      "Each bridge village has its own temper: Alindaer is an opportunistic crossroads playing the Great Game in miniature; Jualdhe is a place of passage where no one asks questions; Darein is stubbornly persistent; Luagde is discreet; Daghain leans Cairhienin; Osenrein welcomes weary travelers and keeps the memory of its dead."
     ],
     places: [
       { group: "City", items: [
         { name: "The Blue Cat", desc: "Inn shaped like a sleeping blue cat, overlooking the Erinin. Multicultural décor, old maps and exotic wines. Innkeeper: Tom Veldan." },
-        { name: "The Light's Blessing Inn", desc: "Mid-sized inn run by Basel Gill, with a library of rare books." },
+        { name: "The Light's Blessing Inn", desc: "Mid-sized inn run by Halwin Sorrel, with a library of rare books." },
         { name: "The Woman of Tanchico", desc: "Inn on the edge of Southharbour, with a few tables tucked into more private corners." },
         { name: "Great Fish Market", desc: "A market whose streets fan out toward the river like a school of colorful fish (see Shops)." },
         { name: "Kandori Merchants' Guild Hall", desc: "Its façade shows horses galloping out of the sea." },
@@ -172,8 +173,8 @@ const LOCATIONS = [
       { group: "Bridge villages", items: [
         { name: "Alindaer", desc: "West bank, ~8,000 people. The busiest of the six bridges and the start of the road south to Caemlyn. Inns: The Blue Brick and The Carver's Table. Three money-changers, a river port for barges, and Bridge Square, the best place to hear rumors from far away." },
         { name: "Darein", desc: "West bank, ~4,500. The middle bridge, a place for discreet meetings between factions. The Windmill Tavern (tavern, barn and smithy in one building), the Hall of Negotiations (neutral meetings for a fee to the council), Smiths' Row and the North Mill." },
-        { name: "Jualde", desc: "West bank, ~3,200. The northern gate, where travelers and troops from the Borderlands arrive. Inns: The Shield and the Snow and The Last Flame. A twenty-soldier Tower Guard outpost and the Border Market." },
-        { name: "Lugagde", desc: "East bank, ~2,800. A quiet fishing and farming village. Inn: The Ferry and the Hook. Old Maret's Garden belongs to an unofficial healer the villagers trust." },
+        { name: "Jualdhe", desc: "West bank, ~3,200. The northern gate, where travelers and troops from the Borderlands arrive. Inns: The Shield and the Snow and The Last Flame. A twenty-soldier Tower Guard outpost and the Border Market." },
+        { name: "Luagde", desc: "East bank, ~2,800. A quiet fishing and farming village. Inn: The Ferry and the Hook. Old Maret's Garden belongs to an unofficial healer the villagers trust." },
         { name: "Daghain", desc: "East bank, ~5,000. The most commercial of the eastern villages, with strong Cairhienin influence. Inns: The Gray Stone and several cheaper ones around Market Square. A market three times a week and a Guild depot." },
         { name: "Osenrein", desc: "East bank, ~3,800. End of the southern road, built to welcome weary travelers. Inn: The Last Mile. Inn Row, the Provisions Market, View Square, and the Temple of Memory, whose walls bear the names of the dead." }
       ] }
@@ -183,10 +184,10 @@ const LOCATIONS = [
       image: "map-tar-valon.png",
       credit: "Map by Adam Whitehead, Atlas of Ice and Fire (2019)",
       pins: [
-        { name: "Jualde", top: 34.5, left: 10.0, size: 13 },
+        { name: "Jualdhe", top: 34.5, left: 10.0, size: 13 },
         { name: "Darein", top: 63.5, left: 6.0, size: 12 },
         { name: "Alindaer", top: 87.5, left: 16.5, size: 13 },
-        { name: "Lugagde", top: 27.4, left: 70.4, size: 13 },
+        { name: "Luagde", top: 27.4, left: 70.4, size: 13 },
         { name: "Daghain", top: 47.0, left: 81.5, size: 13 },
         { name: "Osenrein", top: 76.5, left: 87.5, size: 12 },
         { name: "The White Tower", top: 55.5, left: 43.2, size: 10 },
@@ -201,7 +202,7 @@ const LOCATIONS = [
       "The Whitecloaks have been asking questions in the bridge villages.",
       "A merchant at Alindaer's port who complained about the fees has vanished.",
       "One night the sky above Darein glowed orange to the north.",
-      "If you don't want to be seen leaving Tar Valon, go by way of Lugagde."
+      "If you don't want to be seen leaving Tar Valon, go by way of Luagde."
     ],
     knowledge: [
       { who: "Dongo", tag: "personal background", pc: true, text: "Reached Tar Valon by boat, arriving at South Harbor — surviving the voyage by stealing olives on board." },
@@ -213,10 +214,10 @@ const LOCATIONS = [
       { name: "Serenya Taravin", role: "Aes Sedai · Blue Ajah · Sitter", type: "npc", desc: "Apparent age around 45, from Saldaea. Pragmatic and direct: tall, black hair streaked with grey pinned in a bun, dark eyes. A Sitter in the Hall of the Tower, she runs a network of informants outside the Tower's official channels and hired the party for tasks the Tower cannot take on openly." },
       { name: "Jarem al'Caar", role: "Serenya's Warder", type: "npc", desc: "Apparent age around 50, jovial and quick to read people. A former intelligence operative for a noble House of Arafel. Dark brown hair." },
       { name: "Tomas \"Tom\" Veldan", role: "Innkeeper · The Blue Cat", type: "npc", desc: "Burly, friendly man who owns the Blue Cat Inn, overlooking the River Erinin." },
-      { name: "Basel Gill", role: "Innkeeper · The Light's Blessing", type: "npc", desc: "Runs the Light's Blessing Inn, a mid-sized inn with a library of rare books." },
-      { name: "Edras Vorn", role: "Tower Guard Captain · Jualde", type: "npc", desc: "Veteran of the north, around fifty, commanding the Tower Guard outpost at Jualde. A practical man who doesn't believe the stories but acts as if he did." },
+      { name: "Halwin Sorrel", role: "Innkeeper · The Light's Blessing", type: "npc", desc: "Runs the Light's Blessing Inn, a mid-sized inn with a library of rare books." },
+      { name: "Edras Vorn", role: "Tower Guard Captain · Jualdhe", type: "npc", desc: "Veteran of the north, around fifty, commanding the Tower Guard outpost at Jualdhe. A practical man who doesn't believe the stories but acts as if he did." },
       { name: "Mira Lyndrel", role: "House Lyndrel agent · Daghain", type: "npc", desc: "Cairhienin agent of House Lyndrel who sells information as readily as goods. The person to hire to learn what is coming from the east." },
-      { name: "Ossin Leal", role: "Innkeeper · The Ferry and the Hook", type: "npc", desc: "Knows the name and face of every villager in Lugagde and is the village's social hub." },
+      { name: "Ossin Leal", role: "Innkeeper · The Ferry and the Hook", type: "npc", desc: "Knows the name and face of every villager in Luagde and is the village's social hub." },
       { name: "Cenda Vail", role: "Innkeeper · The Last Mile", type: "npc", desc: "Runs the Last Mile in Osenrein and seems to know each guest's origin and destination before asking the price." },
       { name: "The Traveler's Shop", role: "General gear", type: "shop", desc: "A white-stone shop two blocks from the South Bridge, with ropes, hooks and baskets covering every wall. Owner Anaiatel Doswell (Andor), a broad, gray-bearded former caravan guard, speaks plainly and never sells what you don't need. His niece Sela (Murandy), a chaotic but sharp-minded teenager, helps at the counter.",
         items: [
@@ -371,7 +372,8 @@ const LOCATIONS = [
     top: 43.3, left: 76.1,
     desc: "Small village in Cairhien, north of the capital, on the road to Tar Valon.",
     geography: [
-      "Sits atop a terraced hill in the foothills of Kinslayer's Dagger, with square stone houses on uniform lots and streets laid out in a neat grid."
+      "Sits atop a terraced hill in the foothills of Kinslayer's Dagger, with square stone houses on uniform lots and streets laid out in a neat grid.",
+      "About a hundred miles north of the capital along the road to Tar Valon."
     ],
     politics: [
       "Governed locally, under the nobility of the region."
@@ -411,9 +413,10 @@ const LOCATIONS = [
       "The inner city lies within square walls, built on hills flattened into terraces, with streets laid out in a perfect grid.",
       "Outside the walls sprawls the Foregate: a second city, unplanned, loud, colorful and chaotic — the opposite of the inner city.",
       "The Topless Towers were burned by the Aiel in 976 NE. Ogier stonemasons have been rebuilding them, but the work goes slowly.",
+      "There are seventy-one Topless Towers, several over 300 feet tall. Some are held by noble Houses as a mark of prestige, some stand abandoned and others belong to the crown.",
       "The city stands on the River Alguenya, just south of where the Gaelin flows into it; the Alguenya joins the Erinin further south.",
       "Four gates pierce the walls: the Jangai Gate to the north, the Dragonwall Gate to the east, the Alguenya Gate to the west, by the river port, and the Erinin Gate to the south. The Foregate spreads outside the north and south walls.",
-      "The north road leads to Tar Valon by way of Tremonsien; the east road runs all the way to the Jangai Pass, with the town of Eianrod about halfway."
+      "The north road leads to Tar Valon by way of Tremonsien, about a hundred miles away; the east road runs all the way to the Jangai Pass, with the town of Eianrod about halfway."
     ],
     politics: [
       "Cairhien is a monarchy: its ruler sits the Sun Throne, and the nobility is split into Houses that vie for the crown.",
@@ -433,7 +436,7 @@ const LOCATIONS = [
     places: [
       { group: "City", items: [
         { name: "The Sun Palace", desc: "Seat of the Sun Throne, now empty, at the heart of the city." },
-        { name: "The Royal Library", desc: "One of the greatest libraries in the world; the Aiel took care to protect it when they burned the city." },
+        { name: "The Royal Library", desc: "The greatest library in the world open to the public (the White Tower's is larger, but access is tightly controlled); the Aiel took care to protect it when they burned the city." },
         { name: "House Damodred Palace", desc: "Palace of House Damodred, the House of the late King Laman." },
         { name: "The Topless Towers", desc: "Burned in the Aiel War; Ogier stonemasons are slowly rebuilding them." },
         { name: "Port of Cairhien", desc: "The river port on the Alguenya, outside the western wall." }
