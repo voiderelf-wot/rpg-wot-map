@@ -657,9 +657,55 @@ const LOCATIONS = [
   {
     id: "amadicia",
     distCity: "Amador",
-    name: "Amadicia",
+    name: "Amador (Amadicia)",
     top: 69.9, left: 38.9,
     desc: "Capital of Amadicia and home to the Fortress of the Light, headquarters of the Children of the Light. Amadicia has a king, but it's the Whitecloaks who really rule — channeling is outlawed throughout the territory.",
+    geography: [
+      "The capital lies at the heart of the realm, on a plain between the mountains to the north and west and the Dhallin Forest to the east.",
+      "The River Eldar marks the border with Altara to the east and south; the Sharia runs through the southwest.",
+      "Market towns line the roads out of Amador: Abila and Jeramel to the north, Sienda and Bellon to the east and southeast, Mardecin, Nassad and Serana to the west, Almizar to the southwest."
+    ],
+    politics: [
+      "King Ailron reigns from Amador. In practice, power lies with the Fortress of the Light, inside the capital itself.",
+      "The Children of the Light are headquartered in the Fortress: thousands of horsemen and foot soldiers under a dozen Lord Captains, commanded by the Lord Captain Commander, Pedron Niall.",
+      "The Questioners, the Hand of the Light, interrogate and judge those suspected of serving the Shadow. They answer to a High Inquisitor.",
+      "Channeling is a crime throughout Amadicia. Aes Sedai are not welcome, and women who channel are hunted.",
+      "Beyond Amadicia, the Children's presence in Andor keeps growing since their agreement with Queen Morgase."
+    ],
+    culture: [
+      "Many common folk support the Children; those who don't have learned to pretend.",
+      "Some years ago the Children branded an entire noble House, House Macura, as Darkfriends and destroyed it in a single night. The banners burned and the lord was executed in public. No one in Amador speaks of it aloud."
+    ],
+    places: [
+      { group: "City", items: [
+        { name: "The Fortress of the Light", desc: "Headquarters of the Children of the Light, a fortress within the capital." },
+        { name: "The King's Palace", desc: "Where Ailron reigns, in the shadow of the Fortress." }
+      ] }
+    ],
+    rumors: [
+      "The High Inquisitor vanishes from Amador for months at a time, and not even the Lord Captain Commander seems to know where he goes.",
+      "Questioners have been going through the villages asking after herbs that 'calm the witches'."
+    ],
+    npcs: [
+      { name: "Pedron Niall", role: "Lord Captain Commander · Children of the Light", type: "npc", desc: "Old, lean and calculating — more dangerous for his patience than for his sword." },
+      { name: "Ailron", role: "King of Amadicia", type: "npc", desc: "Wears the crown; the Children wield the power." },
+      { name: "The High Inquisitor", role: "Hand of the Light", type: "npc", desc: "Head of the Questioners, the Hand of the Light. Seldom seen in Amador lately." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "macura-ruins",
+    name: "Ruins of House Macura",
+    top: 69.0, left: 41.3,
+    desc: "The burned manor of House Macura, between Amador and Abila near the road to Ghealdan. Its walls are blackened, but the silver scale of the House's crest can still be seen on the gate.",
+    places: [
+      { group: "Ruins", items: [
+        { name: "The burned manor", desc: "What is left of the manor: blackened walls, and the crest of the silver scale still visible on the gate." }
+      ] }
+    ],
+    rumors: [
+      "They say not everyone of House Macura died that night."
+    ],
     knowledge: [
       { who: "Uthar", tag: "personal background", pc: true, text: "Captured by the Whitecloaks at around 10 after the fall of his father's fortress, he was handed to the guardianship of House Macura — an Amadician noble house that publicly served the Light but secretly opposed the Children's fanaticism." },
       { who: "Uthar", tag: "personal background", pc: true, text: "House Macura's crest: a silver scale with open hands. Its motto: 'By the hand, not by the knee.' To outsiders, devotion to the Light; to those inside, 'we serve standing, not kneeling.'" },
@@ -669,6 +715,62 @@ const LOCATIONS = [
       { who: "Uthar", tag: "personal background", pc: true, text: "The Crucible was commanded by an Inquisitor named Thane. Uthar saw him lick his dagger after killing a guard — a gesture that felt almost ritual, and that he has never understood." },
       { who: "Uthar", tag: "personal background", pc: true, text: "Escaped the massacre and fled east through Ghealdan, crossing into Andor. He does not know whether Maren, Evon, Theril or Sena survived." },
     ],
+  },
+  {
+    id: "abila",
+    name: "Abila",
+    top: 67.8, left: 42.7,
+    desc: "A market town on the north road from Amador toward Ghealdan.",
+    knowledge: [],
+  },
+  {
+    id: "jeramel",
+    name: "Jeramel",
+    top: 68.2, left: 40.6,
+    desc: "A town northeast of Amador, at the foot of the mountains.",
+    knowledge: [],
+  },
+  {
+    id: "sienda",
+    name: "Sienda",
+    top: 71.8, left: 41.4,
+    desc: "A market town on the road east of Amador.",
+    knowledge: [],
+  },
+  {
+    id: "bellon",
+    name: "Bellon",
+    top: 71.8, left: 40.0,
+    desc: "A town just southeast of Amador, on the road out of the capital.",
+    knowledge: [],
+  },
+  {
+    id: "mardecin",
+    name: "Mardecin",
+    top: 70.8, left: 37.2,
+    desc: "A town west of Amador, on the road toward Nassad and Serana.",
+    knowledge: [],
+  },
+  {
+    id: "nassad",
+    name: "Nassad",
+    top: 70.1, left: 35.7,
+    desc: "A town on the western road from Amador, beyond Mardecin.",
+    knowledge: [],
+  },
+  {
+    id: "serana",
+    name: "Serana",
+    top: 68.8, left: 34.2,
+    desc: "A town in the far northwest of Amadicia, at the end of the western road.",
+    knowledge: [],
+  },
+  {
+    id: "almizar",
+    name: "Almizar",
+    top: 72.7, left: 36.7,
+    desc: "A town in southwestern Amadicia, near the River Sharia.",
+    knowledge: [],
   },
   {
     id: "saldaea",
