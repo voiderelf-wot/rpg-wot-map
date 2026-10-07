@@ -211,12 +211,14 @@ const LOCATIONS = [
       { who: "Dongo", tag: "personal background", pc: true, text: "Carries a mission from the Ghostbloods: eliminate 'the rat merchant' in Tar Valon. In return they promised him information about his own past. They warned him: 'he is not what he seems.' Refusing could mean being found by his old buyers." },
       { who: "Aynara", tag: "personal background", pc: true, visibleTo: ["Aynara"], text: "Worked for High Inquisitor Dagobert Thane as a tracker and informant, finding and mapping Portal Stones with a portal-identifying device he gave her." },
       { who: "Aynara", tag: "personal background", pc: true, visibleTo: ["Aynara"], text: "Was imprisoned in the Whitecloak camp after openly questioning the mission and disobeying a direct order — she had tried to walk away from it." },
+      { who: "Party", tag: "the Whitecloak camp", pc: false, visibleTo: ["Maeri", "Uthar", "Dongo", "Aynara"], text: "Outside Tar Valon stood a Children of the Light camp under High Inquisitor Dagobert Thane, gathering the Legion of Amadicia and the Legion of Andor. One corner of it was hidden under dark tarps, over shafts where men dug day after day. The camp has since been destroyed." },
     ],
     npcs: [
       { name: "Serenya Taravin", role: "Aes Sedai · Blue Ajah · Sitter", type: "npc", desc: "Apparent age around 45, from Saldaea. Pragmatic and direct: tall, black hair streaked with grey pinned in a bun, dark eyes. A Sitter in the Hall of the Tower, she runs a network of informants outside the Tower's official channels and hired the party for tasks the Tower cannot take on openly." },
       { name: "Jarem al'Caar", role: "Serenya's Warder", type: "npc", desc: "Apparent age around 50, jovial and quick to read people. A former intelligence operative for a noble House of Arafel. Dark brown hair." },
       { name: "Tomas \"Tom\" Veldan", role: "Innkeeper · The Blue Cat", type: "npc", desc: "Burly, friendly man who owns the Blue Cat Inn, overlooking the River Erinin." },
       { name: "Halwin Sorrel", role: "Innkeeper · The Light's Blessing", type: "npc", desc: "Runs the Light's Blessing Inn, a mid-sized inn with a library of rare books." },
+      { name: "Dagobert Thane", role: "High Inquisitor · Hand of the Light", type: "npc", visibleTo: ["Maeri", "Uthar", "Dongo", "Aynara"], desc: "Commanded the Whitecloak camp outside Tar Valon. Tall and thin, with dark olive skin, immaculate black hair and eyes that linger a moment too long before he blinks. Since the camp was destroyed, his whereabouts are unknown." },
       { name: "Edras Vorn", role: "Tower Guard Captain · Jualdhe", type: "npc", desc: "Veteran of the north, around fifty, commanding the Tower Guard outpost at Jualdhe. A practical man who doesn't believe the stories but acts as if he did." },
       { name: "Mira Lyndrel", role: "House Lyndrel agent · Daghain", type: "npc", desc: "Cairhienin agent of House Lyndrel who sells information as readily as goods. The person to hire to learn what is coming from the east." },
       { name: "Ossin Leal", role: "Innkeeper · The Ferry and the Hook", type: "npc", desc: "Knows the name and face of every villager in Luagde and is the village's social hub." },
@@ -891,6 +893,23 @@ const LOCATIONS = [
       ] }
     ],
     knowledge: [],
+  },
+  {
+    id: "malkier",
+    name: "Malkier",
+    top: 17.0, left: 79.4,
+    desc: "The lost kingdom of the Seven Towers, swallowed by the Blight in 955 NE. Its ruins lie at the very edge of the Blight, west of Tarwin's Gap.",
+    rumors: [
+      "They say someone is rebuilding the Seven Towers, and that Shadowspawn cannot come near."
+    ],
+    npcs: [
+      { name: "Azure", role: "Leader of the Malkier camp", type: "npc", visibleTo: ["Aynara"], desc: "Leads a camp of some four hundred soldiers, workers and Malkieri survivors among the ruins, and is rebuilding the Seven Towers. Dark hair with a white streak, amber eyes, a dark blue military coat. Trains with her soldiers every morning. Her accent belongs to no land anyone can name." }
+    ],
+    knowledge: [
+      { who: "Aynara", tag: "personal background", pc: true, visibleTo: ["Aynara"], text: "Born in Discordia, a tiefling, and chosen as a Sealer — one who seeks out and seals the portals between worlds." },
+      { who: "Aynara", tag: "personal background", pc: true, visibleTo: ["Aynara"], text: "Came through a Portal Stone and fell into the Blight." },
+      { who: "Aynara", tag: "personal background", pc: true, visibleTo: ["Aynara"], text: "Was taken in by Azure at Malkier and stayed there for a time; she still reports to her. Azure knows she is from another plane — and Azure, too, is not from this world." },
+    ],
   },
   {
     id: "far-madding",
