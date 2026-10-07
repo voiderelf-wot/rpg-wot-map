@@ -97,7 +97,8 @@ const WATER_MODES = {
 const RIVER_SYSTEMS = [
   { river: "River Erinin", mode: "rio", cities: ["Shol Arbela", "Tar Valon", "Cairhien", "Aringill", "Tear"] },
   { river: "River Arinelle", mode: "rio", cities: ["Maradon", "Whitebridge"] },
-  { river: "River Manetherendrelle", mode: "rio", cities: ["Whitebridge", "Ebou Dar", "Lugard", "Illian"] },
+  { river: "River Manetherendrelle", mode: "rio", cities: ["Whitebridge", "Lugard", "Illian"] },
+  { river: "River Eldar", mode: "rio", cities: ["Salidar", "Ebou Dar"] },
   { river: "Sea of Storms coast (Sea Folk)", mode: "mar", cities: ["Tear", "Illian", "Ebou Dar"] }
 ];
 function findWaterRoute(cityA, cityB){
@@ -117,8 +118,8 @@ function cityHasWaterRoute(city){
 // a manual background card for it.
 // ============================================================
 const CHARACTERS = {
-  "Maeri": { classe: "Cleric",  origemLabel: "Born in a village in Altara; raised by The Kin in Ebou Dar; grew up in So Eban", homeLocationId: "altara" },
-  "Uthar": { classe: "Fighter", origemLabel: "House Maredo — a border fortress near Alkindar, Altara", homeLocationId: "altara" },
+  "Maeri": { classe: "Cleric",  origemLabel: "Born in a village in Altara; grew up in Ebou Dar and So Eban", homeLocationId: "so-eban" },
+  "Uthar": { classe: "Fighter", origemLabel: "House Maredo — a border fortress near Alkindar, Altara", homeLocationId: "alkindar" },
   "Dongo": { classe: "Rogue",   origemLabel: "Tremonsien, Cairhien", homeLocationId: "tremosien" },
   "Aynara": { classe: "Paladin", origemLabel: "Origin not yet revealed in-game", homeLocationId: null }
 };
@@ -566,21 +567,92 @@ const LOCATIONS = [
   {
     id: "altara",
     distCity: "Ebou Dar",
-    name: "Altara (Ebou Dar)",
+    name: "Ebou Dar (Altara)",
     top: 81.8, left: 44.6,
     desc: "Altara's port capital, built over the ruins of ancient Barashta. Split by the River Eldar between the wealthy noble quarter and the Rahad, a poor and dangerous district — known for its extravagant fashion and the vibrant life around the Tarasin Palace.",
+    geography: [
+      "Ebou Dar stands on the Bay of Eldar, where the River Eldar meets the sea.",
+      "The Eldar runs north from the city past Alkindar, So Eban and Salidar toward Ghealdan. In the south it marks the border with Amadicia.",
+      "East of the city, the Venir Mountains and the Kabal Deep close off the coast."
+    ],
+    politics: [
+      "Queen Tylin Quintara of House Mitsobar reigns from Ebou Dar. As always in Altara, the crown holds little beyond the capital: the rest of the realm is a patchwork of noble domains, each looking after itself.",
+      "The Eldar border with Amadicia is tense. Border Houses have fallen before to raids backed by the Whitecloaks."
+    ],
+    culture: [
+      "Ebou-Dari are famous for their pride and their tempers: knife duels settle insults, and the law rarely interferes.",
+      "Married women wear a marriage knife hung at the throat, its gems telling how many sons and daughters they have borne.",
+      "The Wise Women of Ebou Dar, with their red belts, are said to be the finest healers in the world. People travel from far away to be treated by them.",
+      "A busy port on the Bay of Eldar, visited by Sea Folk ships, with sea routes to Illian and Tear."
+    ],
+    places: [
+      { group: "City", items: [
+        { name: "The Tarasin Palace", desc: "The queen's palace, on the Mol Hara." },
+        { name: "Mol Hara Square", desc: "The great square before the palace." },
+        { name: "The Rahad", desc: "The district on the east bank, poor and lawless; not even the Civil Guard goes in." }
+      ] },
+      { group: "Inns", items: [
+        { name: "The Wandering Woman", desc: "A well-known inn near the Mol Hara." }
+      ] }
+    ],
+    rumors: [
+      "A Wise Woman of Ebou Dar healed a man the physicians had already given up for dead.",
+      "Ebou Dar fishermen tell of strange ships with enormous sails, sighted far out from the coast."
+    ],
     knowledge: [
-      { who: "Uthar", tag: "personal background", pc: true, text: "Born into House Maredo, an Altaran noble family. His father, Lord Dainar, held a border fortress near Alkindar, on the River Eldar, guarding Altara against Amadician incursions — and was killed when the Whitecloaks invaded with the help of a traitorous uncle." },
-      { who: "Uthar", tag: "personal background", pc: true, text: "Carries his father's sword: a heron-marked longsword that once belonged to Lord Dainar." },
       { who: "Maeri", tag: "personal background", pc: true, text: "Born in a small village in Altara to parents whose house was always full of drying herbs and curing pelts. She barely remembers them — at some point she got lost and found herself alone on an unknown road." },
       { who: "Maeri", tag: "personal background", pc: true, text: "Reached the Rahad around age 6 and survived its streets on luck and observation. For about six months a passing traveler taught her how to break free, where to strike, how to flee, and whom to trust — then left as suddenly as she came." },
       { who: "Maeri", tag: "personal background", pc: true, text: "Around age 8, Vernam, a healer of The Kin, found her in a desperate state in the Rahad and healed her. Maeri followed her everywhere, worked the Farm and gathered herbs until Vernam became her official guardian, teaching her healing and herbcraft." },
       { who: "Maeri", tag: "personal background", pc: true, text: "Began to show the Power at 11. Refused the White Tower, and Vernam kept her secret from the other Kinswomen — on the condition that she never channel in front of anyone. She was never entered in The Kin's records." },
-      { who: "Maeri", tag: "personal background", pc: true, text: "At 13 she moved with Vernam to the village of So Eban, where Vernam is the Wisdom. Grew up as a Wisdom in training — tending the sick, presiding over births and deaths, and practising the Power alone in secret." },
     ],
     npcs: [
-      { name: "Vernam", role: "Elder · The Kin", type: "npc", desc: "One of the Elders of The Kin, part of the Knitting Circle. Particular talent for healing, both with the Power and with herbs. Rescued Maeri from the streets of Rahad and became her official guardian." },
+      { name: "Tylin Quintara", role: "Queen of Altara", type: "npc", desc: "Queen of Altara, of House Mitsobar. Handsome and middle-aged, shrewd, and with no patience for anyone who underestimates her." }
     ]
+  },
+  {
+    id: "so-eban",
+    name: "So Eban",
+    top: 75.1, left: 46.4,
+    desc: "A village on the River Eldar, south of Salidar, where the Wisdom keeps the old ways firmly in hand.",
+    rumors: [
+      "The midwives of So Eban have been frightened lately, and no one can say why."
+    ],
+    npcs: [
+      { name: "Vernam", role: "Wisdom of So Eban", type: "npc", desc: "The Wisdom of So Eban. A healer with a rare hand for herbs, stern and respected — and no one argues with her." }
+    ],
+    knowledge: [
+      { who: "Maeri", tag: "personal background", pc: true, text: "At 13 she moved with Vernam to the village of So Eban, where Vernam is the Wisdom. Grew up as a Wisdom in training — tending the sick, presiding over births and deaths, and practising the Power alone in secret." },
+    ],
+  },
+  {
+    id: "alkindar",
+    name: "Alkindar",
+    top: 80.1, left: 45.4,
+    desc: "A town where the River Eldar meets the Bay of Eldar, just north of Ebou Dar, on the road along the Amadician border.",
+    places: [
+      { group: "Nearby", items: [
+        { name: "The ruined Maredo fortress", desc: "A border hold on the Eldar that fell to an attack backed by the Whitecloaks. Its walls still stand, empty." }
+      ] }
+    ],
+    knowledge: [
+      { who: "Uthar", tag: "personal background", pc: true, text: "Born into House Maredo, an Altaran noble family. His father, Lord Dainar, held a border fortress near Alkindar, on the River Eldar, guarding Altara against Amadician incursions — and was killed when the Whitecloaks invaded with the help of a traitorous uncle." },
+      { who: "Uthar", tag: "personal background", pc: true, text: "Carries his father's sword: a heron-marked longsword that once belonged to Lord Dainar." },
+    ],
+  },
+  {
+    id: "the-farm",
+    name: "The Farm",
+    top: 82.1, left: 45.9,
+    desc: "A large farm outside Ebou Dar run entirely by women. It is said that a woman in trouble can find shelter and work there.",
+    knowledge: [],
+  },
+  {
+    id: "salidar",
+    distCity: "Salidar",
+    name: "Salidar",
+    top: 72.8, left: 46.5,
+    desc: "A half-abandoned village on the River Eldar. Its houses and old inn stand mostly empty.",
+    knowledge: [],
   },
   {
     id: "amadicia",
