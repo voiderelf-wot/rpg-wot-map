@@ -773,6 +773,125 @@ const LOCATIONS = [
     knowledge: [],
   },
   {
+    id: "ghealdan",
+    distCity: "Jehanna",
+    name: "Jehannah (Ghealdan)",
+    top: 60.7, left: 42.2,
+    desc: "Capital of Ghealdan, a city of grey stone on hills at the foot of the Mountains of Mist, south of the Forest of Shadows. Ruled by an old king from Mayene whom the people love.",
+    geography: [
+      "Ghealdan is a small kingdom between the Mountains of Mist to the west, the range of Garen's Wall to the east, the Forest of Shadows to the north and Amadicia to the south.",
+      "On the southern border the River Eldar separates Ghealdan from Amadicia and runs down past Samara and Boannda toward Altara.",
+      "Two Ogier steddings lie at the edges of the realm. Inside a stedding, no one can touch the True Source."
+    ],
+    politics: [
+      "Ghealdan was an orderly kingdom until a civil war of succession broke its army. A string of short-lived kings and queens fell without bringing order back.",
+      "An old nobleman from Mayene came with wagons of healers, food and medicine to tend the wounded. He won the gratitude of the people and of the Houses, and in the end the Houses themselves asked him to take the throne and make peace. He is King Taravangian.",
+      "The army, rebuilt after the war, is the Legion of the Wall.",
+      "The Children of the Light cross the Eldar border when they please, and the king prefers yielding to fighting. Questioners move freely through Samara and Bethal."
+    ],
+    culture: [
+      "A people tired of war and of kings who fall. Wary of armed strangers, whether they come from Amador or from Tar Valon.",
+      "They love the old king who brought food and healers when no one else would."
+    ],
+    places: [
+      { group: "City", items: [
+        { name: "The Hospital of the Dying", desc: "A great hospital founded by the king that takes in the sick and the dying of any nation, free of charge. Famous for the patience of its attendants, who sit with every death and write down the last words 'for the families'." },
+        { name: "The King's Palace", desc: "Modest for a palace; the king spends more time at the hospital." }
+      ] }
+    ],
+    rumors: [
+      "At the Hospital of the Dying, the attendants write down everything the dying say, even their raving, and send the papers to the palace.",
+      "Closed wagons reach the hospital at night, coming from the north, and no one sees who gets out."
+    ],
+    npcs: [
+      { name: "Taravangian", role: "King of Ghealdan", type: "npc", desc: "Came from Mayene. Old, soft-spoken and kind-eyed. Some days he seems sharper than anyone alive; on others, a distracted grandfather." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "samara",
+    name: "Samara",
+    top: 65.8, left: 43.1,
+    desc: "A large town on the River Eldar, on Ghealdan's border with Amadicia. The first Ghealdanin town on the road from Amador.",
+    rumors: [
+      "Questioners have been going through Samara asking after women who 'know how to heal'."
+    ],
+    knowledge: [
+      { who: "Uthar", tag: "personal background", pc: true, text: "After the Crucible, he crossed the Eldar into Ghealdan at Samara and kept moving east, through Jehannah, until he crossed Garen's Wall into Andor." },
+    ],
+  },
+  {
+    id: "jarra",
+    name: "Jarra",
+    top: 62.7, left: 40.6,
+    desc: "A village southwest of Jehannah, in the foothills of the Mountains of Mist.",
+    knowledge: [],
+  },
+  {
+    id: "bethal",
+    name: "Bethal",
+    top: 64.7, left: 43.3,
+    desc: "A town north of Samara, on the road to Jehannah.",
+    rumors: [
+      "A Questioner turned up dead in Bethal with his throat cut, and the king sent no one to look into it."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "sidon",
+    name: "Sidon",
+    top: 64.6, left: 45.0,
+    desc: "A town east of Bethal.",
+    knowledge: [],
+  },
+  {
+    id: "cosamelle",
+    name: "Cosamelle",
+    top: 66.2, left: 40.9,
+    desc: "A town west of Samara, near the Amadician border.",
+    knowledge: [],
+  },
+  {
+    id: "boannda",
+    name: "Boannda",
+    top: 67.3, left: 45.7,
+    desc: "A town on the River Eldar, downstream from Samara on the way to Altara.",
+    rumors: [
+      "Eldar boatmen say more than one Wise Woman of Ebou Dar went up the river this year, and none came back down."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "willar",
+    name: "Willar",
+    top: 65.4, left: 48.8,
+    desc: "A town in southeastern Ghealdan, on the road toward Murandy and Lugard.",
+    rumors: [
+      "Foreign sellswords pass through Willar on their way to Jehannah; they say the king pays well and asks no questions."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "stedding-jinsiun",
+    name: "Stedding Jinsiun",
+    top: 57.6, left: 40.8,
+    desc: "An Ogier stedding beside the Forest of Shadows. Inside it, no one can touch the True Source.",
+    rumors: [
+      "The Ogier of Jinsiun have stopped sending stonemasons to Jehannah, and no one knows why."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "stedding-shangloon",
+    name: "Stedding Shangloon",
+    top: 62.9, left: 37.9,
+    desc: "An Ogier stedding in the Mountains of Mist. Inside it, no one can touch the True Source.",
+    rumors: [
+      "Whoever flees into Shangloon is never handed over, not to the Whitecloaks and not to the king."
+    ],
+    knowledge: [],
+  },
+  {
     id: "saldaea",
     distCity: "Maradon",
     name: "Saldaea (Maradon)",
