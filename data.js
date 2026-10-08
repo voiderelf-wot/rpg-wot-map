@@ -1210,9 +1210,127 @@ const LOCATIONS = [
     name: "Far Madding",
     top: 67.5, left: 66.4,
     desc: "Independent city-state on an island, linked to the mainland by three bridges. Home to the Guardian, an ancient ter'angreal that blocks access to the One Power in and around the city — the only known place where no one can channel.",
-    knowledge: [
-      { who: "GM", tag: "worldbuilding", pc: false, text: "Reserved for future expansion — surrounding villages, local culture and conflicts still in development. The party hasn't been here yet.", visibleTo: [] },
+    geography: [
+      "Far Madding stands on an island in the middle of Far Madding Lake, linked to the shore by three bridges: the Ajalon to the north, toward Caemlyn; the Ikane to the southwest, toward Illian; and the Goine to the southeast, toward Tear.",
+      "Each bridge ends in a village: Glancor to the north, Daigan to the southwest and Southbridge to the southeast.",
+      "The Hills of Kintara rise to the north, and the Plains of Maredo stretch away to the south."
     ],
+    politics: [
+      "Far Madding is ruled by thirteen Counsels, all women; the First Counsel, Aleis Barsalla, is first among equals. Men are wholly subject to women here: they do not govern, they do not vote, and they need a woman's leave for a great many things.",
+      "No one enters armed. At the Glancor fortification and at the other bridgeheads, weapons are confiscated or peace-bound. The Street Guard patrols the city and fines without mercy.",
+      "An ancient ter'angreal, the Guardian, made after the Shattering to protect the city from men who channeled and went mad, keeps anyone from touching the Source inside the city and in a wide band around the lake."
+    ],
+    culture: [
+      "A trading city that lives by shunning the One Power. Aes Sedai are not welcome — inside, they are just women like any other."
+    ],
+    places: [
+      { group: "Government", items: [
+        { name: "Hall of the Counsels", desc: "Where the thirteen Counsels meet, at the heart of the island." },
+        { name: "Counsels' Plaza", desc: "The square before the Hall of the Counsels." },
+        { name: "Barsalla Palace", desc: "The First Counsel's palace, on the east side of the island." }
+      ] },
+      { group: "Markets & streets", items: [
+        { name: "Amhara Market", desc: "The great market in the south of the island." },
+        { name: "Nethvin Market", desc: "The market at the center of the island." },
+        { name: "Avharin Market", desc: "The market in the north of the island, near the Caemlyn Gate." },
+        { name: "Street of Joy", desc: "A well-known street in the city." },
+        { name: "Blue Carp Street", desc: "A well-known street near the Illian Gate." },
+        { name: "The Heights", desc: "The high ground on the east side of the island." },
+        { name: "Mustering Ground", desc: "The field where the Street Guard gathers, by the Tear Gate." },
+        { name: "Lakeman's Quarter", desc: "The fishermen's quarter, at the southeast tip of the island." }
+      ] },
+      { group: "Gates", items: [
+        { name: "Caemlyn Gate", desc: "The northern gate, at the head of the Ajalon Bridge toward Caemlyn." },
+        { name: "Illian Gate", desc: "The southwestern gate, at the head of the Ikane Bridge toward Illian." },
+        { name: "Tear Gate", desc: "The southeastern gate, at the head of the Goine Bridge toward Tear." }
+      ] },
+      { group: "Inns", items: [
+        { name: "The Crown of Maredo", desc: "An inn in the north of the city." },
+        { name: "The Counsel's Head", desc: "An inn near the Nethvin Market." },
+        { name: "The Golden Wheel", desc: "An inn by the Avharin Market." }
+      ] },
+      { group: "Around the lake", items: [
+        { name: "Glancor", desc: "A waystation village at the north end of the Ajalon Bridge. Everyone entering Far Madding passes its stone fortification, where weapons are confiscated or peace-bound." },
+        { name: "Daigan", desc: "The village at the far end of the Ikane Bridge, toward Illian." },
+        { name: "Southbridge", desc: "The village at the far end of the Goine Bridge, toward Tear." },
+        { name: "Hills of Kintara", desc: "High, lonely hills north of the lake." }
+      ] }
+    ],
+    subMap: {
+      title: "Far Madding",
+      image: "far-madding.png",
+      credit: "Map by Adam Whitehead, Atlas of Ice and Fire (2020)",
+      pins: [
+        { name: "Hall of the Counsels", top: 48.9, left: 57.5, size: 6 },
+        { name: "Counsels' Plaza", top: 48.9, left: 59.6, size: 4 },
+        { name: "Barsalla Palace", top: 45.9, left: 65.7, size: 5 },
+        { name: "Amhara Market", top: 60.1, left: 52.1, size: 5 },
+        { name: "Nethvin Market", top: 53.1, left: 61.4, size: 5 },
+        { name: "Avharin Market", top: 36.9, left: 57.3, size: 5 },
+        { name: "Caemlyn Gate", top: 29.6, left: 57.4, size: 4 },
+        { name: "Illian Gate", top: 73.9, left: 40.1, size: 4 },
+        { name: "Tear Gate", top: 59.1, left: 67.9, size: 4 },
+        { name: "The Heights", top: 48.4, left: 67.1, size: 4 },
+        { name: "Mustering Ground", top: 62.4, left: 73.0, size: 4 },
+        { name: "Street of Joy", top: 54.6, left: 54.0, size: 3.6 },
+        { name: "Blue Carp Street", top: 73.4, left: 42.5, size: 3.6 },
+        { name: "Lakeman's Quarter", top: 63.6, left: 62.8, size: 4 },
+        { name: "The Crown of Maredo", top: 41.1, left: 61.1, size: 3.6 },
+        { name: "The Counsel's Head", top: 53.3, left: 59.1, size: 3.6 },
+        { name: "The Golden Wheel", top: 36.2, left: 59.8, size: 3.6 },
+        { name: "Glancor", top: 18.9, left: 64.4, size: 6 },
+        { name: "Daigan", top: 81.8, left: 31.1, size: 6 },
+        { name: "Southbridge", top: 73.2, left: 81.6, size: 6 },
+        { name: "Hills of Kintara", top: 4.3, left: 34.4, size: 6 }
+      ]
+    },
+    rumors: [
+      "Near Glancor, shepherds come back from the Hills of Kintara unable to say what they saw, and one of them did not speak for three days.",
+      "In Glancor, cattle turn up dead in ways no one can explain, and people wake from nightmares they cannot name.",
+      "In Daigan, doors are now locked at dusk, and no one will say why."
+    ],
+    npcs: [
+      { name: "Aleis Barsalla", role: "First Counsel of Far Madding", type: "npc", desc: "First among thirteen equals on the Council that rules Far Madding." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "minde",
+    name: "Minde",
+    top: 63.8, left: 59.6,
+    desc: "A town northeast of Lugard, on the River Storn.",
+    knowledge: [],
+  },
+  {
+    id: "inishlinn",
+    name: "Inishlinn",
+    top: 69.2, left: 57.4,
+    desc: "A town south of Lugard.",
+    knowledge: [],
+  },
+  {
+    id: "sabinel",
+    name: "Sabinel",
+    top: 73.4, left: 58.9,
+    desc: "A town in southern Murandy, near the Manetherendrelle.",
+    knowledge: [],
+  },
+  {
+    id: "trustair",
+    name: "Trustair",
+    top: 60.7, left: 57.3,
+    desc: "A village in northern Murandy, near the Andoran border.",
+    knowledge: [],
+  },
+  {
+    id: "hinderstap",
+    name: "Hinderstap",
+    top: 61.1, left: 56.7,
+    desc: "A village in northern Murandy, near the Andoran border.",
+    rumors: [
+      "In Hinderstap, the villagers go home before nightfall and tell travelers to be gone before dark."
+    ],
+    knowledge: [],
   },
   {
     id: "illian",
@@ -1233,9 +1351,24 @@ const LOCATIONS = [
   {
     id: "murandy",
     distCity: "Lugard",
-    name: "Murandy (Lugard)",
+    name: "Lugard (Murandy)",
     top: 65, left: 56.9,
     desc: "Capital of Murandy, a city kept alive by trade but known for its disorder and for how little authority the king holds beyond his own walls. A crossroads of trade routes between Andor, Illian, Altara, and Ghealdan.",
+    geography: [
+      "Lugard lies in the northwest of Murandy, between the Cumbar Hills and the River Storn."
+    ],
+    politics: [
+      "King Roedran reigns from Lugard, but in name only: the lords of Murandy do as they please on their own lands and quarrel among themselves."
+    ],
+    culture: [
+      "Murandians are proud and wary, and every village heeds its local lord more than its king."
+    ],
+    rumors: [
+      "Roedran is buying sellswords he has no way to pay."
+    ],
+    npcs: [
+      { name: "Roedran", role: "King of Murandy", type: "npc", desc: "King of Murandy, in name. He reads books on war and fancies himself a great general." }
+    ],
     knowledge: [],
   },
   {
