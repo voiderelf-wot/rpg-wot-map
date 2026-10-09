@@ -777,7 +777,7 @@ const LOCATIONS = [
     distCity: "Jehanna",
     name: "Jehannah (Ghealdan)",
     top: 60.7, left: 42.2,
-    desc: "Capital of Ghealdan, a city of grey stone on hills at the foot of the Mountains of Mist, south of the Forest of Shadows. Ruled by an old king from Mayene whom the people love.",
+    desc: "Capital of Ghealdan, a city of grey stone on hills at the foot of the Mountains of Mist, south of the Forest of Shadows. Ruled by an old king, once First of Mayene, whom the people love.",
     geography: [
       "Ghealdan is a small kingdom between the Mountains of Mist to the west, the range of Garen's Wall to the east, the Forest of Shadows to the north and Amadicia to the south.",
       "On the southern border the River Eldar separates Ghealdan from Amadicia and runs down past Samara and Boannda toward Altara.",
@@ -785,7 +785,7 @@ const LOCATIONS = [
     ],
     politics: [
       "Ghealdan was an orderly kingdom until a civil war of succession broke its army. A string of short-lived kings and queens fell without bringing order back.",
-      "An old nobleman from Mayene came with wagons of healers, food and medicine to tend the wounded. He won the gratitude of the people and of the Houses, and in the end the Houses themselves asked him to take the throne and make peace. He is King Taravangian.",
+      "The old First of Mayene came with wagons of healers, food and medicine to tend the wounded. He won the gratitude of the people and of the Houses, and in the end the Houses themselves asked him to take the throne and make peace. He is King Taravangian.",
       "The army, rebuilt after the war, is the Legion of the Wall.",
       "The Children of the Light cross the Eldar border when they please, and the king prefers yielding to fighting. Questioners move freely through Samara and Bethal."
     ],
@@ -804,7 +804,7 @@ const LOCATIONS = [
       "Closed wagons reach the hospital at night, coming from the north, and no one sees who gets out."
     ],
     npcs: [
-      { name: "Taravangian", role: "King of Ghealdan", type: "npc", desc: "Came from Mayene. Old, soft-spoken and kind-eyed. Some days he seems sharper than anyone alive; on others, a distracted grandfather." }
+      { name: "Taravangian", role: "King of Ghealdan · former First of Mayene", type: "npc", desc: "Left the throne of Mayene to aid Ghealdan in its civil war. Old, soft-spoken and kind-eyed. Some days he seems sharper than anyone alive; on others, a distracted grandfather." }
     ],
     knowledge: [],
   },
@@ -1377,7 +1377,69 @@ const LOCATIONS = [
     distCity: "Illian",
     name: "Illian",
     top: 85.3, left: 59.3,
-    desc: "One of the largest cities in the Westlands, cut through by many canals and jointly ruled by the King, the Council of Nine, and the Assemblage. Famous for hosting the Great Hunt of the Horn, in which Hunters swear to find the Horn of Valere.",
+    desc: "One of the greatest cities of the Westlands, built on islands cut by canals at the mouth of the Manetherendrelle, with the largest harbor in the known world. Ruled by the King and the Council of Nine; it is in the Square of Tammaz that hunters swear the Hunt for the Horn.",
+    geography: [
+      "On the landward side the city is ringed by a vast marsh with a single way in: the fortified Causeway of the Northern Star. That is why Illian has no wall, and why it has never fallen in battle.",
+      "The country has forests and olive groves to the west, the Doirlon Hills and their castles to the north, and marshes to the east opening onto the Plains of Maredo."
+    ],
+    politics: [
+      "King Mattin Stepaneos wears the Laurel Crown and shares power with the Council of Nine, which rules when the king cannot; king and Council have quarreled for centuries. The Assemblage has a palace of its own.",
+      "The Companions, five or six thousand men in green and yellow, are the king's elite troops; commoners and foreigners rise to officer rank.",
+      "Illian and Tear have long fought over the oil trade. Altara and Murandy fear Illian, which has taken pieces of their land before."
+    ],
+    culture: [
+      "Illianers speak in an emphatic, very particular way, and many names sound old and ceremonious.",
+      "The largest port in the known world: olive oil and trade by sea with Tear, Ebou Dar and the Aryth, and upriver to Murandy, Altara, Andor and Saldaea."
+    ],
+    places: [
+      { group: "Government", items: [
+        { name: "Square of Tammaz", desc: "The great square where hunters swear the Hunt for the Horn." },
+        { name: "King's Palace", desc: "Faces the Great Hall across the Square of Tammaz." },
+        { name: "Great Hall of the Council", desc: "Identical to the King's Palace, only two feet smaller in every dimension." },
+        { name: "Palace of the Assemblage", desc: "Seat of the Assemblage." }
+      ] },
+      { group: "Inns", items: [
+        { name: "Easing the Badger", desc: "An inn in the south of the city." },
+        { name: "The Silver Dolphin", desc: "An inn in the south of the city." }
+      ] },
+      { group: "The city", items: [
+        { name: "Bridge of Flowers", desc: "A bridge over one of the canals, south of the Square of Tammaz." },
+        { name: "Perfumed Quarter", desc: "A district on the edge of the harbor." },
+        { name: "Cemetery", desc: "The city's cemetery." },
+        { name: "Breakwater", desc: "The breakwater at the mouth of the harbor." },
+        { name: "Illian Harbour", desc: "The great bay, always full of ships." },
+        { name: "Causeway of the Northern Star", desc: "The only way in by land, across the marsh." },
+        { name: "Ferry", desc: "The crossing of the Manetherendrelle, toward Lugard and Ebou Dar." }
+      ] }
+    ],
+    subMap: {
+      title: "Illian",
+      image: "illian-final.png",
+      credit: "Map by Adam Whitehead, Atlas of Ice and Fire (2020)",
+      pins: [
+        { name: "Ferry", top: 9.8, left: 13.8, size: 4 },
+        { name: "Square of Tammaz", top: 59.5, left: 68.6, size: 5 },
+        { name: "King's Palace", top: 60.0, left: 63.2, size: 5 },
+        { name: "Great Hall of the Council", top: 55.4, left: 72.0, size: 5 },
+        { name: "Palace of the Assemblage", top: 47.9, left: 81.7, size: 5 },
+        { name: "Easing the Badger", top: 77.0, left: 51.2, size: 4 },
+        { name: "The Silver Dolphin", top: 82.1, left: 52.8, size: 4 },
+        { name: "Bridge of Flowers", top: 65.5, left: 63.0, size: 4 },
+        { name: "Breakwater", top: 88.5, left: 35.7, size: 5 },
+        { name: "Cemetery", top: 61.3, left: 52.7, size: 5 },
+        { name: "Perfumed Quarter", top: 80.1, left: 40.0, size: 6 },
+        { name: "Causeway of the Northern Star", top: 2.0, left: 77.0, size: 6 },
+        { name: "Illian Harbour", top: 56.0, left: 17.5, size: 8 }
+      ]
+    },
+    rumors: [
+      "Illianer and Tairen merchants quarrel over the price of oil even on the docks of Tar Valon.",
+      "There is talk of calling a new Hunt for the Horn in the Square of Tammaz."
+    ],
+    npcs: [
+      { name: "Mattin Stepaneos", role: "King of Illian", type: "npc", desc: "Wears the Laurel Crown." },
+      { name: "Demetre Marcolin", role: "First Captain of the Companions", type: "npc", desc: "Commander of the king's elite troops." }
+    ],
     knowledge: [],
   },
   {
@@ -1385,7 +1447,69 @@ const LOCATIONS = [
     distCity: "Tear",
     name: "Tear",
     top: 77.6, left: 71.4,
-    desc: "Great port on the Sea of Storms, dominated by the Stone of Tear — a massive fortress raised shortly after the Breaking of the World, never taken until the coming of the Dragon Reborn. Ruled by High Lords deeply averse to anything tied to the One Power.",
+    desc: "Great port on the Sea of Storms at the mouth of the Erinin, dominated by the Stone of Tear — the oldest building in the world, raised shortly after the Shattering and never taken. Ruled by the High Lords, who fear anything that comes from the One Power.",
+    geography: [
+      "South of the city, the delta of the Fingers of the Dragon is a maze of channels and marsh stretching for miles to the sea; only Tairen pilots guide ships through it. Tear is the third-largest port on the Sea of Storms, after Illian and Ebou Dar.",
+      "The Stone rises in the northwest of the city, above the river: more than three hundred feet high and over a mile deep inland, the largest enclosed space in the Westlands.",
+      "The forest of Haddon Mirk lies to the north; the Plains of Maredo, to the west."
+    ],
+    politics: [
+      "Tear has no king: the High Lords rule in council from the Stone. To this day a commoner cannot bring a noble before a magistrate.",
+      "Channeling is forbidden in Tear. Those born with the gift are sent away, and Aes Sedai are received coldly.",
+      "The Defenders of the Stone, cavalry in black and gold, guard the fortress. The lords favor horse and despise foot.",
+      "In the Heart of the Stone the High Lords guard a crystal sword that no one can touch, which they call \"the Traitor's sword\". The prophecy says: \"The Stone shall not fall until the Traitor's hand returns to claim his sword.\"",
+      "Tear has claimed Mayene for centuries, and has tried to take it by force, by spying and by blackmail."
+    ],
+    culture: [
+      "Wealth belongs to the nobility, who treat commoners as lesser folk. Nobles live in the walled center, on paved streets; the poor, in the unwalled districts of the Maule, the Chalm and the Tavar, on streets of mud. Nobles wear silk and embroidery; commoners, baggy breeches, flat-topped hats and wooden clogs.",
+      "No one remembers where the names of the Fingers of the Dragon, the Dragonwall Gate or the inn called The Dragon come from; they are older than memory.",
+      "Olive oil from the groves, grain shipped up the Erinin to Cairhien, fish and spices."
+    ],
+    places: [
+      { group: "Fortress & gates", items: [
+        { name: "Stone of Tear", desc: "Fortress of the High Lords and the Defenders, in the northwest of the city. In its Heart lies the sword no one can touch." },
+        { name: "Dragonwall Gate", desc: "Gate of the walled center, beside the Stone." },
+        { name: "Mar Haddon Gate", desc: "The northern gate of the walled center." },
+        { name: "Godan Gate", desc: "The eastern gate, on the road to Godan." }
+      ] },
+      { group: "Inns & shops", items: [
+        { name: "The White Crescent", desc: "An inn." },
+        { name: "The Golden Cup", desc: "An inn near the Godan Gate." },
+        { name: "The Star", desc: "An inn in the heart of the city." },
+        { name: "The Dragon", desc: "An inn north of the center." },
+        { name: "Ajala's Smithy", desc: "A smithy in the heart of the city." }
+      ] },
+      { group: "Districts", items: [
+        { name: "The Maule", desc: "The port district, outside the walls." },
+        { name: "The Chalm", desc: "The warehouse district, outside the walls." },
+        { name: "The Tavar", desc: "The farmers' district, outside the walls." }
+      ] }
+    ],
+    subMap: {
+      title: "Tear",
+      image: "tear-final.png",
+      credit: "Map by Adam Whitehead, Atlas of Ice and Fire (2020)",
+      pins: [
+        { name: "Stone of Tear", top: 12.2, left: 32.5, size: 10 },
+        { name: "Dragonwall Gate", top: 17.2, left: 50.6, size: 4 },
+        { name: "Godan Gate", top: 42.5, left: 85.5, size: 4 },
+        { name: "Mar Haddon Gate", top: 9.3, left: 56.6, size: 4 },
+        { name: "The White Crescent", top: 43.4, left: 33.8, size: 4 },
+        { name: "The Golden Cup", top: 42.5, left: 74.2, size: 4 },
+        { name: "The Star", top: 38.3, left: 44.8, size: 3 },
+        { name: "Ajala's Smithy", top: 38.3, left: 43.2, size: 3 },
+        { name: "The Dragon", top: 28.6, left: 54.1, size: 4 },
+        { name: "The Maule", top: 37.3, left: 7.3, size: 6 },
+        { name: "The Chalm", top: 58.9, left: 9.7, size: 6 },
+        { name: "The Tavar", top: 13.1, left: 89.1, size: 6 }
+      ]
+    },
+    rumors: [
+      "The Fingers of the Dragon pilots charge Illianer ships three times the going rate."
+    ],
+    npcs: [
+      { name: "Rodrivar Tihera", role: "Captain of the Stone", type: "npc", desc: "Commander of the Defenders of the Stone; a minor noble." }
+    ],
     knowledge: [],
   },
   {
@@ -1771,6 +1895,49 @@ const LOCATIONS = [
     name: "Stedding Qichen",
     top: 18.2, left: 90.3,
     desc: "An Ogier stedding on the slopes of the Spine of the World, in Shienar. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "mayene",
+    distCity: "Mayene",
+    name: "Mayene",
+    top: 85.5, left: 87.0,
+    desc: "A small, wealthy city-state at the tip of a peninsula on the Bay of Remara, shielded from the mainland by the Drowned Lands. It lives on oilfish oil and on a secret: where the shoals are.",
+    geography: [
+      "The Drowned Lands, a marsh no large army can cross, cut Mayene off from the mainland. It is the easternmost city of the Westlands."
+    ],
+    politics: [
+      "Mayene is ruled by its First, a title that passes to the eldest child, advised by the Seconds. The old First, Taravangian, left the city to aid Ghealdan in its civil war and ended up king there; his granddaughter Berelain now rules in his place.",
+      "Its only standing force is the Winged Guard, some two thousand men in red-painted armor; every commoner between fifteen and fifty trains in the militia."
+    ],
+    culture: [
+      "Its rulers claim descent from Artur Hawkwing; outside the city, no one takes that seriously. The city's sign is a golden hawk.",
+      "Oilfish oil, cheaper than Tairen olive oil; where the shoals lie is a state secret. Also shipyards, goldsmiths, gem-cutters, ornate swords, carpets, blown glass and the finest figs in the world. Much of its trade with Tear is smuggling."
+    ],
+    rumors: [
+      "No one in Mayene understands why the old First traded his own city for a foreign throne."
+    ],
+    npcs: [
+      { name: "Berelain sur Paendrag", role: "First of Mayene", type: "npc", desc: "Taravangian's granddaughter, heir as the eldest child of his late son. Young, beautiful and very sharp; she rules with the Seconds." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "godan",
+    distCity: "Godan",
+    name: "Godan",
+    top: 80.7, left: 83.9,
+    desc: "A Tairen city on the Bay of Remara, right across from Mayene. Tear let it grow, free of the building tax, only to keep watch on its neighbor.",
+    rumors: [
+      "The High Lords are talking again of taking Mayene, and Godan is full of soldiers."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "stedding-shangtai",
+    name: "Stedding Shangtai",
+    top: 72.3, left: 87.4,
+    desc: "An Ogier stedding in the mountains east of Tear, in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
     knowledge: [],
   },
 ];
