@@ -897,7 +897,38 @@ const LOCATIONS = [
     name: "Saldaea (Maradon)",
     top: 20.3, left: 51.3,
     desc: "Capital of Saldaea, the largest of the Borderlands, built on the banks of the River Arinelle right by the Blight. Home to the Cordamora Palace and a lively court, despite the constant threat of the Blight just to the north.",
-    knowledge: [],
+    geography: [
+      "Saldaea is the largest of the Borderlands, a little bigger than Kandor, Arafel and Shienar together. It runs from the Aryth Ocean to the Plain of Lances, with forests in the south and plains in the east; its rocky coast, World's End, has no good harbor.",
+      "Maradon stands on the Arinelle, its main gates facing north, toward the Blight. No bridge crosses the Arinelle from here down to Whitebridge."
+    ],
+    politics: [
+      "Queen Tenobia rules from the Cordamora Palace. Young and hot-tempered, she tolerates only soldiers as advisors. Her uncle, Davram Bashere, is Marshal-General and one of the finest captains on the continent.",
+      "In Saldaea the crown passes to the eldest child, man or woman, and the consort rules almost as an equal.",
+      "Saldaea fields the best light cavalry on the continent."
+    ],
+    culture: [
+      "A warrior people who rarely fight among themselves. The cities have wide avenues and streets lit all night long, so that no shadow is left for a Myrddraal to walk in.",
+      "Trolloc raids come more often and with more order than before, and the Blight seems to creep a little further south every year. The old folk say it was never like this.",
+      "Saldaean men wear long mustaches; the women have bold noses, tilted eyes and a famous temper, and often ride with their husbands on campaign. Everyone carries at least a knife, and steel leaves its sheath only to be used. The man asks for marriage, after a long courtship.",
+      "Furs, timber, iron and worked steel; diamond and silver mines. Saldaea holds the monopoly on ice peppers."
+    ],
+    places: [
+      { group: "Notable places", items: [
+        { name: "Cordamora Palace", desc: "Seat of Saldaea's rulers, just inside the main gates." },
+        { name: "The towers", desc: "Towers from which, they say, the Blight can be seen on a clear day." },
+        { name: "The court", desc: "A lively court of balls and promenades, Blight or no Blight." }
+      ] }
+    ],
+    rumors: [
+      "The old border stones already stand inside the Blight."
+    ],
+    npcs: [
+      { name: "Tenobia", role: "Queen of Saldaea", type: "npc", desc: "Young and handsome, with a bold nose and blue eyes so dark they look violet; a difficult temper and exacting standards for a husband." },
+      { name: "Davram Bashere", role: "Marshal-General of Saldaea", type: "npc", desc: "The queen's uncle. Slender, hook-nosed, with a thick mustache; one of the great captains of the continent." }
+    ],
+    knowledge: [
+      { who: "Party", tag: "Serenya", pc: false, visibleTo: ["Maeri", "Uthar", "Dongo", "Aynara"], text: "Serenya Taravin, the Aes Sedai who hired the group, is from Saldaea — which helps explain her direct, practical manner." },
+    ],
   },
   {
     id: "andor",
@@ -1192,6 +1223,15 @@ const LOCATIONS = [
     name: "Malkier",
     top: 17.0, left: 79.4,
     desc: "The lost kingdom of the Seven Towers, swallowed by the Blight in 955 NE. Its ruins lie at the very edge of the Blight, west of Tarwin's Gap.",
+    geography: [
+      "Malkier lay north of Shienar, on lakeshores at the foot of the Mountains of Dhoom. Today the lakes are poisoned by the Blight."
+    ],
+    politics: [
+      "Malkier fell in 955 NE: traitor nobles stripped the border forts, and the Shadowspawn broke through. King al'Akir died with his kingdom, and no heir survived. Shienar and Arafel, with Kandor's help, only stopped the invasion at the Stair of Jehaan."
+    ],
+    culture: [
+      "Malkieri men wore the hadori, a braided leather cord around the brow (the women, the ki'sain). They were warriors, but they prized music, dance and poetry. The kingdom's sign was the Golden Crane."
+    ],
     rumors: [
       "They say someone is rebuilding the Seven Towers, and that Shadowspawn cannot come near."
     ],
@@ -1385,6 +1425,352 @@ const LOCATIONS = [
     name: "Arafel (Shol Arbela)",
     top: 21, left: 71.6,
     desc: "Capital of Arafel, known as the City of Ten Thousand Bells for the local custom of braiding bells into one's hair. One of the few great Westlands cities not built by the Ogier.",
+    geography: [
+      "Arafel runs from Kandor to the River Mora, which separates it from Shienar. Roads link Shol Arbela to Chachin, to Fal Moran and to Tar Valon."
+    ],
+    politics: [
+      "King Paitar Nachiman, old, steady and hard to shake, is close to the White Tower: one of his sisters is Aes Sedai."
+    ],
+    culture: [
+      "A warrior people who rarely fight among themselves. The cities have wide avenues and streets lit all night long, so that no shadow is left for a Myrddraal to walk in.",
+      "Trolloc raids come more often and with more order than before, and the Blight seems to creep a little further south every year. The old folk say it was never like this.",
+      "Arafellin braid little bells into their hair. They are a hot-blooded people with their own notions of honor and debt: asking for a punishment to clear one's honor is nothing unusual.",
+      "Medicinal herbs that grow only near the Blight, and the trade of the roads down to Tar Valon."
+    ],
+    rumors: [
+      "King Paitar sends riders to Tar Valon more often than ever."
+    ],
+    npcs: [
+      { name: "Paitar Nachiman", role: "King of Arafel", type: "npc", desc: "Tall and nearly bald, still strong despite his age; calm and steady." }
+    ],
+    knowledge: [
+      { who: "Party", tag: "Jarem", pc: false, visibleTo: ["Maeri", "Uthar", "Dongo", "Aynara"], text: "Jarem al'Caar, Serenya's Warder, is from Arafel and once served one of its noble Houses." },
+    ],
+  },
+  {
+    id: "kandor",
+    distCity: "Chachin",
+    name: "Kandor (Chachin)",
+    top: 21.4, left: 61.9,
+    desc: "Capital of Kandor, a mountain city of three ringwalls and twenty-four guarded bridges, crowned by the Aesdaishar Palace. Seat of the Throne of the Clouds and of Kandor's powerful merchants' guild.",
+    geography: [
+      "Kandor runs from the Plain of Lances in the west to Arafel in the east, with the Blight to the north.",
+      "Chachin is built around several hills, with three tall mountains at its heart. The air is thin, and outsiders feel dizzy for the first few days."
+    ],
+    politics: [
+      "Queen Ethenielle sits the Throne of the Clouds in the Aesdaishar Palace. A Crown Council of twelve, half of them commoners, advises her but cannot bind her."
+    ],
+    culture: [
+      "A warrior people who rarely fight among themselves. The cities have wide avenues and streets lit all night long, so that no shadow is left for a Myrddraal to walk in.",
+      "Trolloc raids come more often and with more order than before, and the Blight seems to creep a little further south every year. The old folk say it was never like this.",
+      "Kandori are the touchiest of the Borderlanders, with very precise rules for dueling. Here it is the woman who asks for marriage. Master merchants wear three silver chains across the chest.",
+      "Sapphires, emeralds, rubies, timber and fox furs. Chachin is home to Kandor's powerful merchants' guild — the same one that keeps a hall in Tar Valon."
+    ],
+    places: [
+      { group: "Notable places", items: [
+        { name: "Aesdaishar Palace", desc: "On the summit of the highest mountain, more than five thousand feet above the city." },
+        { name: "Walls & bridges", desc: "Three ringwalls and a hundred-foot dry moat, crossed by twenty-four bridges, each guarded by a small fortress. The Bridge of Sunrise is on the east side." }
+      ] },
+      { group: "Inns", items: [
+        { name: "Silver Penny", desc: "An inn in Chachin." },
+        { name: "Ruffled Goose", desc: "An inn in Chachin." },
+        { name: "Evening Star", desc: "An inn in Chachin." },
+        { name: "Blind Pig", desc: "An inn in Chachin." }
+      ] }
+    ],
+    rumors: [
+      "Kandori merchants are charging double for horses and steel, because everyone in the north is arming."
+    ],
+    npcs: [
+      { name: "Ethenielle", role: "Queen of Kandor", type: "npc", desc: "Plump, with black hair lightly dusted with grey and blue eyes." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "canluum",
+    name: "Canluum",
+    top: 23.0, left: 66.9,
+    desc: "A wealthy Kandori city on the main road to Chachin, near the Arafel border, grown rich on the gems of its hills. Its walls have never been breached.",
+    places: [
+      { group: "Notable places", items: [
+        { name: "Walls & moat", desc: "A thick wall and a dry moat crossed by five stone bridges. The city has never been taken." },
+        { name: "Stag's Stand", desc: "The largest hill, crowned by the fortress-palace of the city's lord." },
+        { name: "The Deeps", desc: "A warren of narrow streets, small inns and cutpurses along the north wall." }
+      ] },
+      { group: "Inns", items: [
+        { name: "The Gates of Heaven", desc: "For nobles and wealthy merchants." },
+        { name: "The Blue Rose", desc: "In the Deeps." }
+      ] }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "shienar",
+    distCity: "Fal Moran",
+    name: "Shienar (Fal Moran)",
+    top: 21.9, left: 80.9,
+    desc: "Capital of Shienar, the easternmost of the Borderlands, and seat of King Easar Togita. A kingdom of keeps and heavy cavalry, standing between the Blight and the Erinin.",
+    geography: [
+      "Shienar runs from the River Mora to the Spine of the World, and from the Blight down to the Erinin."
+    ],
+    politics: [
+      "King Easar Togita reigns from Fal Moran. When the king is at war, the queen governs.",
+      "Shienar fields the most heavily armored cavalry of the Borderlands."
+    ],
+    culture: [
+      "A warrior people who rarely fight among themselves. The cities have wide avenues and streets lit all night long, so that no shadow is left for a Myrddraal to walk in.",
+      "Trolloc raids come more often and with more order than before, and the Blight seems to creep a little further south every year. The old folk say it was never like this.",
+      "Shienaran warriors shave their heads but for a topknot. Keeps have separate quarters for men and women; the baths are shared, but being half-dressed anywhere else is poor manners. The greeting: \"Peace favor your sword.\"",
+      "Gold, silver and gemstones; Shienar is the largest source of firedrops. It exports timber and furs."
+    ],
+    places: [
+      { group: "Notable places", items: [
+        { name: "The king's keep", desc: "Seat of the throne of Shienar." }
+      ] }
+    ],
+    npcs: [
+      { name: "Easar Togita", role: "King of Shienar", type: "npc", desc: "Short, with a white topknot; he recites poetry, but he is a hard man." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "fal-dara",
+    distCity: "Fal Dara",
+    name: "Fal Dara",
+    top: 19.8, left: 81.9,
+    desc: "The northernmost city of Shienar and its last great bulwark against the Blight, a small but fiercely defended fortress city guarding the road to Tarwin's Gap.",
+    geography: [
+      "Fal Dara is Shienar's northernmost city. The edge of the Blight lies only hours away on horseback, and to the northeast opens Tarwin's Gap, the pass between the Mountains of Dhoom and the Spine of the World."
+    ],
+    politics: [
+      "Agelmar Jagad, Lord of Fal Dara, is King Easar's general.",
+      "In 998 a Shadowspawn army came down through Tarwin's Gap. Agelmar met it with far fewer men and won, but Shienar still counts the dead of that day."
+    ],
+    places: [
+      { group: "Notable places", items: [
+        { name: "The keep", desc: "A fortress on the hilltop, with a dry moat full of spikes and a second, towered wall." },
+        { name: "Gates", desc: "East Gate · King's Gate · Malkier Gate." },
+        { name: "The town", desc: "Houses with steep roofs running almost to the ground, against the snow. It was raised on the ruins of Mafal Dadaranell, an ancient capital razed in the Trolloc Wars." }
+      ] }
+    ],
+    rumors: [
+      "The Trollocs are coming in bigger bands and with more order than anyone old can remember.",
+      "Thirteen Red sisters passed through here heading north, without telling anyone what they hunt.",
+      "A man who channels is gathering followers near Tarwin's Gap, and those who fight beside him say they never felt such a hunger for battle."
+    ],
+    npcs: [
+      { name: "Agelmar Jagad", role: "Lord of Fal Dara · General of Shienar", type: "npc", desc: "King Easar's general, and the victor of Tarwin's Gap in 998." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "mehar",
+    name: "Mehar",
+    top: 22.7, left: 49.1,
+    desc: "A village on the road running south from Maradon.",
+    knowledge: [],
+  },
+  {
+    id: "bashere",
+    name: "Bashere",
+    top: 24.8, left: 48.7,
+    desc: "Town of House Bashere, the Marshal-General's family.",
+    knowledge: [],
+  },
+  {
+    id: "tyr",
+    name: "Tyr",
+    top: 26.0, left: 48.3,
+    desc: "A village in southern Saldaea, at the edge of the forests.",
+    knowledge: [],
+  },
+  {
+    id: "sidona",
+    name: "Sidona",
+    top: 25.0, left: 50.9,
+    desc: "A village on the Arinelle, south of Maradon.",
+    knowledge: [],
+  },
+  {
+    id: "irinjavar",
+    name: "Irinjavar",
+    top: 23.1, left: 54.5,
+    desc: "A village on the Maradon–Chachin road, at the edge of the Plain of Lances.",
+    knowledge: [],
+  },
+  {
+    id: "kayacun",
+    name: "Kayacun",
+    top: 28.2, left: 42.1,
+    desc: "A village near World's End, Saldaea's rocky coast without a harbor.",
+    knowledge: [],
+  },
+  {
+    id: "berndt-crossroads",
+    name: "Berndt Crossroads",
+    top: 21.8, left: 58.9,
+    desc: "A crossroads on the Maradon–Chachin road, where the way to South Mettler branches off.",
+    knowledge: [],
+  },
+  {
+    id: "ravinda",
+    name: "Ravinda",
+    top: 22.4, left: 64.6,
+    desc: "A village on the Chachin–Canluum road.",
+    knowledge: [],
+  },
+  {
+    id: "manala",
+    name: "Manala",
+    top: 22.8, left: 65.5,
+    desc: "A village on the Chachin–Canluum road.",
+    knowledge: [],
+  },
+  {
+    id: "south-hill",
+    name: "South Hill",
+    top: 23.4, left: 64.9,
+    desc: "A village in the hills south of the Canluum road.",
+    knowledge: [],
+  },
+  {
+    id: "denhuir",
+    name: "Denhuir",
+    top: 27.2, left: 60.1,
+    desc: "A town in southern Kandor, on the road down to Tar Valon.",
+    knowledge: [],
+  },
+  {
+    id: "jakanda",
+    name: "Jakanda",
+    top: 20.8, left: 74.6,
+    desc: "A village on the Shol Arbela–Fal Moran road.",
+    knowledge: [],
+  },
+  {
+    id: "silverwall-keeps",
+    name: "Silverwall Keeps",
+    top: 24.2, left: 69.0,
+    desc: "Forts guarding the Birchon Pass, on the border with Kandor.",
+    knowledge: [],
+  },
+  {
+    id: "tifans-well",
+    name: "Tifan's Well",
+    top: 26.4, left: 69.7,
+    desc: "A village in southern Arafel, where the roads go down toward the Erinin.",
+    knowledge: [],
+  },
+  {
+    id: "gorien-springs",
+    name: "Gorien Springs",
+    top: 28.3, left: 71.2,
+    desc: "A village at the southern edge of Arafel.",
+    knowledge: [],
+  },
+  {
+    id: "fal-eisen",
+    name: "Fal Eisen",
+    top: 21.2, left: 77.9,
+    desc: "A fort on the River Mora, on the border with Arafel.",
+    knowledge: [],
+  },
+  {
+    id: "medo",
+    name: "Medo",
+    top: 20.4, left: 79.9,
+    desc: "A village between Fal Eisen and Fal Dara.",
+    knowledge: [],
+  },
+  {
+    id: "fal-sion",
+    name: "Fal Sion",
+    top: 21.4, left: 84.7,
+    desc: "A fort east of Fal Moran.",
+    knowledge: [],
+  },
+  {
+    id: "mos-shirare",
+    name: "Mos Shirare",
+    top: 21.7, left: 85.2,
+    desc: "A town east of Fal Moran.",
+    knowledge: [],
+  },
+  {
+    id: "camron-caan",
+    name: "Camron Caan",
+    top: 21.1, left: 86.6,
+    desc: "A fort on the slopes of the Spine of the World.",
+    knowledge: [],
+  },
+  {
+    id: "ankor-dail",
+    name: "Ankor Dail",
+    top: 24.1, left: 86.4,
+    desc: "A fort at the foot of the Niamh Passes.",
+    knowledge: [],
+  },
+  {
+    id: "mallards-hill",
+    name: "Mallard's Hill",
+    top: 24.8, left: 83.6,
+    desc: "A village in southern Shienar.",
+    knowledge: [],
+  },
+  {
+    id: "oak-water",
+    name: "Oak Water",
+    top: 25.3, left: 84.0,
+    desc: "A village on the Erinin, in southern Shienar.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-saishen",
+    name: "Stedding Saishen",
+    top: 27.7, left: 51.6,
+    desc: "An Ogier stedding in the forests of southern Saldaea. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-chiantal",
+    name: "Stedding Chiantal",
+    top: 26.6, left: 63.5,
+    desc: "An Ogier stedding in southern Kandor. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-shanjing",
+    name: "Stedding Shanjing",
+    top: 18.8, left: 75.4,
+    desc: "An Ogier stedding in Arafel. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-tanhal",
+    name: "Stedding Tanhal",
+    top: 22.7, left: 75.3,
+    desc: "An Ogier stedding in Arafel. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-sholoon",
+    name: "Stedding Sholoon",
+    top: 24.8, left: 72.7,
+    desc: "An Ogier stedding in Arafel. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-sanshen",
+    name: "Stedding Sanshen",
+    top: 19.3, left: 88.6,
+    desc: "An Ogier stedding on the slopes of the Spine of the World, in Shienar. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-qichen",
+    name: "Stedding Qichen",
+    top: 18.2, left: 90.3,
+    desc: "An Ogier stedding on the slopes of the Spine of the World, in Shienar. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
     knowledge: [],
   },
 ];
