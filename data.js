@@ -2089,4 +2089,130 @@ const LOCATIONS = [
     desc: "An Ogier stedding in the mountains of the Shadow Coast. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
     knowledge: [],
   },
+  {
+    id: "arad-doman",
+    distCity: "Bandar Eban",
+    name: "Arad Doman (Bandar Eban)",
+    top: 37.4, left: 26.4,
+    desc: "Capital and chief port of Arad Doman, at the mouth of the River Dhagon. A city of merchants, where the king is elected by the Council of Merchants and the councillors' houses are grander than the king's palace.",
+    geography: [
+      "Arad Doman lies between the Mountains of Mist and the Aryth Ocean. To the south, the Almoth Plain separates it from Tarabon.",
+      "The city runs down a gentle slope to the harbor, its widest part. The wealthy live on the heights to the east; the streets are packed earth with wooden boardwalks, and nearly every building flies a banner."
+    ],
+    politics: [
+      "Arad Doman is an absolute monarchy, but its king is elected by the Council of Merchants, made up almost entirely of women; the throne is never inherited. Alsalam Saeed Almadar reigns today.",
+      "The standing army, ten to fifteen thousand men, is commanded by Rodel Ituralde, one of the greatest captains on the continent.",
+      "For some three hundred years Arad Doman has disputed the Almoth Plain with Tarabon. The kingdom is stable, and that is its only war."
+    ],
+    culture: [
+      "Domani women wear thin, clinging dresses that would scandalize almost any other country; seduction is treated as an art and taught from an early age.",
+      "Nearly all merchants are women, and few men can out-bargain them; they say losing is worth it for the experience.",
+      "Food comes in thin slivers of meat and vegetables, eaten with wooden sticks. The kingdom's sign is the Sword and Hand.",
+      "Heavy trade with the Sea Folk, bargaining as equals. Domani horses, above all the razors, are much coveted and almost never sold to outlanders."
+    ],
+    places: [
+      { group: "Notable places", items: [
+        { name: "King's Palace", desc: "Less imposing than the houses of the Council of Merchants." },
+        { name: "Chadmar Mansion", desc: "One of the grandest mansions in the city, belonging to a Council family." },
+        { name: "Arandi Square", desc: "A square with fountains of copper horses." },
+        { name: "Terhana Library", desc: "One of the finest libraries in the world." },
+        { name: "Gull's Feast", desc: "The fishermen's dock, built over the ruins of Allorallen, an ancient city." }
+      ] }
+    ],
+    rumors: [
+      "The Council of Merchants is divided over spending more on the war for the Almoth Plain.",
+      "The Terhana Library holds copies of books not even the White Tower has."
+    ],
+    npcs: [
+      { name: "Alsalam Saeed Almadar", role: "King of Arad Doman", type: "npc", desc: "Elected by the Council of Merchants." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "katar",
+    distCity: "Katar",
+    name: "Katar",
+    top: 44.3, left: 37.7,
+    desc: "Arad Doman's second city, near Lake Somal at the foot of the Mountains of Mist. Far from the capital, its lords act almost on their own.",
+    knowledge: [],
+  },
+  {
+    id: "solanje",
+    name: "Solanje",
+    top: 37.4, left: 32.9,
+    desc: "A town in the Dhagon valley, east of the capital.",
+    knowledge: [],
+  },
+  {
+    id: "coron-ford",
+    name: "Coron Ford",
+    top: 41.8, left: 33.4,
+    desc: "A village at the ford of the River Akuum.",
+    knowledge: [],
+  },
+  {
+    id: "darluna",
+    name: "Darluna",
+    top: 42.3, left: 29.9,
+    desc: "A village in southern Arad Doman, near the coast.",
+    knowledge: [],
+  },
+  {
+    id: "kandelmar",
+    name: "Kandelmar",
+    top: 44.6, left: 32.3,
+    desc: "A village at the northern edge of the Almoth Plain, the last in Arad Doman before the disputed lands.",
+    rumors: [
+      "Ituralde has ordered Kandelmar reinforced; they say he expects a Taraboner attack before summer."
+    ],
+    npcs: [
+      { name: "Rodel Ituralde", role: "Great Captain of Arad Doman", type: "npc", desc: "Commands the army on the Almoth Plain frontier. Short, with a trimmed beard and a calm gaze." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "natrins-barrow",
+    name: "Natrin's Barrow",
+    top: 40.3, left: 39.5,
+    desc: "An old fortress-mansion in the Mountains of Mist. No one knows for certain who lives there.",
+    rumors: [
+      "No one knows who lives at Natrin's Barrow, but wagons go up the road full and come down empty."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "stedding-mintai",
+    name: "Stedding Mintai",
+    top: 36.4, left: 35.1,
+    desc: "An Ogier stedding in the Mountains of Mist. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-wenchen",
+    name: "Stedding Wenchen",
+    top: 36.1, left: 38.8,
+    desc: "An Ogier stedding in the Mountains of Mist. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-tsofan",
+    name: "Stedding Tsofan",
+    top: 38.9, left: 39.4,
+    desc: "An Ogier stedding in the Mountains of Mist. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-chinden",
+    name: "Stedding Chinden",
+    top: 33.1, left: 40.7,
+    desc: "An Ogier stedding in the Mountains of Mist. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-sendar",
+    name: "Stedding Sendar",
+    top: 40.5, left: 41.7,
+    desc: "An Ogier stedding in the Mountains of Mist. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
 ];
