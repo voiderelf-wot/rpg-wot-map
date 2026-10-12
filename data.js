@@ -1540,7 +1540,36 @@ const LOCATIONS = [
     distCity: "Tanchico",
     name: "Tarabon (Tanchico)",
     top: 62.5, left: 25.9,
-    desc: "Former capital of Tarabon, built across three peninsulas on Tanchico Bay. Home to the Panarch's Palace — parts of which date back to the Age of Legends itself — now weakened by civil war and the growing Seanchan presence.",
+    desc: "Capital of Tarabon and one of the oldest cities in the world, spread across three peninsulas around Tanchico Bay. Home to the Panarch's Palace, parts of which may date back to the Age of Legends. Ruled jointly by a King and a Panarch.",
+    geography: [
+      "The city climbs steep hills around Tanchico Bay, where the River Andahar meets the sea. It covers three peninsulas: Verana to the east, Maseta in the middle and Calpene, nearest the sea. A dozen fortresses guard the bay.",
+      "To the south, the mountainous Shadow Coast runs down to Amadicia; to the east, mountains form the border with Amadicia."
+    ],
+    politics: [
+      "Tarabon is ruled jointly by a King and a Panarch. The Panarch, elected by the Council of Lords, collects the taxes, runs the lower courts and commands the Watch and the Panarch's Legion. The King runs the High Courts, spends the taxes and commands the Army.",
+      "Tarabon is a strong and orderly kingdom. Its only war is the old quarrel with Arad Doman over the Almoth Plain."
+    ],
+    culture: [
+      "Taraboner men wear thick mustaches with thin veils over them; the women wear sheer veils and their hair in many fine braids.",
+      "The Panarch's Palace holds a frieze of animals no living person has seen, their skeletons, and a great collection of ancient artifacts. Commoners and nobles may visit three days a month and on feastdays.",
+      "Three arenas: the Panarch's Circle, on Verana; the King's Circle, on Maseta, the largest; and the Great Circle, on Calpene, the smallest, where thousands watch horse races and the Illuminators' displays.",
+      "Tanchico is the port of the Aryth and of trade with the Sea Folk."
+    ],
+    places: [
+      { group: "Notable places", items: [
+        { name: "Panarch's Palace", desc: "On Verana. Parts of it may date to the Age of Legends; it houses a great collection of ancient artifacts." },
+        { name: "Panarch's Circle", desc: "Arena on Verana." },
+        { name: "King's Circle", desc: "Arena on Maseta, the largest of the three." },
+        { name: "Great Circle", desc: "Arena on Calpene, the smallest, for horse races and Illuminators' displays." }
+      ] }
+    ],
+    rumors: [
+      "The Panarch is buying antiquities from anyone who brings them."
+    ],
+    npcs: [
+      { name: "Andric", role: "King of Tarabon", type: "npc", desc: "Commands the Army and the High Courts." },
+      { name: "Amathera", role: "Panarch of Tarabon", type: "npc", desc: "Commands the Watch and the Panarch's Legion." }
+    ],
     knowledge: [],
   },
   {
@@ -1938,6 +1967,126 @@ const LOCATIONS = [
     name: "Stedding Shangtai",
     top: 72.3, left: 87.4,
     desc: "An Ogier stedding in the mountains east of Tear, in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "falme",
+    distCity: "Falme",
+    name: "Falme",
+    top: 51.6, left: 22.9,
+    desc: "The largest town on Toman Head, at the tip of the peninsula: an unwalled harbor town of dark stone streets and houses climbing the cliffs. Home to the Watchers Over the Waves, who wait for the return of Artur Hawkwing's armies.",
+    geography: [
+      "Toman Head is a peninsula of hills and forests between Tarabon and Arad Doman. Falme has some twenty-five thousand people and was built on the site of an ancient city, Miereallen.",
+      "East of Toman Head stretches the Almoth Plain, as far as the Paerish Swar and the Darkwood."
+    ],
+    politics: [
+      "Tarabon and Arad Doman have disputed the Almoth Plain and Toman Head for some three hundred years, since the nation of Almoth ceased to exist. There is no central government: each town and village has a mayor and a council, and the border skirmishes never quite stop.",
+      "Patrols of the Children of the Light ride the Almoth Plain, and neither kingdom has the strength to send them away."
+    ],
+    culture: [
+      "Many on Toman Head believe that Artur Hawkwing's armies, sent across the Aryth, will one day return. The Watchers Over the Waves keep a tower on the cliff above the harbor to wait for them.",
+      "Falme lives on fishing and on the wagons that come in from the Almoth Plain."
+    ],
+    places: [
+      { group: "Harbor", items: [
+        { name: "The Watchers Over the Waves", desc: "The Watchers' tower, on the cliff above the harbor." },
+        { name: "Falme Harbour", desc: "The harbor, ringed by cliffs." },
+        { name: "Warehouse District", desc: "Warehouses along the harbor." },
+        { name: "Trade District", desc: "The merchants' quarter by the harbor." },
+        { name: "Craftsman District", desc: "The craftsmen's quarter." }
+      ] },
+      { group: "Inns", items: [
+        { name: "The Three Plum Blossoms", desc: "An inn near the harbor." },
+        { name: "The Wind Song Inn", desc: "An inn near the harbor." }
+      ] },
+      { group: "Town", items: [
+        { name: "Marketplace", desc: "The market, at the heart of the town." },
+        { name: "Upscale Residential Areas", desc: "The wealthier houses, to the east." },
+        { name: "Residential Areas", desc: "The town's houses." },
+        { name: "Wagon Yards", desc: "Where the wagons from the Almoth Plain come in, to the south." }
+      ] }
+    ],
+    subMap: {
+      title: "Falme",
+      image: "falme.png",
+      credit: "Map by Adam Whitehead, Atlas of Ice and Fire (2020)",
+      pins: [
+        { name: "The Watchers Over the Waves", top: 21.3, left: 40.7, size: 5 },
+        { name: "Falme Harbour", top: 35.3, left: 47.8, size: 8 },
+        { name: "Warehouse District", top: 45.9, left: 31.1, size: 5 },
+        { name: "The Three Plum Blossoms", top: 50.0, left: 38.5, size: 4 },
+        { name: "Trade District", top: 53.3, left: 46.3, size: 5 },
+        { name: "The Wind Song Inn", top: 54.9, left: 42.8, size: 4 },
+        { name: "Craftsman District", top: 56.2, left: 31.5, size: 5 },
+        { name: "Marketplace", top: 68.9, left: 46.9, size: 4 },
+        { name: "Upscale Residential Areas", top: 70.5, left: 57.9, size: 6 },
+        { name: "Residential Areas", top: 77.0, left: 32.9, size: 6 },
+        { name: "Wagon Yards", top: 87.3, left: 57.8, size: 5 }
+      ]
+    },
+    rumors: [
+      "The Watchers swear they saw huge sails on the horizon, bigger than any ship, and no one believed them.",
+      "Skirmishes between Taraboners and Domani have returned to the Almoth Plain with the end of winter."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "atuans-mill",
+    name: "Atuan's Mill",
+    top: 49.8, left: 26.6,
+    desc: "A mill village on the south coast of Toman Head.",
+    knowledge: [],
+  },
+  {
+    id: "tobins-hollow",
+    name: "Tobin's Hollow",
+    top: 47.2, left: 28.6,
+    desc: "A village of Toman Head, on the road from Falme to the Almoth Plain.",
+    knowledge: [],
+  },
+  {
+    id: "aturos-orchard",
+    name: "Aturo's Orchard",
+    top: 46.2, left: 30.6,
+    desc: "An orchard village at the edge of the Almoth Plain.",
+    rumors: [
+      "Whitecloak patrols ride the Almoth Plain asking after \"witches\"."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "maracru",
+    name: "Maracru",
+    top: 59.2, left: 32.7,
+    desc: "A town in the valley east of Tanchico.",
+    knowledge: [],
+  },
+  {
+    id: "alcruna",
+    name: "Alcruna",
+    top: 57.5, left: 35.2,
+    desc: "A village in the mountains near the border with Amadicia.",
+    knowledge: [],
+  },
+  {
+    id: "elmora",
+    name: "Elmora",
+    top: 65.7, left: 32.6,
+    desc: "A town on the road down from Tanchico to Amadicia.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-madan",
+    name: "Stedding Madan",
+    top: 55.6, left: 36.5,
+    desc: "An Ogier stedding in the mountains on the border with Amadicia. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-shadoon",
+    name: "Stedding Shadoon",
+    top: 72.1, left: 33.2,
+    desc: "An Ogier stedding in the mountains of the Shadow Coast. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
     knowledge: [],
   },
 ];
