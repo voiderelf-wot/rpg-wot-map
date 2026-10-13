@@ -1163,6 +1163,35 @@ const LOCATIONS = [
     knowledge: [],
   },
   {
+    id: "tower-of-ghenjei",
+    name: "Tower of Ghenjei",
+    top: 49.9, left: 49.5,
+    desc: "A metal tower with no door or window, some two hundred feet tall, on the bank of the Arinelle north of Whitebridge. No one knows who built it.",
+    geography: [
+      "Stands on the bank of the Arinelle, about ten days upriver from Whitebridge by boat, in a nearly empty stretch of western Andor.",
+      "The metal shows no rust and no mark of age; it always looks freshly polished."
+    ],
+    politics: [
+      "It stands on Andoran land, but no lord claims it and no garrison watches it."
+    ],
+    culture: [
+      "Arinelle boatmen use the tower as a marker to reckon their journey. No one ties up a boat near it."
+    ],
+    rumors: [
+      "They say the tower has a door, but only for those who know how to ask. Whoever goes in never comes back, or comes back changed.",
+      "Boatmen swear that on certain nights a red light shows through cracks the tower does not have.",
+      "An old children's game, Snakes and Foxes, was supposedly invented by someone who came out of there."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "shadar-logoth",
+    name: "Shadar Logoth",
+    top: 47.9, left: 45.6,
+    desc: "The ruins of a city that died in the time of the Trolloc Wars, east of Baerlon near the Arinelle. Its name means \"Where the Shadow Waits\". No one goes in, and those who camp nearby leave before dark.",
+    knowledge: [],
+  },
+  {
     id: "baerlon",
     distCity: "Baerlon",
     name: "Baerlon",
