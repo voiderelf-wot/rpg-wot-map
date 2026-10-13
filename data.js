@@ -2215,4 +2215,187 @@ const LOCATIONS = [
     desc: "An Ogier stedding in the Mountains of Mist. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
     knowledge: [],
   },
+  {
+    id: "jangai-pass",
+    distCity: "Jangai Pass",
+    name: "Jangai Pass",
+    top: 39.5, left: 89.0,
+    desc: "The great pass through the Spine of the World between Cairhien and the Aiel Waste. Before the Aiel War, Cairhien's caravans followed it all the way to Shara; today almost only peddlers cross it.",
+    geography: [
+      "Rhuidean lies thirteen or fourteen days' hard march from the Jangai Pass."
+    ],
+    politics: [
+      "Since the Aiel War (976–978), almost no Aiel have crossed the Spine again."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "taien",
+    name: "Taien",
+    top: 39.1, left: 90.8,
+    desc: "A small walled Cairhienin town at the eastern end of the Jangai Pass, at the foot of a huge rock the locals call the \"cliff snake\". The last town before the Waste.",
+    rumors: [
+      "Taien's guards have doubled the watch on the wall since last winter."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "selean",
+    name: "Selean",
+    top: 40.0, left: 86.6,
+    desc: "A Cairhienin village at the western mouth of the Jangai Pass.",
+    knowledge: [],
+  },
+  {
+    id: "eianrod",
+    name: "Eianrod",
+    top: 44.5, left: 80.7,
+    desc: "A Cairhienin town on the east road, halfway between the capital and the Jangai Pass.",
+    knowledge: [],
+  },
+  {
+    id: "rhuidean",
+    name: "Rhuidean",
+    top: 43.8, left: 95.6,
+    desc: "The only city of the Aiel Waste, larger than Tar Valon and empty. They say only clan chiefs and Wise Ones may enter, and that they come back changed. It lies at the foot of Chaendaer.",
+    geography: [
+      "The Aiel Waste, which the Aiel call the Three-fold Land, lies between the Spine of the World to the west, the Cliffs of Dawn and the Great Rift to the east, the Termool to the south and the Mountains of Dhoom to the north.",
+      "It is mostly cracked clay and stony ground, with dry gullies, fissures, cliffs and spires of rock. Searing by day and freezing by night; only the Aiel know how to find water."
+    ],
+    politics: [
+      "The Aiel are divided into twelve clans (Taardad, Shaido, Nakai, Goshien, Chareen, Tomanelle, Shaarad, Reyn, Miagoma, Daryne, Codarra and Shiande), and each clan into septs; every sept can call at least a thousand spears. Each settlement, a hold, is kept by a Roofmistress."
+    ],
+    culture: [
+      "The Aiel call the Waste the Three-fold Land: a shaping stone, a testing ground, and the punishment for an ancient sin they can no longer name.",
+      "Outsiders are not welcome. The exceptions are gleemen, the Tuatha'an and honest peddlers; peddlers are respected because they trade in water and are the only source of books in the Waste.",
+      "The Aiel live by ji'e'toh, a code of honor and obligation. They veil their faces before they kill. The Maidens of the Spear are warriors, and the Wise Ones guide the clans.",
+      "Trollocs call the Waste Djevik K'Shar, the Dying Ground. Artur Hawkwing sent armies to dig the Aiel out of it and suffered the only great defeats of his reign."
+    ],
+    rumors: [
+      "A peddler swears he saw the glass towers of Rhuidean shining from afar on a moonless night."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "cold-rocks-hold",
+    name: "Cold Rocks Hold",
+    top: 37.5, left: 96.9,
+    desc: "An Aiel hold of the Taardad clan, in the Waste.",
+    knowledge: [],
+  },
+  {
+    id: "alcair-dal",
+    name: "Alcair Dal",
+    top: 31.9, left: 95.6,
+    desc: "A bowl-shaped canyon where the Aiel clans gather; there the truce holds even between enemies.",
+    knowledge: [],
+  },
+  {
+    id: "imre-stand",
+    name: "Imre Stand",
+    top: 47.7, left: 95.5,
+    desc: "A watering hole in Taardad lands, a day from Rhuidean.",
+    knowledge: [],
+  },
+  {
+    id: "harad-dakar",
+    name: "Harad Dakar",
+    top: 31.7, left: 80.8,
+    desc: "Ruins of the old capital of Hardan, between Kinslayer's Dagger and the Erinin, on Shienar's southern border. Abandoned three centuries ago; settlers carted off its stones, and almost nothing is left.",
+    rumors: [
+      "At the ruins of Harad Dakar, the settlers won't take the last stones; they say they bring bad luck."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "stedding-nurshang",
+    name: "Stedding Nurshang",
+    top: 28.8, left: 80.9,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-handu",
+    name: "Stedding Handu",
+    top: 26.4, left: 86.5,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-chanti",
+    name: "Stedding Chanti",
+    top: 29.8, left: 86.7,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-lantoine",
+    name: "Stedding Lantoine",
+    top: 31.9, left: 86.4,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-yontiang",
+    name: "Stedding Yontiang",
+    top: 37.0, left: 85.3,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-yongen",
+    name: "Stedding Yongen",
+    top: 35.8, left: 88.3,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-mashong",
+    name: "Stedding Mashong",
+    top: 43.4, left: 85.1,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-sintiang",
+    name: "Stedding Sintiang",
+    top: 47.3, left: 85.0,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-tajing",
+    name: "Stedding Tajing",
+    top: 53.4, left: 86.4,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-cantoine",
+    name: "Stedding Cantoine",
+    top: 54.2, left: 83.2,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-kolomon",
+    name: "Stedding Kolomon",
+    top: 59.3, left: 84.5,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-daiting",
+    name: "Stedding Daiting",
+    top: 65.5, left: 85.8,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
+  {
+    id: "stedding-jenshin",
+    name: "Stedding Jenshin",
+    top: 64.1, left: 80.0,
+    desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
+    knowledge: [],
+  },
 ];
