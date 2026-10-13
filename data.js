@@ -2398,4 +2398,65 @@ const LOCATIONS = [
     desc: "An Ogier stedding in the Spine of the World. Inside it, no one can touch the True Source, and the Ogier receive travelers in peace.",
     knowledge: [],
   },
+  {
+    id: "tremalking",
+    distCity: "Tremalking",
+    name: "Tremalking",
+    top: 83.6, left: 16.6,
+    desc: "The largest of the Sea Folk islands, very mountainous, southwest of the mainland. The Amayar live here too, a peaceful people who make the famous porcelain, and here stands a colossal statue of a woman, half buried, which they revere.",
+    geography: [
+      "The Sea Folk live on ships and on islands in the Aryth and the Sea of Storms. In the Aryth: Aile Somera, Aile Dashar and Aile Jafar; in the Sea of Storms: Tremalking, Qaim and Cindaking."
+    ],
+    politics: [
+      "The Sea Folk are ruled by the Mistress of the Ships, who holds no fixed territory, and by the Master of the Blades, who sees to trade and defense. Each clan has a Wavemistress, with a Swordmaster at her side.",
+      "Rank is strict and worn on the body: rings in the ears and nose, linked by chains for the highest, and medals on an honor chain.",
+      "Aboard ship, the Windfinder, who reads the winds, ranks just below the Sailmistress and the Cargomaster. Favoring kin is a serious crime: it can cost a post and earn a flogging hung upside down in the rigging."
+    ],
+    culture: [
+      "Dark skin, silk clothes, intricately knotted sashes and pendants. At sea, out of sight of land, men and women alike go bare to the waist.",
+      "Sea Folk bargains are formal and hard; a mainlander almost never comes out ahead.",
+      "Sea Folk porcelain, worth its weight in gold, is in truth made by the Amayar. Passage on a Sea Folk ship is expensive, but their ships are the fastest and most reliable in the world."
+    ],
+    rumors: [
+      "The Amayar of Tremalking spend one whole night each year in silence before the statue, and no one knows why."
+    ],
+    npcs: [
+      { name: "Nesta din Reas Two Moons", role: "Mistress of the Ships", type: "npc", desc: "Mistress of the Ships of the Sea Folk." }
+    ],
+    knowledge: [],
+  },
+  {
+    id: "cantorin",
+    name: "Cantorin",
+    top: 50.1, left: 12.7,
+    desc: "The chief town of Aile Somera, Sea Folk islands in the Aryth, west of Toman Head.",
+    rumors: [
+      "Sea Folk captains talk of strange ships to the west, with sails of no nation, and have changed their routes."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "dantora",
+    name: "Dantora",
+    top: 66.0, left: 19.0,
+    desc: "The chief town of Aile Jafar, Sea Folk islands in the Aryth, west of Tanchico.",
+    rumors: [
+      "The Windfinders have sent another girl to Tar Valon; they say she is the weakest of the year."
+    ],
+    knowledge: [],
+  },
+  {
+    id: "qaim",
+    name: "Qaim",
+    top: 88.2, left: 35.4,
+    desc: "A Sea Folk island in the Sea of Storms, south of Ebou Dar.",
+    knowledge: [],
+  },
+  {
+    id: "cindaking",
+    name: "Cindaking",
+    top: 90.2, left: 84.1,
+    desc: "A Sea Folk island in the Sea of Storms, south of Mayene.",
+    knowledge: [],
+  },
 ];
